@@ -4,6 +4,7 @@ import 'dotenv/config';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.join(__dirname, '../.env.local') });
 import { PACKAGE_GEO_DATA } from '../src/data/itinerary-geo';
+import type { RouteSegment, DayRoute, PackageRoutes } from '../src/types/routes';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const OUT_DIR = path.join(__dirname, '../src/data/routes');
@@ -50,29 +51,17 @@ function makeSeaRoute(coordinates: [number, number][]) {
 }
 
 async function generateRoutes() {
-  interface RouteSegmentData {
-    transport: string;
-    geometry: { type: string; coordinates: [number, number][] } | null;
-    duration: number;
-    distance: number;
-  }
-
-  interface DayRouteData {
-    dayIndex: number;
-    segments: RouteSegmentData[];
-  }
-
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
   }
 
   for (const pkg of PACKAGE_GEO_DATA) {
     console.log(`\nGenerating routes for Package ${pkg.packageIndex}...`);
-    const packageRoutes: { days: DayRouteData[] } = { days: [] };
+    const packageRoutes: PackageRoutes = { days: [] };
 
     for (const day of pkg.days) {
       console.log(`  Day ${day.dayIndex}:`);
-      const dayRoute: DayRouteData = {
+      const dayRoute: DayRoute = {
         dayIndex: day.dayIndex,
         segments: [],
       };

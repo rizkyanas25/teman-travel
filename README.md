@@ -145,6 +145,8 @@ npm run dev
 │   ├── data/
 │   │   ├── itinerary-geo.ts   # Geo coordinates + stop definitions
 │   │   └── routes/            # Pre-generated Mapbox route JSONs
+│   ├── types/
+│   │   └── routes.ts          # Shared route data interfaces
 │   ├── i18n/
 │   │   ├── navigation.ts     # Localized navigation helpers
 │   │   ├── request.ts        # Message loading config

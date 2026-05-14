@@ -6,22 +6,7 @@ import { PACKAGE_GEO_DATA, getDayStops } from "@/data/itinerary-geo";
 import routesPackage0 from "@/data/routes/package-0-routes.json";
 import routesPackage1 from "@/data/routes/package-1-routes.json";
 import routesPackage2 from "@/data/routes/package-2-routes.json";
-
-interface RouteSegment {
-  transport: string;
-  geometry: { type: 'LineString'; coordinates: [number, number][] } | null;
-  duration: number;
-  distance: number;
-}
-
-interface DayRoute {
-  dayIndex: number;
-  segments: RouteSegment[];
-}
-
-interface PackageRoutes {
-  days: DayRoute[];
-}
+import type { RouteSegment, DayRoute, PackageRoutes } from "@/types/routes";
 
 const ALL_ROUTES: Record<number, PackageRoutes> = {
   0: routesPackage0 as PackageRoutes,
