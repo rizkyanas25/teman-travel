@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
-import { PACKAGE_GEO_DATA, getDayStops } from "@/data/itinerary-geo";
+import { useTranslations } from 'next-intl';
+import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
 
 interface DaySidebarProps {
   packageIndex: number;
@@ -11,22 +11,34 @@ interface DaySidebarProps {
   completedDays?: Set<number>;
 }
 
-export default function DaySidebar({ packageIndex, activeDayIndex, onSelectDay, dayTitles, dayLabels, activeStopIndex = -1, completedDays = new Set() }: DaySidebarProps) {
-  const t = useTranslations("packages");
+export default function DaySidebar({
+  packageIndex,
+  activeDayIndex,
+  onSelectDay,
+  dayTitles,
+  dayLabels,
+  activeStopIndex = -1,
+  completedDays = new Set(),
+}: DaySidebarProps) {
+  const t = useTranslations('packages');
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
 
   if (!pkgData) return null;
 
   // Find the next uncompleted day (for pulse hint)
-  const nextUncompletedIdx = pkgData.days.find(d => !completedDays.has(d.dayIndex) && d.dayIndex !== activeDayIndex)?.dayIndex ?? -1;
+  const nextUncompletedIdx =
+    pkgData.days.find(
+      (d) => !completedDays.has(d.dayIndex) && d.dayIndex !== activeDayIndex,
+    )?.dayIndex ?? -1;
   // Only pulse next day bullet if the current active day IS completed
-  const shouldPulseNextDay = completedDays.has(activeDayIndex) && nextUncompletedIdx >= 0;
+  const shouldPulseNextDay =
+    completedDays.has(activeDayIndex) && nextUncompletedIdx >= 0;
 
   return (
-    <div className="h-full overflow-y-auto px-6 py-6 custom-scrollbar">
-      <div className="space-y-6 relative">
+    <div className='h-full overflow-y-auto px-6 py-6 custom-scrollbar'>
+      <div className='space-y-6 relative'>
         {/* Connecting Line */}
-        <div className="absolute left-[11px] top-4 bottom-4 w-0.5 bg-white/10" />
+        <div className='absolute left-[11px] top-4 bottom-4 w-0.5 bg-white/10' />
 
         {pkgData.days.map((day, idx) => {
           const isActive = activeDayIndex === day.dayIndex;
@@ -34,91 +46,129 @@ export default function DaySidebar({ packageIndex, activeDayIndex, onSelectDay, 
           const isPast = day.dayIndex < activeDayIndex;
           const dayLabel = dayLabels[idx] || `Day ${day.dayIndex + 1}`;
           const stops = getDayStops(day);
-          const shouldPulseBullet = shouldPulseNextDay && day.dayIndex === nextUncompletedIdx;
+          const shouldPulseBullet =
+            shouldPulseNextDay && day.dayIndex === nextUncompletedIdx;
 
           return (
-            <div key={day.dayIndex} className="relative pl-8">
-              {/* Timeline Node */}
-              <div className="absolute left-0 top-0 z-10">
-                {/* Pulse rings on next-day bullet */}
-                {shouldPulseBullet && (
-                  <>
-                    <span className="absolute inset-0 w-6 h-6 rounded-full bg-gold-400/40 animate-[pulseRing_2s_ease-out_infinite]" />
-                    <span className="absolute inset-0 w-6 h-6 rounded-full bg-gold-400/20 animate-[pulseRing_2s_ease-out_0.6s_infinite]" />
-                  </>
-                )}
-                <button
-                  onClick={() => onSelectDay(day.dayIndex)}
-                  className={`relative w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    isActive 
-                      ? 'ring-4 ring-dark-800 scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
-                      : isCompleted
-                      ? 'bg-green-500 hover:bg-green-400'
-                      : isPast
-                      ? 'bg-white/40 hover:bg-white/60'
-                      : 'bg-dark-800 border-2 border-white/20 hover:border-white/40'
-                  }`}
-                  style={{ backgroundColor: isActive ? day.color : undefined }}
-                >
-                  {isActive && <div className="w-2 h-2 bg-dark-900 rounded-full" />}
-                  {!isActive && isCompleted && (
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-
-              {/* Content */}
-              <div 
-                className={`transition-opacity duration-300 cursor-pointer ${isActive ? 'opacity-100' : isCompleted ? 'opacity-70 hover:opacity-90' : 'opacity-50 hover:opacity-80'}`}
+            <div key={day.dayIndex} className='relative'>
+              {/* Day Header: Flex container ensures perfect vertical alignment */}
+              <div
+                className={`flex items-center gap-3 transition-opacity duration-300 cursor-pointer ${isActive ? 'opacity-100' : isCompleted ? 'opacity-70 hover:opacity-90' : 'opacity-50 hover:opacity-80'}`}
                 onClick={() => onSelectDay(day.dayIndex)}
               >
-                <h4 className="text-sm font-bold flex items-center gap-2 mb-1 leading-6">
-                  <span style={{ color: isActive ? day.color : isCompleted ? '#4ade80' : '#fff' }}>{dayLabel}</span>
-                  <span className="text-white/40 font-normal">—</span>
-                  <span className="text-white/80">{dayTitles[idx] || dayLabel}</span>
-                </h4>
-                
-                {isActive && (
-                  <div className="mt-3 space-y-2 animate-[fadeInUp_0.3s_ease]">
-                    {stops.map((stop, sIdx) => {
-                      const isReached = activeStopIndex >= sIdx;
-                      const isCurrent = activeStopIndex === sIdx;
+                {/* Timeline Node */}
+                <div className='relative z-10 w-6 h-6 shrink-0 flex items-center justify-center'>
+                  {/* Pulse rings on next-day bullet */}
+                  {shouldPulseBullet && (
+                    <>
+                      <span className='absolute inset-0 rounded-full bg-gold-400/40 animate-[pulseRing_2s_ease-out_infinite]' />
+                      <span className='absolute inset-0 rounded-full bg-gold-400/20 animate-[pulseRing_2s_ease-out_0.6s_infinite]' />
+                    </>
+                  )}
+                  <button
+                    className={`relative w-full h-full rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isActive
+                        ? 'ring-4 ring-dark-800 scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]'
+                        : isCompleted
+                          ? 'bg-green-500 hover:bg-green-400'
+                          : isPast
+                            ? 'bg-white/40 hover:bg-white/60'
+                            : 'bg-dark-800 border-2 border-white/20 hover:border-white/40'
+                    }`}
+                    style={{
+                      backgroundColor: isActive ? day.color : undefined,
+                    }}
+                  >
+                    {isActive && (
+                      <div className='w-2 h-2 bg-dark-900 rounded-full' />
+                    )}
+                    {!isActive && isCompleted && (
+                      <svg
+                        className='w-3 h-3 text-white'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth={3}
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M5 13l4 4L19 7'
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
 
-                      return (
-                        <div 
-                          key={sIdx} 
-                          className={`flex items-start gap-2.5 text-xs transition-all duration-300 ${
-                            isReached ? 'opacity-100' : 'opacity-40'
+                {/* Text Content */}
+                <h4 className='text-sm font-bold flex items-center gap-2 m-0 leading-none'>
+                  <span
+                    style={{
+                      color: isActive
+                        ? day.color
+                        : isCompleted
+                          ? '#4ade80'
+                          : '#fff',
+                    }}
+                  >
+                    {dayLabel}
+                  </span>
+                  <span className='text-white/40 font-normal'>—</span>
+                  <span className='text-white/80'>
+                    {dayTitles[idx] || dayLabel}
+                  </span>
+                </h4>
+              </div>
+
+              {/* Day Details (Stops) */}
+              {isActive && (
+                <div className='pl-9 mt-3 space-y-2 animate-[fadeInUp_0.3s_ease]'>
+                  {stops.map((stop, sIdx) => {
+                    const isReached = activeStopIndex >= sIdx;
+                    const isCurrent = activeStopIndex === sIdx;
+
+                    return (
+                      <div
+                        key={sIdx}
+                        className={`flex items-center gap-2.5 text-xs transition-all duration-300 ${
+                          isReached ? 'opacity-100' : 'opacity-40'
+                        }`}
+                      >
+                        <div
+                          className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
+                            isCurrent ? 'scale-125 ring-2 ring-white/30' : ''
+                          }`}
+                          style={{
+                            backgroundColor: isReached
+                              ? day.color
+                              : 'rgba(255,255,255,0.15)',
+                            color: isReached ? '#000' : 'rgba(255,255,255,0.4)',
+                          }}
+                        >
+                          {isReached ? (
+                            <span className='font-bold text-[9px]'>✓</span>
+                          ) : (
+                            <span className='font-bold text-[9px]'>
+                              {sIdx + 1}
+                            </span>
+                          )}
+                        </div>
+                        <span
+                          className={`leading-snug mt-0.5 transition-colors duration-300 ${
+                            isCurrent
+                              ? 'text-white font-semibold'
+                              : isReached
+                                ? 'text-white/80'
+                                : 'text-white/40'
                           }`}
                         >
-                          <div 
-                            className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
-                              isCurrent ? 'scale-125 ring-2 ring-white/30' : ''
-                            }`} 
-                            style={{ 
-                              backgroundColor: isReached ? day.color : 'rgba(255,255,255,0.15)', 
-                              color: isReached ? '#000' : 'rgba(255,255,255,0.4)' 
-                            }}
-                          >
-                            {isReached ? (
-                              <span className="font-bold text-[9px]">✓</span>
-                            ) : (
-                              <span className="font-bold text-[9px]">{sIdx + 1}</span>
-                            )}
-                          </div>
-                          <span className={`leading-snug transition-colors duration-300 ${
-                            isCurrent ? 'text-white font-semibold' : isReached ? 'text-white/80' : 'text-white/40'
-                          }`}>
-                            {stop.name}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+                          {stop.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           );
         })}
