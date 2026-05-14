@@ -303,5 +303,12 @@
     "shopping": "Personal shopping expenses",
     "activities": "Optional paid activities",
     "kecak": "Kecak Dance ticket"
-  }
+  },
+  "viewRoute": "View Route Map",
+  "mapTitle": "Itinerary Route Map",
+  "playJourney": "Play Journey",
+  "pauseJourney": "Pause",
+  "stops": "stops",
+  "driveTime": "drive time",
+  "dayOf": "Day {current} of {total}"
 }

@@ -1,0 +1,163 @@
+"use client";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useTranslations, useMessages } from "next-intl";
+import DaySidebar from "./map/DaySidebar";
+import PlaybackControls from "./map/PlaybackControls";
+import MapView, { MapViewHandle } from "./map/MapView";
+import { PACKAGE_GEO_DATA, getDayStops } from "@/data/itinerary-geo";
+
+interface Props {
+  packageIndex: number | null;
+  onClose: () => void;
+}
+
+export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
+  const t = useTranslations("packages");
+  const messages = useMessages();
+  const [activeDayIndex, setActiveDayIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeStopIndex, setActiveStopIndex] = useState(-1);
+  const [shouldPulse, setShouldPulse] = useState(true);
+  const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
+  const mapRef = useRef<MapViewHandle>(null);
+  const prevPackageRef = useRef<number | null>(null);
+
+  // Synchronous reset when package changes — must happen BEFORE render
+  if (packageIndex !== null && packageIndex !== prevPackageRef.current) {
+    prevPackageRef.current = packageIndex;
+    // These setState calls during render are batched by React and applied immediately
+    if (activeDayIndex !== 0) setActiveDayIndex(0);
+    if (isPlaying) setIsPlaying(false);
+    if (activeStopIndex !== -1) setActiveStopIndex(-1);
+    if (!shouldPulse) setShouldPulse(true);
+    if (completedDays.size > 0) setCompletedDays(new Set());
+  }
+
+  if (packageIndex === null) return null;
+
+  const packagesMessages = messages.packages as { items: any[] };
+  const pkgData = packagesMessages.items[packageIndex];
+  const geoData = PACKAGE_GEO_DATA.find(p => p.packageIndex === packageIndex);
+
+  if (!pkgData || !geoData) return null;
+
+  const dayTitles = pkgData.itinerary.map((d: any) => d.title);
+  const dayLabels = pkgData.itinerary.map((d: any) => d.day);
+  const currentDayGeo = geoData.days.find(d => d.dayIndex === activeDayIndex);
+  const stopCount = currentDayGeo ? getDayStops(currentDayGeo).length : 0;
+  const currentDayLabel = dayLabels[activeDayIndex] || `Day ${activeDayIndex + 1}`;
+  const totalDays = geoData.days.length;
+
+  const handleSelectDay = (idx: number) => {
+    setActiveDayIndex(idx);
+    setIsPlaying(false);
+    setActiveStopIndex(-1);
+    // Pulse play button when switching to a non-completed day
+    setShouldPulse(!completedDays.has(idx));
+    if (mapRef.current) {
+      mapRef.current.pauseAnimation();
+      mapRef.current.flyToDay(idx);
+    }
+  };
+
+  const handlePlayToggle = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      if (mapRef.current) mapRef.current.pauseAnimation();
+    } else {
+      setIsPlaying(true);
+      setShouldPulse(false);
+      setActiveStopIndex(-1);
+      if (mapRef.current) {
+        mapRef.current.flyToDay(activeDayIndex);
+        setTimeout(() => {
+           if (mapRef.current) mapRef.current.playAnimation(activeDayIndex);
+        }, 500);
+      }
+    }
+  };
+
+  const handleAnimationEnd = () => {
+    setIsPlaying(false);
+
+    // Mark this day as completed — highlights persist
+    setCompletedDays(prev => new Set(prev).add(activeDayIndex));
+
+    // No auto-advance. Play pulse off, next day bullet will pulse in sidebar.
+    setShouldPulse(false);
+  };
+
+  const handleStopReached = (stopIndex: number) => {
+    setActiveStopIndex(stopIndex);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center" onClick={onClose}>
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+      <div 
+        className="relative w-full h-full md:w-[95vw] md:h-[90vh] md:max-h-[900px] md:max-w-[1400px] bg-dark-800 flex flex-col md:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-4 py-3 md:px-6 md:py-4 flex items-center justify-between z-10 shrink-0">
+          <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white flex items-center gap-2">
+            🗺️ {pkgData.title} <span className="hidden sm:inline text-white/40 font-normal text-base">— {t("mapTitle")}</span>
+          </h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Content Body */}
+        <div className="flex flex-col md:flex-row flex-1 min-h-0 overflow-hidden">
+          
+          {/* Map Area */}
+          <div className="relative order-1 md:order-2 flex-1 h-[50vh] md:h-auto" style={{ minHeight: '300px' }}>
+             <MapView 
+                key={packageIndex}
+                ref={mapRef} 
+                packageIndex={packageIndex} 
+                activeDayIndex={activeDayIndex}
+                onAnimationEnd={handleAnimationEnd}
+                onStopReached={handleStopReached}
+             />
+          </div>
+
+          {/* Sidebar Area */}
+          <div className="w-full md:w-[320px] lg:w-[380px] bg-dark-800 flex flex-col order-2 md:order-1 border-t md:border-t-0 md:border-r border-white/10 h-[50vh] md:h-full shrink-0 z-10">
+            {/* Timeline */}
+            <div className="flex-1 overflow-hidden min-h-0">
+              <DaySidebar 
+                packageIndex={packageIndex} 
+                activeDayIndex={activeDayIndex} 
+                onSelectDay={handleSelectDay}
+                dayTitles={dayTitles}
+                dayLabels={dayLabels}
+                activeStopIndex={isPlaying ? activeStopIndex : (completedDays.has(activeDayIndex) ? 999 : -1)}
+                completedDays={completedDays}
+              />
+            </div>
+
+            {/* Playback Controls */}
+            <PlaybackControls 
+              isPlaying={isPlaying}
+              onPlayToggle={handlePlayToggle}
+              currentDayLabel={currentDayLabel}
+              totalDays={totalDays}
+              stopCount={stopCount}
+              shouldPulse={shouldPulse}
+            />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}

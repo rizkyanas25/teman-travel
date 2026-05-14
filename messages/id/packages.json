@@ -303,5 +303,12 @@
     "shopping": "Belanja pribadi",
     "activities": "Aktivitas opsional berbayar",
     "kecak": "Tiket Tari Kecak"
-  }
+  },
+  "viewRoute": "Lihat Peta Rute",
+  "mapTitle": "Peta Rute Perjalanan",
+  "playJourney": "Putar Perjalanan",
+  "pauseJourney": "Jeda",
+  "stops": "destinasi",
+  "driveTime": "waktu tempuh",
+  "dayOf": "Hari {current} dari {total}"
 }

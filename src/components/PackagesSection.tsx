@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 import PackageCard from "./PackageCard";
 import PackageDetailsModal from "./PackageDetailsModal";
+
+const ItineraryMapModal = dynamic(() => import("./ItineraryMapModal"), { ssr: false });
 
 export default function PackagesSection() {
   const t = useTranslations("packages");
   const [modalOpen, setModalOpen] = useState(false);
+  const [mapModalPackageIndex, setMapModalPackageIndex] = useState<number | null>(null);
 
   const itemKeys = ["0", "1", "2"] as const;
 
@@ -24,11 +28,17 @@ export default function PackagesSection() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {itemKeys.map((idx) => (
-            <PackageCard key={idx} index={idx} onViewDetails={() => setModalOpen(true)} />
+            <PackageCard 
+              key={idx} 
+              index={idx} 
+              onViewDetails={() => setModalOpen(true)}
+              onViewRoute={() => setMapModalPackageIndex(parseInt(idx))}
+            />
           ))}
         </div>
       </div>
       <PackageDetailsModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <ItineraryMapModal packageIndex={mapModalPackageIndex} onClose={() => setMapModalPackageIndex(null)} />
     </section>
   );
 }

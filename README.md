@@ -6,6 +6,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Mapbox GL](https://img.shields.io/badge/Mapbox_GL-3-000?style=for-the-badge&logo=mapbox)
 ![next-intl](https://img.shields.io/badge/next--intl-4-blue?style=for-the-badge)
 
 **A premium Bali & Nusa Penida tour agency website with full i18n support**
@@ -36,6 +37,7 @@ npm run dev
 - **Full Internationalization** — English & Indonesian with automatic locale detection
 - **Smart Currency Display** — USD for international visitors, IDR for Indonesian market
 - **Interactive Carousel** — Destination gallery with image-description split layout
+- **🗺️ Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries
 - **SEO Optimized** — JSON-LD structured data, OpenGraph, sitemap, robots.txt
 - **PWA Ready** — Web manifest, favicons, and apple-touch-icon
@@ -52,6 +54,7 @@ npm run dev
 | **Hero**            | Full-screen background with CTA buttons and animated text                |
 | **About**           | Company story with stats (5+ years, 1K+ travelers, 6+ packages)         |
 | **Tour Packages**   | 3 packages (4D3N / 5D4N / 6D5N) with pricing, icon badges & itinerary  |
+| **Route Map**       | Animated Mapbox itinerary visualizer with per-day playback & stop sync  |
 | **Destinations**    | Image carousel with 6 iconic Bali & Nusa Penida spots                   |
 | **Contact**         | Contact form, address, WhatsApp link, and social media icons             |
 | **Footer**          | Quick links, package list, and copyright info                            |
@@ -85,6 +88,7 @@ npm run dev
 | **UI Library**    | React 19                              |
 | **Language**      | TypeScript 5                          |
 | **Styling**       | Tailwind CSS 4                        |
+| **Maps**          | Mapbox GL JS 3                        |
 | **i18n**          | next-intl 4 (locale routing + proxy)  |
 | **Images**        | Next.js Image (optimized, lazy-load)  |
 | **SEO**           | Next.js Metadata API, JSON-LD         |
@@ -127,12 +131,20 @@ npm run dev
 │   │   ├── Footer.tsx
 │   │   ├── Gallery.tsx        # Destination carousel
 │   │   ├── Hero.tsx           # Full-screen hero
+│   │   ├── ItineraryMapModal.tsx  # Route map modal controller
 │   │   ├── LanguageSwitcher.tsx
 │   │   ├── Navbar.tsx         # Responsive navigation
 │   │   ├── PackageCard.tsx    # Individual package card
 │   │   ├── PackageDetailsModal.tsx  # Shared includes/excludes modal
 │   │   ├── PackagesSection.tsx
-│   │   └── SocialSidebar.tsx
+│   │   ├── SocialSidebar.tsx
+│   │   └── map/
+│   │       ├── MapView.tsx    # Mapbox map + animation engine
+│   │       ├── DaySidebar.tsx # Day timeline with stop progress
+│   │       └── PlaybackControls.tsx # Play/pause + day info
+│   ├── data/
+│   │   ├── itinerary-geo.ts   # Geo coordinates + stop definitions
+│   │   └── routes/            # Pre-generated Mapbox route JSONs
 │   ├── i18n/
 │   │   ├── navigation.ts     # Localized navigation helpers
 │   │   ├── request.ts        # Message loading config
@@ -206,12 +218,13 @@ npm run dev
 
 ## 📜 Available Scripts
 
-| Command         | Description                             |
-| --------------- | --------------------------------------- |
-| `npm run dev`   | Start development server with Turbopack |
-| `npm run build` | Create production build                 |
-| `npm run start` | Start production server                 |
-| `npm run lint`  | Run ESLint                              |
+| Command                  | Description                             |
+| ------------------------ | --------------------------------------- |
+| `npm run dev`            | Start development server with Turbopack |
+| `npm run build`          | Create production build                 |
+| `npm run start`          | Start production server                 |
+| `npm run lint`           | Run ESLint                              |
+| `npm run generate-routes`| Re-generate Mapbox route data           |
 
 ---
 
@@ -221,11 +234,17 @@ Deploy easily on [Vercel](https://vercel.com):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-### Environment Notes
+### Environment Variables
 
-- No environment variables required for basic deployment
+| Variable                     | Required | Description                        |
+| ---------------------------- | -------- | ---------------------------------- |
+| `NEXT_PUBLIC_MAPBOX_TOKEN`   | Yes      | Mapbox GL JS access token          |
+
+### Notes
+
 - `next-intl` plugin is configured in `next.config.ts`
 - All images are statically served from `/public/images/`
+- Route data is pre-generated — run `npm run generate-routes` after editing `itinerary-geo.ts`
 
 ---
 

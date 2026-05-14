@@ -1,3 +1,4 @@
+@import "mapbox-gl/dist/mapbox-gl.css";
 @import "tailwindcss";
 
 @theme inline {
@@ -118,4 +119,46 @@ html {
 @keyframes carouselFade {
   from { opacity: 0; transform: scale(1.05); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* Mapbox Custom Styles */
+.custom-popup .mapboxgl-popup-content {
+  background-color: var(--color-gold-400);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.custom-popup .mapboxgl-popup-tip {
+  border-top-color: var(--color-gold-400);
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animated popup entrance */
+.anim-popup .mapboxgl-popup-content {
+  animation: popupBounceIn 0.3s ease;
+}
+@keyframes popupBounceIn {
+  0% { opacity: 0; transform: scale(0.7) translateY(5px); }
+  70% { transform: scale(1.05) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Play button attention pulse */
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
 }

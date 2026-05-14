@@ -22,7 +22,7 @@ const featureIcons = [
   { icon: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z", label: "video" },
 ];
 
-export default function PackageCard({ index, onViewDetails }: { index: string; onViewDetails: () => void }) {
+export default function PackageCard({ index, onViewDetails, onViewRoute }: { index: string; onViewDetails: () => void; onViewRoute?: () => void }) {
   const tc = useTranslations("common");
   const t = useTranslations("packages");
   const messages = useMessages();
@@ -121,6 +121,17 @@ export default function PackageCard({ index, onViewDetails }: { index: string; o
             ))}
           </div>
         </div>
+
+        {/* View Route Button */}
+        {onViewRoute && (
+          <button
+            onClick={onViewRoute}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-gold-400/10 border border-white/10 hover:border-gold-400/30 rounded-xl text-sm font-medium transition-all text-white/80 hover:text-gold-400"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+            <span>{t("viewRoute")}</span>
+          </button>
+        )}
 
         {/* CTA */}
         <a href="#kontak-kami" className="block w-full text-center py-3 bg-gold-400 text-dark-900 rounded-xl font-semibold hover:bg-gold-300 transition">
