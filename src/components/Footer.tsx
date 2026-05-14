@@ -8,9 +8,9 @@ export default function Footer() {
   const quickLinks = [
     { key: "home", href: "#home" },
     { key: "about", href: "#about" },
-    { key: "packages", href: "#paket-tour" },
+    { key: "packages", href: "#packages" },
     { key: "gallery", href: "#gallery" },
-    { key: "contact", href: "#kontak-kami" },
+    { key: "contact", href: "#contact" },
   ];
 
   return (

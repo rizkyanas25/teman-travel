@@ -11,7 +11,7 @@ export default function Contact() {
   const t = useTranslations("contact");
 
   return (
-    <section id="kontak-kami" className="py-24 bg-dark-950">
+    <section id="contact" className="py-24 bg-dark-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-3">{t("badge")}</p>

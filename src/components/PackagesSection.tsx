@@ -15,7 +15,7 @@ export default function PackagesSection() {
   const itemKeys = ["0", "1", "2"] as const;
 
   return (
-    <section id="paket-tour" className="py-24 bg-dark-950 relative">
+    <section id="packages" className="py-24 bg-dark-950 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-3">{t("badge")}</p>

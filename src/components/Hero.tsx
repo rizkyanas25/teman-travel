@@ -22,10 +22,10 @@ export default function Hero() {
             {t("subtext")}
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="#paket-tour" className="px-8 py-3.5 bg-gold-400 text-dark-900 rounded-full font-semibold hover:bg-gold-300 transition transform hover:scale-105">
+            <a href="#packages" className="px-8 py-3.5 bg-gold-400 text-dark-900 rounded-full font-semibold hover:bg-gold-300 transition transform hover:scale-105">
               {t("ctaPrimary")}
             </a>
-            <a href="#kontak-kami" className="px-8 py-3.5 border-2 border-white/30 text-white rounded-full font-semibold hover:border-gold-400 hover:text-gold-400 transition">
+            <a href="#contact" className="px-8 py-3.5 border-2 border-white/30 text-white rounded-full font-semibold hover:border-gold-400 hover:text-gold-400 transition">
               {t("ctaSecondary")}
             </a>
           </div>

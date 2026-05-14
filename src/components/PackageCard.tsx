@@ -134,7 +134,7 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
         )}
 
         {/* CTA */}
-        <a href="#kontak-kami" className="block w-full text-center py-3 bg-gold-400 text-dark-900 rounded-xl font-semibold hover:bg-gold-300 transition">
+        <a href="#contact" className="block w-full text-center py-3 bg-gold-400 text-dark-900 rounded-xl font-semibold hover:bg-gold-300 transition">
           {tc("bookNow")}
         </a>
       </div>

@@ -12,7 +12,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "#home", label: t("home") },
     { href: "#about", label: t("about") },
-    { href: "#paket-tour", label: t("packages") },
+    { href: "#packages", label: t("packages") },
     { href: "#gallery", label: t("gallery") },
   ];
 
@@ -38,7 +38,7 @@ export default function Navbar() {
               </a>
             ))}
             <LanguageSwitcher />
-            <a href="#kontak-kami" className="px-5 py-2.5 bg-gold-400 text-dark-900 rounded-full text-sm font-semibold hover:bg-gold-300 transition">
+            <a href="#contact" className="px-5 py-2.5 bg-gold-400 text-dark-900 rounded-full text-sm font-semibold hover:bg-gold-300 transition">
               {t("contact")}
             </a>
           </div>
@@ -63,7 +63,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a href="#kontak-kami" onClick={() => setMenuOpen(false)} className="block text-sm text-gold-400 font-semibold py-2">
+            <a href="#contact" onClick={() => setMenuOpen(false)} className="block text-sm text-gold-400 font-semibold py-2">
               {t("contact")}
             </a>
             <div className="pt-2">
