@@ -1,0 +1,45 @@
+{
+  "badge": "✦ Destinations",
+  "heading": "Iconic <highlight>Places</highlight> to Explore",
+  "subtitle": "From clifftop temples to hidden beaches — discover the spots that make Bali & Nusa Penida unforgettable.",
+  "destinations": [
+    {
+      "title": "Kelingking Beach",
+      "location": "Nusa Penida",
+      "image": "/images/kelingking-beach.png",
+      "description": "The iconic T-Rex shaped cliff plunging into turquoise waters. One of the most photographed spots in all of Indonesia — the viewpoint alone is worth the trip to Nusa Penida."
+    },
+    {
+      "title": "Tegalalang Rice Terrace",
+      "location": "Ubud, Bali",
+      "image": "/images/tegalalang-rice-terrace.png",
+      "description": "Walk through centuries-old cascading rice paddies surrounded by coconut palms and misty jungle. A living canvas of Bali's agricultural heritage and a UNESCO-recognized cultural landscape."
+    },
+    {
+      "title": "Uluwatu Temple",
+      "location": "South Bali",
+      "image": "/images/uluwatu-temple.png",
+      "description": "Perched 70 meters above the Indian Ocean on dramatic sea cliffs, this 11th-century temple offers breathtaking sunset views and the legendary Kecak Fire Dance performance."
+    },
+    {
+      "title": "Tanah Lot Temple",
+      "location": "Tabanan, Bali",
+      "image": "/images/tanah-lot-temple.png",
+      "description": "Bali's most photographed sea temple sits on a rock formation surrounded by crashing waves. At sunset, the silhouette creates one of the most magical scenes in Southeast Asia."
+    },
+    {
+      "title": "Tirta Empul",
+      "location": "Tampaksiring, Bali",
+      "image": "/images/tirta-empul.png",
+      "description": "A sacred water temple where crystal-clear spring water flows through ancient stone fountains. Visitors can participate in the traditional Balinese purification ritual — a deeply spiritual experience."
+    },
+    {
+      "title": "Lempuyang Temple",
+      "location": "East Bali",
+      "image": "/images/lempuyang-temple.png",
+      "description": "The famous Gates of Heaven frame a perfect view of Mount Agung, Bali's highest and most sacred volcano. An early morning visit rewards you with misty, ethereal views."
+    }
+  ],
+  "prev": "Previous",
+  "next": "Next"
+}

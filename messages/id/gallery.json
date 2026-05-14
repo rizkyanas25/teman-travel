@@ -1,0 +1,45 @@
+{
+  "badge": "✦ Destinasi",
+  "heading": "Tempat <highlight>Wisata</highlight> Populer",
+  "subtitle": "Dari pura di tebing hingga pantai tersembunyi — temukan spot-spot yang membuat Bali & Nusa Penida tak terlupakan.",
+  "destinations": [
+    {
+      "title": "Pantai Kelingking",
+      "location": "Nusa Penida",
+      "image": "/images/kelingking-beach.png",
+      "description": "Tebing ikonik berbentuk T-Rex yang menjorok ke perairan biru toska. Salah satu spot paling difoto di seluruh Indonesia — viewpoint-nya saja sudah worth it untuk dikunjungi."
+    },
+    {
+      "title": "Terasering Tegalalang",
+      "location": "Ubud, Bali",
+      "image": "/images/tegalalang-rice-terrace.png",
+      "description": "Berjalan melewati sawah bertingkat berusia ratusan tahun yang dikelilingi pohon kelapa dan hutan tropis berkabut. Warisan budaya pertanian Bali yang diakui UNESCO."
+    },
+    {
+      "title": "Pura Uluwatu",
+      "location": "Bali Selatan",
+      "image": "/images/uluwatu-temple.png",
+      "description": "Berdiri 70 meter di atas Samudra Hindia di tebing laut yang dramatis, pura abad ke-11 ini menawarkan pemandangan sunset memukau dan pertunjukan Tari Kecak yang legendaris."
+    },
+    {
+      "title": "Pura Tanah Lot",
+      "location": "Tabanan, Bali",
+      "image": "/images/tanah-lot-temple.png",
+      "description": "Pura laut paling terkenal di Bali ini berdiri di atas formasi batu yang dikelilingi ombak. Saat sunset, siluetnya menciptakan salah satu pemandangan paling magis di Asia Tenggara."
+    },
+    {
+      "title": "Tirta Empul",
+      "location": "Tampaksiring, Bali",
+      "image": "/images/tirta-empul.png",
+      "description": "Pura air suci di mana air mata air jernih mengalir melalui pancuran batu kuno. Pengunjung dapat berpartisipasi dalam ritual pemurnian tradisional Bali — pengalaman spiritual yang mendalam."
+    },
+    {
+      "title": "Pura Lempuyang",
+      "location": "Bali Timur",
+      "image": "/images/lempuyang-temple.png",
+      "description": "Gerbang Surga yang terkenal membingkai pemandangan sempurna Gunung Agung, gunung tertinggi dan paling sakral di Bali. Kunjungan pagi hari akan memanjakan mata dengan pemandangan berkabut yang magis."
+    }
+  ],
+  "prev": "Sebelumnya",
+  "next": "Selanjutnya"
+}

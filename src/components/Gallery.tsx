@@ -1,0 +1,135 @@
+"use client";
+import { useState, useCallback } from "react";
+import { useTranslations, useMessages } from "next-intl";
+import Image from "next/image";
+
+interface Destination {
+  title: string;
+  location: string;
+  image: string;
+  description: string;
+}
+
+export default function Gallery() {
+  const t = useTranslations("gallery");
+  const messages = useMessages();
+  const destinations = (messages.gallery as { destinations: Destination[] }).destinations;
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+
+  const goTo = useCallback((idx: number, dir: "left" | "right") => {
+    setDirection(dir);
+    setCurrent(idx);
+  }, []);
+
+  const prev = () => {
+    const idx = current === 0 ? destinations.length - 1 : current - 1;
+    goTo(idx, "left");
+  };
+
+  const next = () => {
+    const idx = current === destinations.length - 1 ? 0 : current + 1;
+    goTo(idx, "right");
+  };
+
+  const dest = destinations[current];
+
+  return (
+    <section id="gallery" className="py-24 bg-dark-900 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-3">{t("badge")}</p>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl font-bold mb-4">
+            {t.rich("heading", {
+              highlight: (chunks) => <span className="text-gold-400">{chunks}</span>,
+            })}
+          </h2>
+          <p className="text-white/50 max-w-2xl mx-auto">{t("subtitle")}</p>
+        </div>
+
+        {/* Carousel */}
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-0 items-stretch bg-dark-800 rounded-2xl border border-white/10 overflow-hidden min-h-[400px] lg:min-h-[480px]">
+          {/* Image side */}
+          <div className="relative h-64 sm:h-80 lg:h-auto overflow-hidden">
+            <Image
+              key={dest.image}
+              src={dest.image}
+              alt={dest.title}
+              fill
+              className="object-cover carousel-img"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-900/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-dark-800/30" />
+
+            {/* Location badge on image */}
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm">
+              <svg className="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="text-xs text-white/90 font-medium">{dest.location}</span>
+            </div>
+          </div>
+
+          {/* Content side */}
+          <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+            <div>
+              <p className="text-gold-400 text-xs font-semibold tracking-widest uppercase mb-2">
+                {String(current + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
+              </p>
+              <h3 className="font-[family-name:var(--font-display)] text-2xl sm:text-3xl font-bold text-white mb-4">
+                {dest.title}
+              </h3>
+              <p className="text-white/50 leading-relaxed text-sm sm:text-base">
+                {dest.description}
+              </p>
+            </div>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-between mt-8">
+              {/* Dot indicators */}
+              <div className="flex gap-2">
+                {destinations.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i, i > current ? "right" : "left")}
+                    className={`transition-all duration-300 rounded-full ${
+                      i === current
+                        ? "w-8 h-2 bg-gold-400"
+                        : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Arrows */}
+              <div className="flex gap-2">
+                <button
+                  onClick={prev}
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-gold-400 hover:text-gold-400 transition"
+                  aria-label={t("prev")}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={next}
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-gold-400 hover:text-gold-400 transition"
+                  aria-label={t("next")}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

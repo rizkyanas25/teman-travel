@@ -1,0 +1,128 @@
+{
+  "badge": "✦ Paket Kami",
+  "heading": "Pilih Paket <highlight>Tour</highlight> Anda",
+  "subtitle": "Itinerari Bali & Nusa Penida yang dirancang khusus untuk setiap budget dan gaya perjalanan Anda.",
+  "viewDetails": "Lihat detail lengkap →",
+  "featureLabels": {
+    "hotel": "Hotel",
+    "meals": "Makan",
+    "entrance": "Tiket",
+    "transfer": "Transfer",
+    "video": "Video"
+  },
+  "items": [
+    {
+      "title": "Paket 4H3M",
+      "image": "/images/kelingking-beach.png",
+      "pricing": [
+        { "pax": "2–3 Tamu", "price": "Rp 3.100.000" },
+        { "pax": "4–5 Tamu", "price": "Rp 2.800.000" },
+        { "pax": "6–13 Tamu", "price": "Rp 2.500.000" },
+        { "pax": "14–20 Tamu", "price": "Rp 2.200.000" }
+      ],
+      "includes": [
+        "Kamar hotel untuk 2 orang (extra bed tersedia)",
+        "Hotel di area Kuta",
+        "Makan malam seafood sunset di Jimbaran",
+        "Termasuk makan (3× sarapan, 2× makan siang, 2× makan malam)",
+        "Tur privat sepenuhnya",
+        "Wisata Bali & Nusa Penida",
+        "Semua tiket masuk ditanggung",
+        "Jemput & antar bandara",
+        "Sopir berbahasa Indonesia sebagai pemandu",
+        "Gratis editing video cinematic perjalanan",
+        "Air mineral sepanjang perjalanan"
+      ],
+      "excludes": ["Tiket pesawat", "Belanja pribadi", "Aktivitas opsional", "Tiket Tari Kecak"],
+      "itinerary": [
+        { "day": "Hari 1", "title": "Kedatangan & Sunset Jimbaran", "items": ["Penjemputan di bandara", "Check-in hotel & istirahat", "Makan malam seafood sunset di Pantai Jimbaran"] },
+        { "day": "Hari 2", "title": "Petualangan Nusa Penida", "items": ["Berangkat pukul 06.30 ke pelabuhan Sanur", "Fast boat ke Nusa Penida", "Pantai Kelingking — viewpoint tebing T-Rex ikonik", "Broken Beach — lengkungan batu alam dramatis", "Angel Billabong — kolam infinity alami", "Makan siang", "Crystal Bay Beach — berenang & snorkeling", "Kembali ke Bali dengan fast boat", "Kembali ke hotel"] },
+        { "day": "Hari 3", "title": "Wisata Budaya Ubud", "items": ["Air Terjun Tegenungan", "Tirta Empul — pemandian suci", "Mencicipi kopi & teh khas Bali di kebun", "Makan siang di Kintamani dengan pemandangan Gunung Batur", "Jalan-jalan di Terasering Tegalalang & ayunan (opsional)", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 4", "title": "Kepulangan", "items": ["Sarapan & check-out hotel", "Belanja oleh-oleh atau spa (opsional)", "Antar ke bandara"] }
+      ]
+    },
+    {
+      "title": "Paket 5H4M",
+      "image": "/images/uluwatu-temple.png",
+      "pricing": [
+        { "pax": "2–3 Tamu", "price": "Rp 4.350.000" },
+        { "pax": "4–5 Tamu", "price": "Rp 4.050.000" },
+        { "pax": "6–13 Tamu", "price": "Rp 3.750.000" },
+        { "pax": "14–20 Tamu", "price": "Rp 3.450.000" }
+      ],
+      "includes": [
+        "Kamar hotel untuk 2 orang (extra bed tersedia)",
+        "Hotel di area Kuta",
+        "Makan malam seafood sunset di Jimbaran",
+        "Termasuk makan (4× sarapan, 3× makan siang, 3× makan malam)",
+        "Tur privat sepenuhnya",
+        "Wisata Bali & Nusa Penida",
+        "Semua tiket masuk ditanggung",
+        "Jemput & antar bandara",
+        "Sopir berbahasa Indonesia sebagai pemandu",
+        "Gratis editing video cinematic perjalanan",
+        "Air mineral sepanjang perjalanan"
+      ],
+      "excludes": ["Tiket pesawat", "Belanja pribadi", "Aktivitas opsional", "Tiket Tari Kecak"],
+      "itinerary": [
+        { "day": "Hari 1", "title": "Kedatangan & Sunset Jimbaran", "items": ["Penjemputan di bandara", "Check-in hotel & istirahat", "Makan malam seafood sunset di Pantai Jimbaran"] },
+        { "day": "Hari 2", "title": "Petualangan Nusa Penida", "items": ["Berangkat pukul 06.30 ke pelabuhan Sanur", "Fast boat ke Nusa Penida", "Pantai Kelingking — viewpoint tebing T-Rex ikonik", "Broken Beach — lengkungan batu alam dramatis", "Angel Billabong — kolam infinity alami", "Makan siang", "Crystal Bay Beach — berenang & snorkeling", "Kembali ke Bali dengan fast boat", "Kembali ke hotel"] },
+        { "day": "Hari 3", "title": "Wisata Budaya Ubud", "items": ["Air Terjun Tukad Cepung — air terjun gua tersembunyi", "Tirta Empul — pemandian suci", "Mencicipi kopi & teh khas Bali di kebun", "Makan siang di Kintamani dengan pemandangan Gunung Batur", "Jalan-jalan di Terasering Tegalalang & ayunan (opsional)", "Air Terjun Tegenungan", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 4", "title": "Uluwatu & Pantai Selatan", "items": ["Pantai Pandawa — pantai tersembunyi yang menakjubkan", "GWK Cultural Park — patung Garuda Wisnu Kencana", "Makan siang", "Pura Uluwatu — pura di tebing saat sunset", "Pertunjukan Tari Kecak (opsional)", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 5", "title": "Kepulangan", "items": ["Sarapan & check-out hotel", "Belanja oleh-oleh atau spa (opsional)", "Antar ke bandara"] }
+      ]
+    },
+    {
+      "title": "Paket 6H5M",
+      "image": "/images/tanah-lot-temple.png",
+      "pricing": [
+        { "pax": "2–3 Tamu", "price": "Rp 6.050.000" },
+        { "pax": "4–5 Tamu", "price": "Rp 5.600.000" },
+        { "pax": "6–13 Tamu", "price": "Rp 5.150.000" },
+        { "pax": "14–20 Tamu", "price": "Rp 4.700.000" }
+      ],
+      "includes": [
+        "Kamar hotel untuk 2 orang (extra bed tersedia)",
+        "Hotel di area Kuta",
+        "Makan malam seafood sunset di Jimbaran",
+        "Termasuk makan (5× sarapan, 4× makan siang, 4× makan malam)",
+        "Tur privat sepenuhnya",
+        "Wisata Bali & Nusa Penida",
+        "Semua tiket masuk ditanggung",
+        "Jemput & antar bandara",
+        "Sopir berbahasa Indonesia sebagai pemandu",
+        "Gratis editing video cinematic perjalanan",
+        "Air mineral sepanjang perjalanan"
+      ],
+      "excludes": ["Tiket pesawat", "Belanja pribadi", "Aktivitas opsional", "Tiket Tari Kecak"],
+      "itinerary": [
+        { "day": "Hari 1", "title": "Kedatangan & Sunset Jimbaran", "items": ["Penjemputan di bandara", "Check-in hotel & istirahat", "Makan malam seafood sunset di Pantai Jimbaran"] },
+        { "day": "Hari 2", "title": "Petualangan Nusa Penida", "items": ["Berangkat pukul 06.30 ke pelabuhan Sanur", "Fast boat ke Nusa Penida", "Pantai Kelingking — viewpoint tebing T-Rex ikonik", "Broken Beach — lengkungan batu alam dramatis", "Angel Billabong — kolam infinity alami", "Makan siang", "Crystal Bay Beach — berenang & snorkeling", "Kembali ke Bali dengan fast boat", "Kembali ke hotel"] },
+        { "day": "Hari 3", "title": "Ubud & Bali Timur", "items": ["Air Terjun Tukad Cepung — air terjun gua tersembunyi", "Tirta Empul — pemandian suci", "Jalan-jalan di Terasering Tegalalang & ayunan (opsional)", "Makan siang di Kintamani dengan pemandangan Gunung Batur", "Pura Lempuyang — Gerbang Surga dengan pemandangan Gunung Agung", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 4", "title": "Uluwatu & Pantai Selatan", "items": ["Pantai Pandawa — pantai tersembunyi yang menakjubkan", "GWK Cultural Park — patung Garuda Wisnu Kencana", "Makan siang", "Pura Uluwatu — pura di tebing saat sunset", "Pertunjukan Tari Kecak (opsional)", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 5", "title": "Tanah Lot & Dataran Tinggi Bedugul", "items": ["Pura Tanah Lot — pura laut ikonik", "Jatiluwih Rice Terrace — Warisan Dunia UNESCO", "Makan siang", "Pura Ulun Danu Beratan — pura danau yang tenang", "Foto di Gerbang Handara yang ikonik", "Pura Taman Ayun — pura kerajaan", "Makan malam", "Kembali ke hotel"] },
+        { "day": "Hari 6", "title": "Kepulangan", "items": ["Sarapan & check-out hotel", "Belanja oleh-oleh atau spa tradisional Bali (opsional)", "Antar ke bandara"] }
+      ]
+    }
+  ],
+  "infoTitle": "Semua Paket Sudah Termasuk",
+  "notesTitle": "Catatan Tambahan",
+  "sharedIncludes": {
+    "hotel": "Kamar hotel untuk 2 tamu (extra bed tersedia untuk tamu ke-3)",
+    "hotelArea": "Akomodasi di area Kuta",
+    "sunsetDinner": "Makan malam seafood sunset di Jimbaran",
+    "privateTour": "Tur privat sepenuhnya",
+    "baliNusaPenida": "Wisata Bali & Nusa Penida",
+    "entranceFee": "Semua tiket masuk ditanggung",
+    "pickup": "Jemput & antar bandara",
+    "driverGuide": "Sopir berbahasa Indonesia sebagai pemandu",
+    "cinematicVideo": "Gratis editing video cinematic perjalanan",
+    "water": "Air mineral sepanjang perjalanan"
+  },
+  "sharedExcludes": {
+    "flights": "Tiket pesawat",
+    "shopping": "Belanja pribadi",
+    "activities": "Aktivitas opsional berbayar",
+    "kecak": "Tiket Tari Kecak"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Teman Travel",
+  "short_name": "Teman Travel",
+  "description": "Bali & Nusa Penida Tour Packages — Your Trusted Travel Companion",
+  "start_url": "/en",
+  "display": "standalone",
+  "background_color": "#0B1121",
+  "theme_color": "#D4A843",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

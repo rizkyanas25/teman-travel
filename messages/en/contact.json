@@ -1,0 +1,17 @@
+{
+  "badge": "✦ Get in Touch",
+  "heading": "Contact <highlight>Us</highlight>",
+  "subtitle": "Have questions about our Bali & Nusa Penida tours? We'd love to hear from you.",
+  "addressLabel": "Address",
+  "address": "Jl. Cempaka Wangi No. 18, Batubulan, Kec. Sukawati, Kabupaten Gianyar, Bali 80582, Indonesia",
+  "phoneLabel": "Phone / WhatsApp",
+  "emailLabel": "Email",
+  "formTitle": "Send a Message",
+  "formName": "Full name",
+  "formNamePlaceholder": "Your full name",
+  "formEmail": "Email",
+  "formEmailPlaceholder": "email@example.com",
+  "formMessage": "Message",
+  "formMessagePlaceholder": "Tell us about your dream trip...",
+  "formSubmit": "Send Message"
+}

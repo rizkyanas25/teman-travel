@@ -1,0 +1,128 @@
+{
+  "badge": "✦ Our Packages",
+  "heading": "Choose Your <highlight>Tour</highlight> Package",
+  "subtitle": "Handcrafted Bali & Nusa Penida itineraries designed to fit every budget and travel style.",
+  "viewDetails": "View full inclusions →",
+  "featureLabels": {
+    "hotel": "Hotel",
+    "meals": "Meals",
+    "entrance": "Tickets",
+    "transfer": "Transfer",
+    "video": "Video"
+  },
+  "items": [
+    {
+      "title": "4D3N Package",
+      "image": "/images/kelingking-beach.png",
+      "pricing": [
+        { "pax": "2–3 Guests", "price": "$199" },
+        { "pax": "4–5 Guests", "price": "$179" },
+        { "pax": "6–13 Guests", "price": "$159" },
+        { "pax": "14–20 Guests", "price": "$139" }
+      ],
+      "includes": [
+        "Hotel room for 2 (extra bed available)",
+        "Hotel in Kuta area",
+        "Sunset seafood dinner at Jimbaran",
+        "Meals included (3× breakfast, 2× lunch, 2× dinner)",
+        "Fully private tour",
+        "Bali & Nusa Penida excursion",
+        "All entrance fees covered",
+        "Airport pickup & drop-off",
+        "English-speaking driver guide",
+        "Complimentary cinematic travel video",
+        "Bottled water throughout"
+      ],
+      "excludes": ["Flights", "Personal shopping", "Optional activities", "Kecak Dance ticket"],
+      "itinerary": [
+        { "day": "Day 1", "title": "Arrival & Jimbaran Sunset", "items": ["Airport pickup", "Hotel check-in & rest", "Sunset seafood dinner at Jimbaran Beach"] },
+        { "day": "Day 2", "title": "Nusa Penida Adventure", "items": ["Early departure 06:30 AM to Sanur port", "Fast boat to Nusa Penida", "Kelingking Beach — iconic T-Rex cliff viewpoint", "Broken Beach — dramatic natural arch", "Angel Billabong — natural infinity pool", "Lunch break", "Crystal Bay Beach — swimming & snorkeling", "Return to Bali by fast boat", "Return to hotel"] },
+        { "day": "Day 3", "title": "Ubud Cultural Tour", "items": ["Tegenungan Waterfall", "Tirta Empul — sacred spring purification", "Balinese coffee & tea plantation tasting", "Lunch at Kintamani with Mount Batur volcano view", "Tegalalang Rice Terrace walk & swing (optional)", "Dinner", "Return to hotel"] },
+        { "day": "Day 4", "title": "Departure", "items": ["Breakfast & hotel check-out", "Souvenir shopping or spa (optional)", "Airport transfer"] }
+      ]
+    },
+    {
+      "title": "5D4N Package",
+      "image": "/images/uluwatu-temple.png",
+      "pricing": [
+        { "pax": "2–3 Guests", "price": "$279" },
+        { "pax": "4–5 Guests", "price": "$259" },
+        { "pax": "6–13 Guests", "price": "$239" },
+        { "pax": "14–20 Guests", "price": "$219" }
+      ],
+      "includes": [
+        "Hotel room for 2 (extra bed available)",
+        "Hotel in Kuta area",
+        "Sunset seafood dinner at Jimbaran",
+        "Meals included (4× breakfast, 3× lunch, 3× dinner)",
+        "Fully private tour",
+        "Bali & Nusa Penida excursion",
+        "All entrance fees covered",
+        "Airport pickup & drop-off",
+        "English-speaking driver guide",
+        "Complimentary cinematic travel video",
+        "Bottled water throughout"
+      ],
+      "excludes": ["Flights", "Personal shopping", "Optional activities", "Kecak Dance ticket"],
+      "itinerary": [
+        { "day": "Day 1", "title": "Arrival & Jimbaran Sunset", "items": ["Airport pickup", "Hotel check-in & rest", "Sunset seafood dinner at Jimbaran Beach"] },
+        { "day": "Day 2", "title": "Nusa Penida Adventure", "items": ["Early departure 06:30 AM to Sanur port", "Fast boat to Nusa Penida", "Kelingking Beach — iconic T-Rex cliff viewpoint", "Broken Beach — dramatic natural arch", "Angel Billabong — natural infinity pool", "Lunch break", "Crystal Bay Beach — swimming & snorkeling", "Return to Bali by fast boat", "Return to hotel"] },
+        { "day": "Day 3", "title": "Ubud Cultural Tour", "items": ["Tukad Cepung Waterfall — hidden cave waterfall", "Tirta Empul — sacred spring purification", "Balinese coffee & tea plantation tasting", "Lunch at Kintamani with Mount Batur volcano view", "Tegalalang Rice Terrace walk & swing (optional)", "Tegenungan Waterfall", "Dinner", "Return to hotel"] },
+        { "day": "Day 4", "title": "Uluwatu & South Coast", "items": ["Pandawa Beach — stunning hidden beach", "GWK Cultural Park — Garuda Wisnu Kencana statue", "Lunch", "Uluwatu Temple — clifftop temple at sunset", "Kecak Fire Dance performance (optional)", "Dinner", "Return to hotel"] },
+        { "day": "Day 5", "title": "Departure", "items": ["Breakfast & hotel check-out", "Souvenir shopping or spa (optional)", "Airport transfer"] }
+      ]
+    },
+    {
+      "title": "6D5N Package",
+      "image": "/images/tanah-lot-temple.png",
+      "pricing": [
+        { "pax": "2–3 Guests", "price": "$389" },
+        { "pax": "4–5 Guests", "price": "$359" },
+        { "pax": "6–13 Guests", "price": "$329" },
+        { "pax": "14–20 Guests", "price": "$299" }
+      ],
+      "includes": [
+        "Hotel room for 2 (extra bed available)",
+        "Hotel in Kuta area",
+        "Sunset seafood dinner at Jimbaran",
+        "Meals included (5× breakfast, 4× lunch, 4× dinner)",
+        "Fully private tour",
+        "Bali & Nusa Penida excursion",
+        "All entrance fees covered",
+        "Airport pickup & drop-off",
+        "English-speaking driver guide",
+        "Complimentary cinematic travel video",
+        "Bottled water throughout"
+      ],
+      "excludes": ["Flights", "Personal shopping", "Optional activities", "Kecak Dance ticket"],
+      "itinerary": [
+        { "day": "Day 1", "title": "Arrival & Jimbaran Sunset", "items": ["Airport pickup", "Hotel check-in & rest", "Sunset seafood dinner at Jimbaran Beach"] },
+        { "day": "Day 2", "title": "Nusa Penida Adventure", "items": ["Early departure 06:30 AM to Sanur port", "Fast boat to Nusa Penida", "Kelingking Beach — iconic T-Rex cliff viewpoint", "Broken Beach — dramatic natural arch", "Angel Billabong — natural infinity pool", "Lunch break", "Crystal Bay Beach — swimming & snorkeling", "Return to Bali by fast boat", "Return to hotel"] },
+        { "day": "Day 3", "title": "Ubud & East Bali", "items": ["Tukad Cepung Waterfall — hidden cave waterfall", "Tirta Empul — sacred spring purification", "Tegalalang Rice Terrace walk & swing (optional)", "Lunch at Kintamani with Mount Batur volcano view", "Lempuyang Temple — Gates of Heaven with Mt. Agung view", "Dinner", "Return to hotel"] },
+        { "day": "Day 4", "title": "Uluwatu & South Coast", "items": ["Pandawa Beach — stunning hidden beach", "GWK Cultural Park — Garuda Wisnu Kencana statue", "Lunch", "Uluwatu Temple — clifftop temple at sunset", "Kecak Fire Dance performance (optional)", "Dinner", "Return to hotel"] },
+        { "day": "Day 5", "title": "Tanah Lot & Bedugul Highlands", "items": ["Tanah Lot — iconic sea temple", "Jatiluwih Rice Terrace — UNESCO World Heritage", "Lunch", "Ulun Danu Beratan — serene lake temple", "Handara Iconic Gate photo stop", "Taman Ayun — royal family temple", "Dinner", "Return to hotel"] },
+        { "day": "Day 6", "title": "Departure", "items": ["Breakfast & hotel check-out", "Souvenir shopping or Balinese spa (optional)", "Airport transfer"] }
+      ]
+    }
+  ],
+  "infoTitle": "All Packages Include",
+  "notesTitle": "Additional Notes",
+  "sharedIncludes": {
+    "hotel": "Hotel room for 2 guests (extra bed available for 3rd guest)",
+    "hotelArea": "Accommodation in Kuta area",
+    "sunsetDinner": "Sunset seafood dinner at Jimbaran",
+    "privateTour": "Fully private tour",
+    "baliNusaPenida": "Bali & Nusa Penida island excursion",
+    "entranceFee": "All entrance fees covered",
+    "pickup": "Airport pickup & drop-off transfers",
+    "driverGuide": "English-speaking driver guide",
+    "cinematicVideo": "Complimentary cinematic travel video",
+    "water": "Bottled water throughout the trip"
+  },
+  "sharedExcludes": {
+    "flights": "Flight tickets",
+    "shopping": "Personal shopping expenses",
+    "activities": "Optional paid activities",
+    "kecak": "Kecak Dance ticket"
+  }
+}
