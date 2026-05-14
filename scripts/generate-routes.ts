@@ -50,17 +50,29 @@ function makeSeaRoute(coordinates: [number, number][]) {
 }
 
 async function generateRoutes() {
+  interface RouteSegmentData {
+    transport: string;
+    geometry: { type: string; coordinates: [number, number][] } | null;
+    duration: number;
+    distance: number;
+  }
+
+  interface DayRouteData {
+    dayIndex: number;
+    segments: RouteSegmentData[];
+  }
+
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
   }
 
   for (const pkg of PACKAGE_GEO_DATA) {
     console.log(`\nGenerating routes for Package ${pkg.packageIndex}...`);
-    const packageRoutes: any = { days: [] };
+    const packageRoutes: { days: DayRouteData[] } = { days: [] };
 
     for (const day of pkg.days) {
       console.log(`  Day ${day.dayIndex}:`);
-      const dayRoute: any = {
+      const dayRoute: DayRouteData = {
         dayIndex: day.dayIndex,
         segments: [],
       };
@@ -91,8 +103,9 @@ async function generateRoutes() {
               ...routeData,
             });
             await new Promise(resolve => setTimeout(resolve, 500)); // rate limit
-          } catch (err: any) {
-            console.error(`    Error: ${err.message}`);
+          } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : String(err);
+            console.error(`    Error: ${message}`);
             dayRoute.segments.push({ transport: 'driving', geometry: null, duration: 0, distance: 0 });
           }
         }

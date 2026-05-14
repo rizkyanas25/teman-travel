@@ -7,10 +7,26 @@ import routesPackage0 from "@/data/routes/package-0-routes.json";
 import routesPackage1 from "@/data/routes/package-1-routes.json";
 import routesPackage2 from "@/data/routes/package-2-routes.json";
 
-const ALL_ROUTES: Record<number, any> = {
-  0: routesPackage0,
-  1: routesPackage1,
-  2: routesPackage2,
+interface RouteSegment {
+  transport: string;
+  geometry: { type: 'LineString'; coordinates: [number, number][] } | null;
+  duration: number;
+  distance: number;
+}
+
+interface DayRoute {
+  dayIndex: number;
+  segments: RouteSegment[];
+}
+
+interface PackageRoutes {
+  days: DayRoute[];
+}
+
+const ALL_ROUTES: Record<number, PackageRoutes> = {
+  0: routesPackage0 as PackageRoutes,
+  1: routesPackage1 as PackageRoutes,
+  2: routesPackage2 as PackageRoutes,
 };
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
@@ -153,12 +169,12 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
     removeMovingMarker();
 
     const dayData = pkgData.days.find(d => d.dayIndex === dayIdx);
-    const dayRouteGeo = routesData.days.find((d: any) => d.dayIndex === dayIdx);
+    const dayRouteGeo = routesData.days.find((d: DayRoute) => d.dayIndex === dayIdx);
     if (!dayData || !dayRouteGeo) return;
 
     // 1. Draw route segments
     const segments = dayRouteGeo.segments || [];
-    segments.forEach((seg: any, segIdx: number) => {
+    segments.forEach((seg: RouteSegment, segIdx: number) => {
       if (!seg.geometry) return;
       const sourceId = `route-seg-${segIdx}`;
       const layerId = `route-seg-line-${segIdx}`;
@@ -290,7 +306,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
   useImperativeHandle(ref, () => ({
     flyToDay: (dayIdx: number) => {
       if (!map.current || !pkgData || !routesData) return;
-      const dayRouteGeo = routesData.days.find((d: any) => d.dayIndex === dayIdx);
+      const dayRouteGeo = routesData.days.find((d: DayRoute) => d.dayIndex === dayIdx);
 
       if (dayRouteGeo && dayRouteGeo.segments) {
         const allCoords: [number, number][] = [];
@@ -314,7 +330,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
     playAnimation: (dayIdx: number) => {
       if (!map.current || !routesData || !pkgData) return;
       const m = map.current;
-      const dayRouteGeo = routesData.days.find((d: any) => d.dayIndex === dayIdx);
+      const dayRouteGeo = routesData.days.find((d: DayRoute) => d.dayIndex === dayIdx);
       const dayData = pkgData.days.find(d => d.dayIndex === dayIdx);
       if (!dayRouteGeo || !dayData) { onAnimationEnd(); return; }
 

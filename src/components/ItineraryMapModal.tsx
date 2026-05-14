@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import DaySidebar from "./map/DaySidebar";
 import PlaybackControls from "./map/PlaybackControls";
@@ -19,13 +19,12 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   const [activeStopIndex, setActiveStopIndex] = useState(-1);
   const [shouldPulse, setShouldPulse] = useState(true);
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
+  const [prevPackage, setPrevPackage] = useState<number | null>(null);
   const mapRef = useRef<MapViewHandle>(null);
-  const prevPackageRef = useRef<number | null>(null);
 
-  // Synchronous reset when package changes — must happen BEFORE render
-  if (packageIndex !== null && packageIndex !== prevPackageRef.current) {
-    prevPackageRef.current = packageIndex;
-    // These setState calls during render are batched by React and applied immediately
+  // Synchronous reset when package changes — uses state (safe to read during render)
+  if (packageIndex !== null && packageIndex !== prevPackage) {
+    setPrevPackage(packageIndex);
     if (activeDayIndex !== 0) setActiveDayIndex(0);
     if (isPlaying) setIsPlaying(false);
     if (activeStopIndex !== -1) setActiveStopIndex(-1);
@@ -35,14 +34,16 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
 
   if (packageIndex === null) return null;
 
-  const packagesMessages = messages.packages as { items: any[] };
+  interface ItineraryDay { title: string; day: string; activities: string[] }
+  interface PackageMessage { title: string; subtitle: string; itinerary: ItineraryDay[]; [key: string]: unknown }
+  const packagesMessages = messages.packages as { items: PackageMessage[] };
   const pkgData = packagesMessages.items[packageIndex];
   const geoData = PACKAGE_GEO_DATA.find(p => p.packageIndex === packageIndex);
 
   if (!pkgData || !geoData) return null;
 
-  const dayTitles = pkgData.itinerary.map((d: any) => d.title);
-  const dayLabels = pkgData.itinerary.map((d: any) => d.day);
+  const dayTitles = pkgData.itinerary.map((d: ItineraryDay) => d.title);
+  const dayLabels = pkgData.itinerary.map((d: ItineraryDay) => d.day);
   const currentDayGeo = geoData.days.find(d => d.dayIndex === activeDayIndex);
   const stopCount = currentDayGeo ? getDayStops(currentDayGeo).length : 0;
   const currentDayLabel = dayLabels[activeDayIndex] || `Day ${activeDayIndex + 1}`;
