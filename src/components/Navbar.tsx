@@ -24,10 +24,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isGlass = scrolled || menuOpen;
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-      scrolled 
-        ? "bg-dark-900/75 backdrop-blur-xl border-white/5 shadow-2xl" 
+      isGlass 
+        ? "bg-[rgba(10,28,25,0.7)] backdrop-blur-xl border-white/5 shadow-2xl" 
         : "bg-transparent backdrop-blur-none border-transparent shadow-none"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,11 +62,11 @@ export default function Navbar() {
 
       {/* Premium Mobile Menu Dropdown */}
       <div 
-        className={`md:hidden absolute top-full left-0 w-full glass-dark overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? "max-h-[600px] opacity-100 border-b border-white/10 shadow-2xl" : "max-h-0 opacity-0 border-b-0"
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 py-6 space-y-2">
+        <div className="px-4 py-6 space-y-2 border-t border-white/5">
           {navLinks.map((link) => (
             <a 
               key={link.href} 
