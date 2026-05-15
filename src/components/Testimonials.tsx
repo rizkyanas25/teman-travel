@@ -47,8 +47,12 @@ export default function Testimonials() {
   const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const amount = el.clientWidth * 0.7;
-    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
+    const card = el.querySelector(".snap-center");
+    if (card) {
+      const cardWidth = card.clientWidth;
+      const gap = 24; // gap-6
+      el.scrollBy({ left: dir === "left" ? -(cardWidth + gap) : (cardWidth + gap), behavior: "smooth" });
+    }
   };
 
   return (
@@ -91,18 +95,18 @@ export default function Testimonials() {
           )}
 
           {/* Fade edges */}
-          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none hidden md:block" />}
-          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none hidden md:block" />}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none" />
 
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-[calc(50%-150px)] sm:px-[calc(50%-190px)]"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {items.map((item, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-[300px] sm:w-[380px] snap-start bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group"
+                className="flex-shrink-0 w-[300px] sm:w-[380px] snap-center bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group"
               >
                 {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
