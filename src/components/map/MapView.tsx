@@ -66,6 +66,29 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
   const routesData = ALL_ROUTES[packageIndex] || null;
 
+  const doFlyToDay = (dayIdx: number, duration: number = 1000) => {
+    if (!map.current || !pkgData || !routesData) return;
+    const dayRouteGeo = routesData.days.find((d: DayRoute) => d.dayIndex === dayIdx);
+
+    if (dayRouteGeo && dayRouteGeo.segments) {
+      const allCoords: [number, number][] = [];
+      for (const seg of dayRouteGeo.segments) {
+        if (seg.geometry && seg.geometry.coordinates) allCoords.push(...seg.geometry.coordinates);
+      }
+      if (allCoords.length > 0) {
+        const bounds = allCoords.reduce((b: mapboxgl.LngLatBounds, coord: [number, number]) => b.extend(coord),
+          new mapboxgl.LngLatBounds(allCoords[0], allCoords[0]));
+        map.current.fitBounds(bounds, { padding: 60, duration, essential: true });
+        return;
+      }
+    }
+    const dayData = pkgData.days.find(d => d.dayIndex === dayIdx);
+    if (dayData) {
+      const stops = getDayStops(dayData);
+      if (stops.length > 0) map.current.flyTo({ center: stops[0].coordinates as [number, number], zoom: 12, duration });
+    }
+  };
+
   // Initialize Map
   useEffect(() => {
     if (!mapContainer.current || !pkgData) return;
@@ -91,7 +114,11 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
       map.current = m;
       m.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
 
-      m.on('load', () => { m.resize(); renderDay(activeDayIndex); });
+      m.on('load', () => { 
+        m.resize(); 
+        renderDay(activeDayIndex); 
+        doFlyToDay(activeDayIndex, 800); 
+      });
       m.on('style.load', () => { m.resize(); });
     }, 150);
 
@@ -289,28 +316,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
   };
 
   useImperativeHandle(ref, () => ({
-    flyToDay: (dayIdx: number) => {
-      if (!map.current || !pkgData || !routesData) return;
-      const dayRouteGeo = routesData.days.find((d: DayRoute) => d.dayIndex === dayIdx);
-
-      if (dayRouteGeo && dayRouteGeo.segments) {
-        const allCoords: [number, number][] = [];
-        for (const seg of dayRouteGeo.segments) {
-          if (seg.geometry && seg.geometry.coordinates) allCoords.push(...seg.geometry.coordinates);
-        }
-        if (allCoords.length > 0) {
-          const bounds = allCoords.reduce((b: mapboxgl.LngLatBounds, coord: [number, number]) => b.extend(coord),
-            new mapboxgl.LngLatBounds(allCoords[0], allCoords[0]));
-          map.current.fitBounds(bounds, { padding: 60, duration: 1000, essential: true });
-          return;
-        }
-      }
-      const dayData = pkgData.days.find(d => d.dayIndex === dayIdx);
-      if (dayData) {
-        const stops = getDayStops(dayData);
-        if (stops.length > 0) map.current.flyTo({ center: stops[0].coordinates as [number, number], zoom: 12, duration: 1000 });
-      }
-    },
+    flyToDay: (dayIdx: number) => doFlyToDay(dayIdx),
 
     playAnimation: (dayIdx: number) => {
       if (!map.current || !routesData || !pkgData) return;
