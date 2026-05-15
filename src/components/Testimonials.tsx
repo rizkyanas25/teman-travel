@@ -2,6 +2,8 @@
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaStar } from "react-icons/fa";
 
 interface TestimonialItem {
   name: string;
@@ -75,7 +77,7 @@ export default function Testimonials() {
               className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex"
               aria-label="Scroll left"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              <FiChevronLeft className="w-5 h-5" />
             </button>
           )}
           {canScrollRight && (
@@ -84,7 +86,7 @@ export default function Testimonials() {
               className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex"
               aria-label="Scroll right"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              <FiChevronRight className="w-5 h-5" />
             </button>
           )}
 
@@ -105,9 +107,7 @@ export default function Testimonials() {
                 {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
                   {Array.from({ length: item.rating }).map((_, s) => (
-                    <svg key={s} className="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    <FaStar key={s} className="w-4 h-4 text-gold-400 shrink-0" />
                   ))}
                 </div>
 

@@ -2,6 +2,7 @@
 import { useState, useCallback } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
+import { FiMapPin, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface Destination {
   title: string;
@@ -65,10 +66,7 @@ export default function Gallery() {
 
             {/* Location badge on image */}
             <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm">
-              <svg className="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+              <FiMapPin className="w-3.5 h-3.5 text-gold-400 shrink-0" />
               <span className="text-xs text-white/90 font-medium">{dest.location}</span>
             </div>
           </div>
@@ -112,18 +110,14 @@ export default function Gallery() {
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-gold-400 hover:text-gold-400 transition"
                   aria-label={t("prev")}
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
+                  <FiChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={next}
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-gold-400 hover:text-gold-400 transition"
                   aria-label={t("next")}
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  <FiChevronRight className="w-5 h-5" />
                 </button>
               </div>
             </div>

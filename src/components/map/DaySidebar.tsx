@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
+import { FiCheck } from 'react-icons/fi';
 
 interface DaySidebarProps {
   packageIndex: number;
@@ -83,19 +84,7 @@ export default function DaySidebar({
                       <div className='w-2 h-2 bg-dark-900 rounded-full' />
                     )}
                     {!isActive && isCompleted && (
-                      <svg
-                        className='w-3 h-3 text-white'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth={3}
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          d='M5 13l4 4L19 7'
-                        />
-                      </svg>
+                      <FiCheck className="w-4 h-4 text-white" />
                     )}
                   </button>
                 </div>
