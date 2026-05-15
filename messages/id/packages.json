@@ -359,6 +359,7 @@
       ]
     }
   ],
+  "packageIncludes": "{name} Sudah Termasuk",
   "infoTitle": "Semua Paket Sudah Termasuk",
   "notesTitle": "Catatan Tambahan",
   "sharedIncludes": {

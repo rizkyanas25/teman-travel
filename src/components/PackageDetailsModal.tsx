@@ -34,7 +34,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
         {/* Header */}
         <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
           <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white">
-            {t("infoTitle")}
+            {t("packageIncludes", { name: pkg.title })}
           </h3>
           <button
             onClick={onClose}
