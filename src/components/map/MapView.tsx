@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import { useEffect, useRef, useImperativeHandle, forwardRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import { PACKAGE_GEO_DATA, getDayStops } from "@/data/itinerary-geo";
 
@@ -63,6 +63,27 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
   const layerIdsRef = useRef<string[]>([]);
   const sourceIdsRef = useRef<string[]>([]);
   const markerDataRef = useRef<Map<string, { el: HTMLElement, totalStops: number, visited: number }>>(new Map());
+
+  const [speedMultiplierUI, setSpeedMultiplierUI] = useState(1);
+  const animStateRef = useRef({
+    animStartTime: 0,
+    timeOffset: 0,
+    lastCameraTime: 0,
+    speedMultiplier: 1,
+    isPlaying: false
+  });
+
+  const handleSpeedChange = (newSpeed: number) => {
+    if (animStateRef.current.isPlaying) {
+      const now = performance.now();
+      const currentElapsed = (now - animStateRef.current.animStartTime) * animStateRef.current.speedMultiplier + animStateRef.current.timeOffset;
+      animStateRef.current.timeOffset = currentElapsed;
+      animStateRef.current.animStartTime = now;
+      animStateRef.current.lastCameraTime = currentElapsed;
+    }
+    animStateRef.current.speedMultiplier = newSpeed;
+    setSpeedMultiplierUI(newSpeed);
+  };
 
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
   const routesData = ALL_ROUTES[packageIndex] || null;
@@ -143,6 +164,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
     if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
     animationFrameRef.current = null;
     pauseTimerRef.current = null;
+    animStateRef.current.isPlaying = false;
     removeMovingMarker();
   };
 
@@ -404,9 +426,11 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
 
       let lastTransport = animPoints[0].transport;
       const hitCheckpoints = new Set<number>();
-      let animStartTime = performance.now();
-      let timeOffset = 0;
-      let lastCameraTime = 0;
+
+      animStateRef.current.animStartTime = performance.now();
+      animStateRef.current.timeOffset = 0;
+      animStateRef.current.lastCameraTime = 0;
+      animStateRef.current.isPlaying = true;
 
       const timeToIndex = (elapsed: number): number => {
         let lo = 0, hi = cumTime.length - 1;
@@ -418,12 +442,14 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
       };
 
       const tick = (timestamp: number) => {
-        const elapsed = (timestamp - animStartTime) + timeOffset;
+        const { animStartTime, timeOffset, speedMultiplier } = animStateRef.current;
+        const elapsed = (timestamp - animStartTime) * speedMultiplier + timeOffset;
         const index = Math.min(timeToIndex(elapsed), animPoints.length - 1);
 
         const pt = animPoints[index];
         if (!pt || !pt.coord) {
           removeMovingMarker();
+          animStateRef.current.isPlaying = false;
           if (onStopReached) onStopReached(allStops.length - 1);
           onAnimationEnd();
           return;
@@ -444,9 +470,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
         }
 
         // Camera follow every 500ms
-        if (elapsed - lastCameraTime > 500) {
-          m.easeTo({ center: pt.coord, duration: 600 });
-          lastCameraTime = elapsed;
+        if (elapsed - animStateRef.current.lastCameraTime > 500) {
+          m.easeTo({ center: pt.coord, duration: 600 / speedMultiplier });
+          animStateRef.current.lastCameraTime = elapsed;
         }
 
         const hitCP = checkpoints.find(cp => !hitCheckpoints.has(cp.stopIdx) && index >= cp.flatIdx);
@@ -474,11 +500,11 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
 
           const pausedElapsed = elapsed;
           pauseTimerRef.current = setTimeout(() => {
-            timeOffset = pausedElapsed;
-            animStartTime = performance.now();
-            lastCameraTime = pausedElapsed;
+            animStateRef.current.timeOffset = pausedElapsed;
+            animStateRef.current.animStartTime = performance.now();
+            animStateRef.current.lastCameraTime = pausedElapsed;
             animationFrameRef.current = requestAnimationFrame(tick);
-          }, 1200);
+          }, 1200 / speedMultiplier);
           return;
         }
 
@@ -486,6 +512,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
           animationFrameRef.current = requestAnimationFrame(tick);
         } else {
           removeMovingMarker();
+          animStateRef.current.isPlaying = false;
           if (onStopReached) onStopReached(allStops.length - 1);
           onAnimationEnd();
         }
@@ -505,6 +532,26 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
       <div ref={mapContainer} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%' }} />
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-dark-950/60 to-transparent pointer-events-none" style={{ zIndex: 1 }} />
       <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-dark-950/60 to-transparent pointer-events-none" style={{ zIndex: 1 }} />
+
+      {/* Speed Controls (Mapbox style) */}
+      <div 
+        className="absolute bottom-3 right-3 flex bg-white rounded shadow-[0_0_0_2px_rgba(0,0,0,0.1)] overflow-hidden" 
+        style={{ zIndex: 10, fontFamily: 'Helvetica Neue, Arial, Helvetica, sans-serif' }}
+      >
+        {[1, 1.5, 2].map((speed) => (
+          <button
+            key={speed}
+            onClick={() => handleSpeedChange(speed)}
+            className={`px-3 py-1.5 text-[11px] font-bold transition-colors border-r border-gray-200 last:border-r-0 ${
+              speedMultiplierUI === speed 
+                ? 'bg-[#D4A843] text-[#05100E]' 
+                : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            }`}
+          >
+            {speed}x
+          </button>
+        ))}
+      </div>
     </div>
   );
 });
