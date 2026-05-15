@@ -4,6 +4,7 @@ import About from "@/components/About";
 import PackagesSection from "@/components/PackagesSection";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -17,6 +18,7 @@ export default function Home() {
       <PackagesSection />
       <Gallery />
       <Testimonials />
+      <FAQ />
       <Contact />
       <Footer />
       <FloatingWhatsApp />

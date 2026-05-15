@@ -1,0 +1,29 @@
+{
+  "badge": "✦ FAQ",
+  "heading": "Pertanyaan yang Sering <highlight>Diajukan</highlight>",
+  "subtitle": "Punya pertanyaan? Berikut adalah jawaban untuk pertanyaan yang paling sering ditanyakan oleh wisatawan kami.",
+  "items": [
+    {
+      "question": "Apakah tiket pesawat sudah termasuk dalam paket?",
+      "answer": "Tidak, tiket pesawat belum termasuk. Semua paket kami hanya mencakup pengaturan darat: hotel, transportasi, makan sesuai jadwal, tiket masuk wisata, dan private driver-guide."
+    },
+    {
+      "question": "Apakah itinerary bisa di-custom?",
+      "answer": "Tentu saja! Karena ini adalah private tour, itinerary kami sangat fleksibel. Anda bisa mengganti destinasi atau menyesuaikan waktu selama masih dalam satu rute geografis yang searah."
+    },
+    {
+      "question": "Menggunakan hotel apa untuk menginap?",
+      "answer": "Standar paket kami menggunakan Bhanuswari Resort & Spa (properti bintang 4 yang asri di area Sukawati/Ubud). Jika Anda punya preferensi hotel atau area lain, kami sangat bisa menyesuaikan paketnya."
+    },
+    {
+      "question": "Apakah tour ini digabung dengan rombongan lain?",
+      "answer": "100% private tour. Anda hanya akan jalan-jalan dengan grup Anda sendiri. Anda mendapat mobil khusus dan driver-guide yang akan menemani selama trip."
+    },
+    {
+      "question": "Bagaimana sistem pembayarannya?",
+      "answer": "Kami membutuhkan deposit 30% untuk mengamankan booking hotel dan tour Anda. Sisa pelunasan bisa dibayarkan saat Anda sudah tiba di Bali via transfer bank atau cash."
+    }
+  ],
+  "stillHaveQuestions": "Masih punya pertanyaan?",
+  "chatUs": "Tanya via WhatsApp"
+}

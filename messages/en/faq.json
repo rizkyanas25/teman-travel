@@ -1,0 +1,29 @@
+{
+  "badge": "✦ FAQ",
+  "heading": "Frequently Asked <highlight>Questions</highlight>",
+  "subtitle": "Got questions? We've got answers. Here are the most common questions we get from our travelers.",
+  "items": [
+    {
+      "question": "Are flight tickets included in the package?",
+      "answer": "No, flight tickets are not included. All our packages cover land arrangements only: hotel, transportation, meals as listed, entrance fees, and your private driver-guide."
+    },
+    {
+      "question": "Can I customize the itinerary?",
+      "answer": "Absolutely! Since this is a private tour, the itinerary is highly flexible. You can swap destinations or adjust timings as long as they are within the same geographical route. Just let us know your preferences."
+    },
+    {
+      "question": "What kind of hotels do you use?",
+      "answer": "We partner with Bhanuswari Resort & Spa (a beautiful 4-star property in the Sukawati/Ubud area) as our standard offering. If you prefer a different hotel or area, we can definitely customize the package for you."
+    },
+    {
+      "question": "Is the tour private or joined with others?",
+      "answer": "100% private. You will only be traveling with your own group. You will have a dedicated car and an English-speaking driver-guide who will assist you throughout the trip."
+    },
+    {
+      "question": "How do we make the payment?",
+      "answer": "We require a 30% deposit to secure your hotel and tour booking. The remaining balance can be paid in cash (IDR, USD, or EUR) upon arrival in Bali."
+    }
+  ],
+  "stillHaveQuestions": "Still have questions?",
+  "chatUs": "Chat us on WhatsApp"
+}
