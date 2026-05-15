@@ -91,8 +91,8 @@ export default function Testimonials() {
           )}
 
           {/* Fade edges */}
-          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none" />}
-          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none" />}
+          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none hidden md:block" />}
+          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none hidden md:block" />}
 
           <div
             ref={scrollRef}
@@ -102,7 +102,7 @@ export default function Testimonials() {
             {items.map((item, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-[340px] sm:w-[380px] snap-start bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group"
+                className="flex-shrink-0 w-[300px] sm:w-[380px] snap-start bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group"
               >
                 {/* Stars */}
                 <div className="flex gap-0.5 mb-4">

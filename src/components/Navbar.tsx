@@ -13,12 +13,12 @@ export default function Navbar() {
   const t = useTranslations("navbar");
 
   const navLinks = [
-    { href: "#home", label: t("home") },
-    { href: "#about", label: t("about") },
-    { href: "#packages", label: t("packages") },
-    { href: "#gallery", label: t("gallery") },
-    { href: "#testimonials", label: t("testimonials") },
-    { href: "#faq", label: t("faq") },
+    { href: "/#home", label: t("home") },
+    { href: "/#about", label: t("about") },
+    { href: "/#packages", label: t("packages") },
+    { href: "/#gallery", label: t("gallery") },
+    { href: "/#testimonials", label: t("testimonials") },
+    { href: "/#faq", label: t("faq") },
   ];
 
   useEffect(() => {
@@ -44,9 +44,9 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-medium text-white/80 hover:text-gold-400 transition">
+              <Link key={link.href} href={link.href} className="text-sm font-medium text-white/80 hover:text-gold-400 transition">
                 {link.label}
-              </a>
+              </Link>
             ))}
             <LanguageSwitcher />
           </div>
@@ -65,14 +65,14 @@ export default function Navbar() {
       >
         <div className="px-4 py-6 space-y-2 border-t border-white/5">
           {navLinks.map((link) => (
-            <a 
+            <Link 
               key={link.href} 
               href={link.href} 
               onClick={() => setMenuOpen(false)} 
               className="block text-base font-medium text-white/80 hover:text-gold-400 transition py-3 border-b border-white/5"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
 
           <div className="pt-6 mt-2 flex items-center justify-between">

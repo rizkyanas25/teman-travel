@@ -8,11 +8,11 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   const quickLinks = [
-    { key: "home", href: "#home" },
-    { key: "about", href: "#about" },
-    { key: "packages", href: "#packages" },
-    { key: "gallery", href: "#gallery" },
-    { key: "contact", href: "#contact" },
+    { key: "home", href: "/#home" },
+    { key: "about", href: "/#about" },
+    { key: "packages", href: "/#packages" },
+    { key: "gallery", href: "/#gallery" },
+    { key: "contact", href: "/#contact" },
   ];
 
   return (
@@ -30,9 +30,9 @@ export default function Footer() {
             <h4 className="font-semibold text-white mb-4">{t("quickLinksTitle")}</h4>
             <div className="space-y-2">
               {quickLinks.map((l) => (
-                <a key={l.key} href={l.href} className="block text-sm text-white/40 hover:text-gold-400 transition">
+                <Link key={l.key} href={l.href} className="block text-sm text-white/40 hover:text-gold-400 transition">
                   {t(`links.${l.key}`)}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { FiMapPin, FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -22,6 +22,15 @@ export default function Gallery() {
     setDirection(dir);
     setCurrent(idx);
   }, []);
+
+  // Autoplay
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev === destinations.length - 1 ? 0 : prev + 1));
+      setDirection("right");
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [destinations.length]);
 
   const prev = () => {
     const idx = current === 0 ? destinations.length - 1 : current - 1;
@@ -74,7 +83,7 @@ export default function Gallery() {
           {/* Content side */}
           <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
             <div>
-              <p className="text-gold-400 text-xs font-semibold tracking-widest uppercase mb-2">
+              <p className="text-gold-400 text-xs font-semibold tracking-widest uppercase mb-2 hidden sm:block">
                 {String(current + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
               </p>
               <h3 className="font-[family-name:var(--font-display)] text-2xl sm:text-3xl font-bold text-white mb-4">
@@ -87,8 +96,8 @@ export default function Gallery() {
 
             {/* Navigation */}
             <div className="flex items-center justify-between mt-8">
-              {/* Dot indicators */}
-              <div className="flex gap-2">
+              {/* Dot indicators (Desktop) */}
+              <div className="hidden sm:flex gap-2">
                 {destinations.map((_, i) => (
                   <button
                     key={i}
@@ -101,6 +110,11 @@ export default function Gallery() {
                     aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
+              </div>
+
+              {/* Number indicator (Mobile) */}
+              <div className="sm:hidden text-gold-400 text-sm font-semibold tracking-widest uppercase">
+                {String(current + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
               </div>
 
               {/* Arrows */}
