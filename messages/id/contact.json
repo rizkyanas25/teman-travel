@@ -6,12 +6,10 @@
   "address": "Jl. Cempaka Wangi No. 18, Batubulan, Kec. Sukawati, Kabupaten Gianyar, Bali 80582, Indonesia",
   "phoneLabel": "Telepon / WhatsApp",
   "emailLabel": "Email",
-  "formTitle": "Kirim Pesan",
-  "formName": "Nama lengkap",
-  "formNamePlaceholder": "Nama lengkap Anda",
-  "formEmail": "Email",
-  "formEmailPlaceholder": "email@contoh.com",
-  "formMessage": "Pesan",
-  "formMessagePlaceholder": "Ceritakan rencana liburan impian Anda...",
-  "formSubmit": "Kirim Pesan"
+  "chatTitle": "Chat Langsung via WhatsApp",
+  "chatBubbleCustomer": "Halo! Saya tertarik paket 5H4M, bisa info lebih lanjut?",
+  "chatBubbleReply": "Halo kak! Tentu bisa 😊 Untuk 2 orang harganya Rp 4,5jt/orang sudah termasuk hotel, transport, dan tiket masuk wisata.",
+  "responseTime": "Biasanya membalas dalam 5 menit (08:00–21:00 WITA)",
+  "chatNow": "Chat Sekarang",
+  "chatGenericMessage": "Halo Teman Travel! 👋 Saya ingin bertanya tentang paket wisata Bali."
 }

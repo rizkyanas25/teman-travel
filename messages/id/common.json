@@ -1,5 +1,5 @@
 {
-  "bookNow": "Pesan Sekarang",
+  "bookNow": "Pesan via WhatsApp",
   "contactUs": "Hubungi Kami",
   "learnMore": "Selengkapnya",
   "perPerson": "Per Orang",
@@ -7,5 +7,7 @@
   "excluded": "Tidak Termasuk",
   "itinerary": "Rencana Perjalanan",
   "childNote": "Anak 3–9 tahun: extra bed & sarapan kurangi Rp 1.000.000/orang",
-  "toddlerNote": "Anak di bawah 2 tahun: Gratis"
+  "toddlerNote": "Anak di bawah 2 tahun: Gratis",
+  "whatsappBookMessage": "Halo Teman Travel! 👋 Saya tertarik dengan paket *{title}*. Bisa info lebih lanjut?",
+  "whatsappGenericMessage": "Halo Teman Travel! 👋 Saya ingin bertanya tentang paket wisata Bali."
 }

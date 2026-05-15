@@ -6,12 +6,10 @@
   "address": "Jl. Cempaka Wangi No. 18, Batubulan, Kec. Sukawati, Kabupaten Gianyar, Bali 80582, Indonesia",
   "phoneLabel": "Phone / WhatsApp",
   "emailLabel": "Email",
-  "formTitle": "Send a Message",
-  "formName": "Full name",
-  "formNamePlaceholder": "Your full name",
-  "formEmail": "Email",
-  "formEmailPlaceholder": "email@example.com",
-  "formMessage": "Message",
-  "formMessagePlaceholder": "Tell us about your dream trip...",
-  "formSubmit": "Send Message"
+  "chatTitle": "Chat Directly via WhatsApp",
+  "chatBubbleCustomer": "Hi! I'm interested in the 5D4N package, could you share more details?",
+  "chatBubbleReply": "Hello! Of course 😊 For 2 people, it's $285/person including hotel, transport, and entrance tickets.",
+  "responseTime": "Usually replies within 5 minutes (8AM–9PM Bali time)",
+  "chatNow": "Chat Now",
+  "chatGenericMessage": "Hi Teman Travel! 👋 I'd like to ask about your Bali tour packages."
 }

@@ -104,7 +104,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
         {/* Header */}
         <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-4 py-3 md:px-6 md:py-4 flex items-center justify-between z-10 shrink-0">
           <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white flex items-center gap-2">
-            🗺️ {pkgData.title} <span className="hidden sm:inline text-white/40 font-normal text-base">— {t("mapTitle")}</span>
+            {pkgData.title} <span className="hidden sm:inline text-white/40 font-normal text-base">— {t("mapTitle")}</span>
           </h3>
           <button
             onClick={onClose}
@@ -154,6 +154,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
               totalDays={totalDays}
               stopCount={stopCount}
               shouldPulse={shouldPulse}
+              packageTitle={pkgData.title}
             />
           </div>
 

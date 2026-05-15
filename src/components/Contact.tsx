@@ -1,5 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const socialIcons = [
   { label: "Facebook", href: "https://www.facebook.com", path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
@@ -7,8 +9,36 @@ const socialIcons = [
   { label: "TikTok", href: "https://www.tiktok.com", path: "M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.28 8.28 0 005.58 2.16v-3.45a4.85 4.85 0 01-3.77-1.25V6.69h3.77z" },
 ];
 
+// WhatsApp icon SVG path
+const WA_ICON_PATH = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z";
+
 export default function Contact() {
   const t = useTranslations("contact");
+  const [showBubble1, setShowBubble1] = useState(false);
+  const [showBubble2, setShowBubble2] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (hasAnimated) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAnimated(true);
+          setTimeout(() => setShowBubble1(true), 400);
+          setTimeout(() => setShowBubble2(true), 1600);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const el = document.getElementById("wa-chat-card");
+    if (el) observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  const waUrl = getWhatsAppUrl(t("chatGenericMessage"));
 
   return (
     <section id="contact" className="py-24 bg-dark-950">
@@ -23,6 +53,7 @@ export default function Contact() {
           <p className="text-white/50 max-w-2xl mx-auto">{t("subtitle")}</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left: Contact Info */}
           <div className="space-y-8">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-gold-400/10 flex items-center justify-center shrink-0">
@@ -39,7 +70,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="font-semibold text-white mb-1">{t("phoneLabel")}</h4>
-                <a href="https://wa.me/628886662507" className="text-gold-400 text-sm hover:underline">+62 888-666-2507</a>
+                <a href={getWhatsAppUrl()} className="text-gold-400 text-sm hover:underline" target="_blank" rel="noopener noreferrer">+62 888-666-2507</a>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -59,23 +90,70 @@ export default function Contact() {
               ))}
             </div>
           </div>
-          <div className="bg-dark-800 rounded-2xl p-8 border border-white/10">
-            <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-6">{t("formTitle")}</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block text-sm text-white/50 mb-2">{t("formName")}</label>
-                <input type="text" placeholder={t("formNamePlaceholder")} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-gold-400 transition placeholder-white/30" />
+
+          {/* Right: WhatsApp Chat Preview Card */}
+          <div
+            id="wa-chat-card"
+            className="relative bg-dark-800 rounded-2xl border border-white/10 overflow-hidden"
+          >
+            {/* Header */}
+            <div className="bg-[#075E54] px-6 py-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d={WA_ICON_PATH}/></svg>
               </div>
               <div>
-                <label className="block text-sm text-white/50 mb-2">{t("formEmail")}</label>
-                <input type="email" placeholder={t("formEmailPlaceholder")} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-gold-400 transition placeholder-white/30" />
+                <h3 className="text-white font-semibold text-sm">{t("chatTitle")}</h3>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+                  <span className="text-white/70 text-xs">Online</span>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm text-white/50 mb-2">{t("formMessage")}</label>
-                <textarea rows={4} placeholder={t("formMessagePlaceholder")} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-gold-400 transition placeholder-white/30 resize-none" />
+            </div>
+
+            {/* Chat Area */}
+            <div className="p-6 space-y-4 min-h-[240px] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImEiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYSkiLz48L3N2Zz4=')] bg-repeat">
+              {/* Customer Bubble */}
+              <div
+                className={`flex justify-end transition-all duration-500 ${
+                  showBubble1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <div className="max-w-[80%] bg-[#005C4B] rounded-2xl rounded-tr-sm px-4 py-3 shadow-md">
+                  <p className="text-white/90 text-sm leading-relaxed">{t("chatBubbleCustomer")}</p>
+                  <p className="text-white/40 text-[10px] text-right mt-1">09:41 ✓✓</p>
+                </div>
               </div>
-              <button type="submit" className="w-full py-3 bg-gold-400 text-dark-900 rounded-xl font-semibold hover:bg-gold-300 transition">{t("formSubmit")}</button>
-            </form>
+
+              {/* Reply Bubble */}
+              <div
+                className={`flex justify-start transition-all duration-500 ${
+                  showBubble2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <div className="max-w-[80%] bg-dark-700 rounded-2xl rounded-tl-sm px-4 py-3 shadow-md border border-white/5">
+                  <p className="text-[#25D366] text-xs font-semibold mb-1">Teman Travel</p>
+                  <p className="text-white/90 text-sm leading-relaxed">{t("chatBubbleReply")}</p>
+                  <p className="text-white/40 text-[10px] text-right mt-1">09:41</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer CTA */}
+            <div className="px-6 pb-6 space-y-3">
+              <div className="flex items-center justify-center gap-2 text-white/50 text-xs">
+                <span>⚡</span>
+                <span>{t("responseTime")}</span>
+              </div>
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl font-semibold transition-all hover:scale-[1.02] shadow-lg shadow-[#25D366]/20"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d={WA_ICON_PATH}/></svg>
+                {t("chatNow")}
+              </a>
+            </div>
           </div>
         </div>
       </div>

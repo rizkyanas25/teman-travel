@@ -1,5 +1,5 @@
 {
-  "bookNow": "Book Now",
+  "bookNow": "Book via WhatsApp",
   "contactUs": "Contact Us",
   "learnMore": "Learn More",
   "perPerson": "Per Person",
@@ -7,5 +7,7 @@
   "excluded": "Not Included",
   "itinerary": "Itinerary",
   "childNote": "Children 3–9 years: extra bed & breakfast deduct $65/person",
-  "toddlerNote": "Children under 2 years: Free"
+  "toddlerNote": "Children under 2 years: Free",
+  "whatsappBookMessage": "Hi Teman Travel! 👋 I'm interested in the *{title}* package. Could you share more details?",
+  "whatsappGenericMessage": "Hi Teman Travel! 👋 I'd like to ask about your Bali tour packages."
 }
