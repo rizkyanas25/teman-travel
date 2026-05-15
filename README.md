@@ -57,7 +57,7 @@ npm run dev
 | **Destinations**  | Image carousel with 12 iconic Bali & Nusa Penida spots                  |
 | **Testimonials**  | Customer reviews with star ratings and rotating cards                   |
 | **FAQ**           | Expandable accordion with common travel questions                       |
-| **Contact**       | Contact form, address, WhatsApp link, and social media icons            |
+| **Contact**       | Address, phone, email, social icons, and interactive WhatsApp chat preview |
 | **Footer**        | Brand logo, description, quick links, legal pages, payment badges, and TripAdvisor recognition |
 
 ### Tour Packages
