@@ -40,9 +40,6 @@ export default function Navbar() {
               </a>
             ))}
             <LanguageSwitcher />
-            <a href="#contact" className="px-5 py-2.5 bg-gold-400 text-dark-900 rounded-full text-sm font-semibold hover:bg-gold-300 transition">
-              {t("contact")}
-            </a>
           </div>
 
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
@@ -57,23 +54,30 @@ export default function Navbar() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden glass-dark border-t border-white/10">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="block text-sm text-white/80 hover:text-gold-400 transition py-2">
-                {link.label}
-              </a>
-            ))}
-            <a href="#contact" onClick={() => setMenuOpen(false)} className="block text-sm text-gold-400 font-semibold py-2">
-              {t("contact")}
+      {/* Premium Mobile Menu Dropdown */}
+      <div 
+        className={`md:hidden absolute top-full left-0 w-full glass-dark overflow-hidden transition-all duration-300 ease-in-out ${
+          menuOpen ? "max-h-[600px] opacity-100 border-b border-white/10 shadow-2xl" : "max-h-0 opacity-0 border-b-0"
+        }`}
+      >
+        <div className="px-6 py-6 space-y-2">
+          {navLinks.map((link) => (
+            <a 
+              key={link.href} 
+              href={link.href} 
+              onClick={() => setMenuOpen(false)} 
+              className="block text-base font-medium text-white/80 hover:text-gold-400 transition py-3 border-b border-white/5"
+            >
+              {link.label}
             </a>
-            <div className="pt-2">
-              <LanguageSwitcher />
-            </div>
+          ))}
+
+          <div className="pt-6 mt-2 flex items-center justify-between">
+            <span className="text-sm font-medium text-white/50">Language</span>
+            <LanguageSwitcher />
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

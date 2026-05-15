@@ -26,7 +26,7 @@ export default function FAQ() {
   );
 
   return (
-    <section id="faq" className="py-24 bg-dark-950 relative overflow-hidden">
+    <section id="faq" className="py-24 bg-dark-900 relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}

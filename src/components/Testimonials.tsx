@@ -50,7 +50,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-dark-900 relative overflow-hidden">
+    <section id="testimonials" className="py-24 bg-dark-950 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-400/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -89,8 +89,8 @@ export default function Testimonials() {
           )}
 
           {/* Fade edges */}
-          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-dark-900 to-transparent z-[5] pointer-events-none" />}
-          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-dark-900 to-transparent z-[5] pointer-events-none" />}
+          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none" />}
+          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none" />}
 
           <div
             ref={scrollRef}
