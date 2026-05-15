@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import { FiHome, FiCoffee, FiMapPin, FiTruck, FiVideo, FiChevronRight, FiChevronDown, FiMap } from "react-icons/fi";
+import { FiHome, FiCoffee, FiMapPin, FiTruck, FiVideo, FiChevronRight, FiChevronDown, FiMap, FiShare2 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 interface PricingItem { pax: string; price: string; }
 interface ItineraryDay { day: string; title: string; items: string[]; }
@@ -43,13 +43,36 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
     t("featureLabels.video"),
   ];
 
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Use origin only (no locale) and index-based ID for consistency across languages
+    const pureUrl = `${window.location.origin}/#pkg-${index}`;
+    
+    navigator.clipboard.writeText(pureUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="package-card bg-dark-800 rounded-2xl overflow-hidden border border-white/10">
-      {/* Image */}
-      <div className="img-hover relative h-56">
-        <Image src={pkg.image} alt={pkg.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 to-transparent" />
-        <div className="absolute bottom-4 left-6">
+    <div 
+      id={`pkg-${index}`}
+      className="package-card group bg-dark-800 rounded-2xl overflow-hidden border border-white/10 scroll-mt-24"
+    >
+      {/* Image Container */}
+      <div className="relative h-56 overflow-hidden rounded-t-2xl [mask-image:linear-gradient(white,white)]">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image 
+            src={pkg.image} 
+            alt={pkg.title} 
+            fill 
+            className="object-cover transition-transform duration-500 group-hover:scale-110 transform-gpu will-change-transform" 
+            sizes="(max-width: 768px) 100vw, 33vw" 
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-900/95 via-dark-900/40 to-transparent z-10 pointer-events-none translate-z-[1px] backface-hidden" />
+        <div className="absolute bottom-4 left-6 z-20 pointer-events-none translate-z-[2px] backface-hidden">
           <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">{pkg.title}</h3>
           <p className="text-gold-400 text-sm mt-1">{tc("perPerson")}</p>
         </div>
@@ -67,25 +90,23 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
         </div>
 
         {/* Icon Badges — at-a-glance features */}
-        <div>
-          <div className="flex flex-wrap gap-2">
-            {featureIcons.map((feat, i) => (
-              <div
-                key={feat.label}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10"
-                title={featureLabels[i]}
-              >
-                <feat.icon className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                <span className="text-[11px] text-white/50">{featureLabels[i]}</span>
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {featureIcons.map((feat, i) => (
+            <div
+              key={feat.label}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10"
+              title={featureLabels[i]}
+            >
+              <feat.icon className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+              <span className="text-[11px] text-white/50">{featureLabels[i]}</span>
+            </div>
+          ))}
           <button
             onClick={onViewDetails}
-            className="mt-3 text-xs text-gold-400 hover:text-gold-300 transition flex items-center gap-1 group"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gold-400/10 border border-gold-400/30 hover:bg-gold-400/20 transition-colors group"
           >
-            {t("viewDetails")}
-            <FiChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <span className="text-[11px] text-gold-400 font-medium">{t("viewDetails")}</span>
+            <FiChevronRight className="w-3 h-3 text-gold-400 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 
@@ -120,16 +141,32 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
           </div>
         </div>
 
-        {/* View Route Button */}
-        {onViewRoute && (
+        {/* Action Row: View Route & Share */}
+        <div className="flex gap-2 relative">
+          {onViewRoute && (
+            <button
+              onClick={onViewRoute}
+              className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-gold-400/10 border border-white/10 hover:border-gold-400/30 rounded-xl text-sm font-medium transition-all text-white/80 hover:text-gold-400"
+            >
+              <FiMap className="w-4 h-4 shrink-0" />
+              <span>{t("viewRoute")}</span>
+            </button>
+          )}
           <button
-            onClick={onViewRoute}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-gold-400/10 border border-white/10 hover:border-gold-400/30 rounded-xl text-sm font-medium transition-all text-white/80 hover:text-gold-400"
+            onClick={handleShare}
+            className="w-12 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white/60 hover:text-white transition-all"
+            title="Share package"
           >
-            <FiMap className="w-4 h-4 shrink-0" />
-            <span>{t("viewRoute")}</span>
+            <FiShare2 className="w-4 h-4" />
           </button>
-        )}
+
+          {/* Toast Notification */}
+          {copied && (
+            <div className="absolute -top-10 right-0 bg-gold-400 text-dark-900 text-[10px] font-bold px-3 py-1.5 rounded-lg animate-[fadeInUp_0.2s_ease] shadow-xl whitespace-nowrap z-20">
+              {tc("linkCopied")}
+            </div>
+          )}
+        </div>
 
         {/* CTA */}
         <a

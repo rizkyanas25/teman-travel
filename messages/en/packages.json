@@ -7,7 +7,7 @@
     "hotel": "Hotel",
     "meals": "Meals",
     "entrance": "Tickets",
-    "transfer": "Transfer",
+    "transfer": "Transport",
     "video": "Video"
   },
   "items": [
@@ -34,7 +34,7 @@
           "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
         },
         {
-          "title": "Transfer & Guide",
+          "title": "Transport & Guide",
           "description": "Airport pickup & drop-off. English-speaking driver guide."
         },
         {
@@ -135,7 +135,7 @@
           "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
         },
         {
-          "title": "Transfer & Guide",
+          "title": "Transport & Guide",
           "description": "Airport pickup & drop-off. English-speaking driver guide."
         },
         {
@@ -199,7 +199,7 @@
             "Lunch at Kintamani with Mount Batur volcano view",
             "Tegalalang Rice Terrace walk & swing (optional)",
             "Tegenungan Waterfall",
-            "Transfer to Jimbaran Bay Beach Resort (South Bali)",
+            "Transport to Jimbaran Bay Beach Resort (South Bali)",
             "Check-in & rest"
           ]
         },
@@ -251,7 +251,7 @@
           "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
         },
         {
-          "title": "Transfer & Guide",
+          "title": "Transport & Guide",
           "description": "Airport pickup & drop-off. English-speaking driver guide."
         },
         {
@@ -329,7 +329,7 @@
             "Jatiluwih Rice Terrace — UNESCO World Heritage",
             "Lunch break",
             "Tanah Lot Temple — iconic sea temple at sunset",
-            "Transfer to Jimbaran Bay Beach Resort (South Bali)",
+            "Transport to Jimbaran Bay Beach Resort (South Bali)",
             "Check-in & rest"
           ]
         },
@@ -361,7 +361,7 @@
   ],
   "packageIncludes": "{name} Inclusions",
   "infoTitle": "All Packages Include",
-  "notesTitle": "Additional Notes",
+  "notesTitle": "Notes",
   "sharedIncludes": {
     "hotel": "Hotel room for 2 guests (extra bed available for 3rd guest)",
     "hotelArea": "Bhanuswari Resort & Spa (Ubud) · Jimbaran Bay Beach Resort (South Bali)",

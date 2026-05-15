@@ -28,11 +28,11 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-dark-800 rounded-2xl border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
+        className="relative w-full max-w-2xl max-h-[85vh] flex flex-col bg-dark-800 rounded-2xl border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
+        {/* Header - Fixed at top */}
+        <div className="bg-dark-800 border-b border-white/10 px-6 py-4 flex items-center justify-between z-10 shrink-0">
           <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white">
             {t("packageIncludes", { name: pkg.title })}
           </h3>
@@ -44,44 +44,37 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 space-y-8">
-          {/* Included */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                <FiCheck className="w-4 h-4 text-green-400" />
-              </span>
-              {tc("included")}
-            </h4>
-            <div className="space-y-3">
-              {includes.map((item, idx) => (
-                <div key={idx} className="flex gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
-                  <FiCheck className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
-                  <div>
-                    <h5 className="text-sm font-bold text-white mb-0.5">{item.title}</h5>
-                    <p className="text-sm text-white/60 leading-relaxed">{item.description}</p>
-                  </div>
+        {/* Content - Scrollable area */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
+          {/* Included Items */}
+          <div className="space-y-4">
+            {pkg.includes.map((item: any, i: number) => (
+              <div key={i} className="p-4 bg-white/5 rounded-xl border border-white/10 flex gap-4">
+                <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <FiCheck className="w-3.5 h-3.5 text-green-500" />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-white mb-1">{item.title}</h4>
+                  <p className="text-xs text-white/50 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Excluded */}
+          {/* Not Included Section */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center">
-                <FiX className="w-4 h-4 text-red-400" />
-              </span>
+            <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mb-4">
               {tc("excluded")}
             </h4>
             <div className="space-y-3">
-              {excludes.map((item, idx) => (
-                <div key={idx} className="flex gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
-                  <FiX className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
+              {pkg.excludes.map((item: any, i: number) => (
+                <div key={i} className="p-3 bg-white/5 rounded-xl border border-white/10 flex gap-3">
+                  <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <FiX className="w-3 text-red-500" />
+                  </div>
                   <div>
-                    <h5 className="text-sm font-bold text-white mb-0.5">{item.title}</h5>
-                    <p className="text-sm text-white/60 leading-relaxed">{item.description}</p>
+                    <h5 className="text-sm font-medium text-white/80 leading-tight">{item.title}</h5>
+                    <p className="text-[11px] text-white/40 mt-0.5">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -90,7 +83,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
 
           {/* Notes */}
           <div className="p-4 bg-gold-400/5 rounded-xl border border-gold-400/20">
-            <p className="text-xs text-gold-400/90 font-medium mb-2">ℹ️ {t("notesTitle")}</p>
+            <p className="text-xs text-gold-400/90 font-medium mb-2">{t("notesTitle")}</p>
             <p className="text-xs text-white/50">• {tc("childNote")}</p>
             <p className="text-xs text-white/50 mt-1">• {tc("toddlerNote")}</p>
           </div>

@@ -39,7 +39,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/images/logomark-nobg.png" alt="Teman Travel Logo" width={60} height={60} className="w-10 h-10 object-contain" />
-            <Image src="/images/logotype-nobg.png" alt="Teman Travel" width={200} height={60} className="w-auto h-7 object-contain mt-1" />
+            <Image src="/images/logotype-nobg.png" alt="Teman Travel" width={200} height={60} className="w-auto h-7 object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
@@ -51,7 +51,11 @@ export default function Navbar() {
             <LanguageSwitcher />
           </div>
 
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)} 
+            className="md:hidden text-white focus:outline-none flex items-center justify-center h-10 w-10" 
+            aria-label="Toggle menu"
+          >
             {menuOpen ? <FiX className="w-7 h-7" /> : <FiMenu className="w-7 h-7" />}
           </button>
         </div>
