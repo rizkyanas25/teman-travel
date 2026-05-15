@@ -93,8 +93,9 @@ export default function DaySidebar({
                 </div>
 
                 {/* Text Content */}
-                <h4 className='text-sm font-bold flex items-center gap-2 m-0 leading-none'>
+                <h4 className='text-sm font-bold flex items-center gap-2 m-0 leading-none w-full min-w-0'>
                   <span
+                    className='whitespace-nowrap shrink-0'
                     style={{
                       color: isActive
                         ? day.color
@@ -105,8 +106,8 @@ export default function DaySidebar({
                   >
                     {dayLabel}
                   </span>
-                  <span className='text-white/40 font-normal'>—</span>
-                  <span className='text-white/80'>
+                  <span className='text-white/40 font-normal shrink-0'>—</span>
+                  <span className='text-white/80 line-clamp-1 flex-1 min-w-0'>
                     {dayTitles[idx] || dayLabel}
                   </span>
                 </h4>
