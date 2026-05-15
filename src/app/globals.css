@@ -54,8 +54,10 @@ html {
 }
 
 .nav-scrolled {
-  background: rgba(15,23,42,0.95) !important;
-  backdrop-filter: blur(16px);
+  background: rgba(15,23,42,0.75) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
 }
 

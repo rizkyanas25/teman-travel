@@ -20,10 +20,9 @@ export default function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const whatsappUrl = getWhatsAppUrl(
-    t("chatUs"), 
-    t.raw("items")[0] // Just to trigger generic message, we'll actually use the common generic template if needed, but let's just use the default getWhatsAppUrl without specific message
-  );
+  const tc = useTranslations("common");
+  
+  const whatsappUrl = getWhatsAppUrl(tc("whatsappGenericMessage"));
 
   return (
     <section id="faq" className="py-24 bg-dark-900 relative overflow-hidden">
