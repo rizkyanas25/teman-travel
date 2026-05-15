@@ -8,10 +8,12 @@
     "gallery": "Gallery",
     "contact": "Contact Us"
   },
-  "packagesTitle": "Tour Packages",
-  "package4d3n": "4 Days 3 Nights",
-  "package5d4n": "5 Days 4 Nights",
-  "package6d5n": "6 Days 5 Nights",
+  "supportTitle": "Support",
+  "terms": "Terms & Conditions",
+  "privacy": "Privacy Policy",
+  "cancellation": "Cancellation Policy",
+  "paymentsTitle": "Secure Payments",
+  "recognizedByTitle": "Recognized By",
   "disclaimer": "This is a portfolio demonstration project. Images and testimonials are illustrative and AI-generated.",
   "copyright": "© Teman Travel 2026. Bali Tour Packages & Travel Agency."
 }

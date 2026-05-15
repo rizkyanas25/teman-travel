@@ -13,6 +13,7 @@ const messageModules = [
   'faq',
   'contact',
   'footer',
+  'legal'
 ] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {

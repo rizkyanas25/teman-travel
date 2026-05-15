@@ -33,12 +33,13 @@ npm run dev
 
 ## 🎨 Features
 
-- **Premium Dark Aesthetic** — Glassmorphism, gold accents, and elegant gradients
+- **Dark Tropical Theme** — Deep teal/jungle green palette, luxury gold assets, and unified glassmorphism
 - **Full Internationalization** — English & Indonesian with automatic locale detection
 - **Smart Currency Display** — USD for international visitors, IDR for Indonesian market
 - **Interactive Carousel** — Destination gallery with image-description split layout
 - **🗺️ Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries
+- **Legal & Trust Integration** — Terms, Privacy, and Cancellation pages with official payment badges
 - **SEO Optimized** — JSON-LD structured data, OpenGraph, sitemap, robots.txt
 - **PWA Ready** — Web manifest, favicons, and apple-touch-icon
 - **Fully Responsive** — Mobile-first design across all breakpoints
@@ -88,6 +89,7 @@ npm run dev
 | **UI Library**    | React 19                              |
 | **Language**      | TypeScript 5                          |
 | **Styling**       | Tailwind CSS 4                        |
+| **Icons**         | React Icons (`react-icons/fa`)        |
 | **Maps**          | Mapbox GL JS 3                        |
 | **i18n**          | next-intl 4 (locale routing + proxy)  |
 | **Images**        | Next.js Image (optimized, lazy-load)  |

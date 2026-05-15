@@ -1,0 +1,14 @@
+{
+  "terms": {
+    "title": "Terms & Conditions",
+    "content": "Welcome to Teman Travel. By booking our services, you agree to our terms and conditions. These include regulations regarding your conduct, our responsibilities as your travel agent, and standard booking procedures. Please read them carefully before proceeding with any transactions."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "content": "Your privacy is important to us. Teman Travel collects and uses your personal information exclusively for processing bookings, communicating itineraries, and improving our services. We do not sell or share your data with third parties without your explicit consent."
+  },
+  "cancellation": {
+    "title": "Cancellation Policy",
+    "content": "We understand that plans can change. Teman Travel offers a flexible cancellation policy. Cancellations made 14 days prior to the tour date will receive a full refund. Cancellations within 7 days will incur a 50% fee, and no-shows are non-refundable."
+  }
+}
