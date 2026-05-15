@@ -1,20 +1,20 @@
-@import "mapbox-gl/dist/mapbox-gl.css";
-@import "tailwindcss";
+@import 'mapbox-gl/dist/mapbox-gl.css';
+@import 'tailwindcss';
 
 @theme inline {
-  --color-gold-50: #FBF7EE;
-  --color-gold-100: #F5ECDA;
-  --color-gold-200: #EAD5B0;
-  --color-gold-300: #DDBB7E;
-  --color-gold-400: #D4A843;
-  --color-gold-500: #C4922E;
-  --color-gold-600: #A67424;
+  --color-gold-50: #fbf7ee;
+  --color-gold-100: #f5ecda;
+  --color-gold-200: #ead5b0;
+  --color-gold-300: #ddbb7e;
+  --color-gold-400: #d4a843;
+  --color-gold-500: #c4922e;
+  --color-gold-600: #a67424;
   --color-gold-700: #875820;
-  --color-gold-800: #6E4720;
-  --color-gold-900: #5C3C1E;
-  --color-dark-800: #13322D; /* Deep Forest/Teal for Cards */
-  --color-dark-900: #0A1C19; /* Deep Jungle Green for Sections */
-  --color-dark-950: #05100E; /* Almost Black Teal for Alternating Sections */
+  --color-gold-800: #6e4720;
+  --color-gold-900: #5c3c1e;
+  --color-dark-800: #13322d; /* Deep Forest/Teal for Cards */
+  --color-dark-900: #0a1c19; /* Deep Jungle Green for Sections */
+  --color-dark-950: #05100e; /* Almost Black Teal for Alternating Sections */
   --font-display: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -41,55 +41,78 @@ html {
 }
 
 .glass {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .glass-dark {
-  background: rgba(10,28,25,0.85);
+  background: rgba(10, 28, 25, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .hero-bg {
-  background-image: linear-gradient(to bottom, rgba(10,28,25,0.55), rgba(10,28,25,0.85)), url('/images/hero.png');
+  background-image:
+    linear-gradient(to bottom, rgba(10, 28, 25, 0.55), rgba(10, 28, 25, 0.85)),
+    url('/images/hero.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
-.float-anim { animation: float 3s ease-in-out infinite; }
+.float-anim {
+  animation: float 3s ease-in-out infinite;
+}
 
 @keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 .wa-pulse::before {
   content: '';
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: #25D366;
+  background: #25d366;
   animation: pulse-ring 1.5s ease infinite;
   z-index: -1;
 }
 
-.img-hover { overflow: hidden; }
-.img-hover img { transition: transform 0.5s ease; }
-.img-hover:hover img { transform: scale(1.1); }
+.img-hover {
+  overflow: hidden;
+}
+.img-hover img {
+  transition: transform 0.5s ease;
+}
+.img-hover:hover img {
+  transform: scale(1.1);
+}
 
 .package-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .package-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(212,168,67,0.25);
+  box-shadow: 0 25px 50px -12px rgba(212, 168, 67, 0.25);
 }
 
 .itinerary-content {
@@ -102,8 +125,14 @@ html {
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .carousel-img {
@@ -111,31 +140,49 @@ html {
 }
 
 @keyframes carouselFade {
-  from { opacity: 0; transform: scale(1.05); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Mapbox Custom Styles */
 .custom-popup .mapboxgl-popup-content {
-  background-color: var(--color-gold-400);
+  background-color: var(--popup-color, white);
   border-radius: 8px;
   padding: 4px 8px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
   border: none !important;
   outline: none !important;
 }
+
+.custom-popup .popup-inner p {
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  font-size: 13px;
+}
+
 .custom-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: var(--color-gold-400) !important;
+  border-top-color: var(--popup-color, white) !important;
 }
+
 .custom-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: var(--color-gold-400) !important;
+  border-bottom-color: var(--popup-color, white) !important;
 }
+
 .custom-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: var(--color-gold-400) !important;
+  border-right-color: var(--popup-color, white) !important;
 }
+
 .custom-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: var(--color-gold-400) !important;
+  border-left-color: var(--popup-color, white) !important;
 }
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -156,13 +203,27 @@ html {
   animation: popupBounceIn 0.3s ease;
 }
 @keyframes popupBounceIn {
-  0% { opacity: 0; transform: scale(0.7) translateY(5px); }
-  70% { transform: scale(1.05) translateY(-2px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(5px);
+  }
+  70% {
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* Play button attention pulse */
 @keyframes pulseRing {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
