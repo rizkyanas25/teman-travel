@@ -11,7 +11,7 @@ interface PackageItem {
   title: string;
   image: string;
   pricing: PricingItem[];
-  includes: string[];
+  includes: { title: string; description: string }[];
   excludes: string[];
   itinerary: ItineraryDay[];
 }

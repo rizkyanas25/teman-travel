@@ -38,6 +38,42 @@
       "location": "East Bali",
       "image": "/images/lempuyang-temple.png",
       "description": "The famous Gates of Heaven frame a perfect view of Mount Agung, Bali's highest and most sacred volcano. An early morning visit rewards you with misty, ethereal views."
+    },
+    {
+      "title": "Ulun Danu Beratan",
+      "location": "Bedugul, Bali",
+      "image": "/images/ulun-danu-beratan.png",
+      "description": "A picturesque Hindu Shaivite water temple set on the shores of Lake Beratan. The serene lake and mountainous backdrop create a magical, floating illusion."
+    },
+    {
+      "title": "Handara Gate",
+      "location": "Bedugul, Bali",
+      "image": "/images/handara-gate.png",
+      "description": "One of the most iconic photo spots in Bali. This towering traditional Balinese gate is surrounded by lush green mountains and misty highlands."
+    },
+    {
+      "title": "Broken Beach",
+      "location": "Nusa Penida",
+      "image": "/images/broken-beach.png",
+      "description": "A spectacular circular cove formed by collapsed rock. The natural archway allows the turquoise ocean to flow in, creating a stunning and dramatic coastal landscape."
+    },
+    {
+      "title": "Tukad Cepung Waterfall",
+      "location": "Bangli, Bali",
+      "image": "/images/tukad-cepung.png",
+      "description": "A unique hidden waterfall located inside a cavern. On sunny days, magical rays of light pierce through the cave roof, illuminating the cascading water."
+    },
+    {
+      "title": "Jatiluwih Rice Terrace",
+      "location": "Tabanan, Bali",
+      "image": "/images/jatiluwih-rice-terrace.png",
+      "description": "Spanning over 600 hectares, these UNESCO World Heritage rice terraces offer breathtaking, sweeping views of traditional Balinese agriculture against the Batukaru mountain range."
+    },
+    {
+      "title": "Mount Batur",
+      "location": "Kintamani, Bali",
+      "image": "/images/mount-batur.png",
+      "description": "An active volcano set inside a massive caldera. The viewpoint offers sweeping panoramic vistas of the volcanic peaks, black lava fields, and the serene Lake Batur below."
     }
   ],
   "prev": "Previous",

@@ -9,7 +9,7 @@ const ItineraryMapModal = dynamic(() => import("./ItineraryMapModal"), { ssr: fa
 
 export default function PackagesSection() {
   const t = useTranslations("packages");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalPackageIndex, setModalPackageIndex] = useState<number | null>(null);
   const [mapModalPackageIndex, setMapModalPackageIndex] = useState<number | null>(null);
 
   const itemKeys = ["0", "1", "2"] as const;
@@ -31,13 +31,13 @@ export default function PackagesSection() {
             <PackageCard 
               key={idx} 
               index={idx} 
-              onViewDetails={() => setModalOpen(true)}
+              onViewDetails={() => setModalPackageIndex(parseInt(idx))}
               onViewRoute={() => setMapModalPackageIndex(parseInt(idx))}
             />
           ))}
         </div>
       </div>
-      <PackageDetailsModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <PackageDetailsModal packageIndex={modalPackageIndex} onClose={() => setModalPackageIndex(null)} />
       <ItineraryMapModal packageIndex={mapModalPackageIndex} onClose={() => setMapModalPackageIndex(null)} />
     </section>
   );

@@ -1,36 +1,25 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useMessages } from "next-intl";
 import { FiCheck, FiX } from "react-icons/fi";
 interface Props {
-  open: boolean;
+  packageIndex: number | null;
   onClose: () => void;
 }
 
-export default function PackageDetailsModal({ open, onClose }: Props) {
+export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const t = useTranslations("packages");
   const tc = useTranslations("common");
+  const messages = useMessages();
 
-  if (!open) return null;
+  if (packageIndex === null) return null;
 
-  const includes = [
-    t("sharedIncludes.hotel"),
-    t("sharedIncludes.hotelArea"),
-    t("sharedIncludes.sunsetDinner"),
-    t("sharedIncludes.privateTour"),
-    t("sharedIncludes.baliNusaPenida"),
-    t("sharedIncludes.entranceFee"),
-    t("sharedIncludes.pickup"),
-    t("sharedIncludes.driverGuide"),
-    t("sharedIncludes.cinematicVideo"),
-    t("sharedIncludes.water"),
-  ];
+  const packagesMessages = messages.packages as { items: any[] };
+  const pkg = packagesMessages.items[packageIndex];
 
-  const excludes = [
-    t("sharedExcludes.flights"),
-    t("sharedExcludes.shopping"),
-    t("sharedExcludes.activities"),
-    t("sharedExcludes.kecak"),
-  ];
+  if (!pkg) return null;
+
+  const includes = pkg.includes as { title: string; description: string }[];
+  const excludes = pkg.excludes as { title: string; description: string }[];
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" onClick={onClose}>
@@ -65,11 +54,14 @@ export default function PackageDetailsModal({ open, onClose }: Props) {
               </span>
               {tc("included")}
             </h4>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {includes.map((item) => (
-                <div key={item} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
-                  <FiCheck className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-white/70">{item}</span>
+            <div className="space-y-3">
+              {includes.map((item, idx) => (
+                <div key={idx} className="flex gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                  <FiCheck className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
+                  <div>
+                    <h5 className="text-sm font-bold text-white mb-0.5">{item.title}</h5>
+                    <p className="text-sm text-white/60 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -83,11 +75,14 @@ export default function PackageDetailsModal({ open, onClose }: Props) {
               </span>
               {tc("excluded")}
             </h4>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {excludes.map((item) => (
-                <div key={item} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
-                  <FiX className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-white/70">{item}</span>
+            <div className="space-y-3">
+              {excludes.map((item, idx) => (
+                <div key={idx} className="flex gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                  <FiX className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
+                  <div>
+                    <h5 className="text-sm font-bold text-white mb-0.5">{item.title}</h5>
+                    <p className="text-sm text-white/60 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>

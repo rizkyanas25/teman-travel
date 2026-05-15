@@ -82,6 +82,12 @@ npm run dev
 | Tanah Lot Temple        | Tabanan, Bali |
 | Tirta Empul             | Tampaksiring  |
 | Lempuyang Temple        | East Bali     |
+| Ulun Danu Beratan       | Bedugul, Bali |
+| Handara Gate            | Bedugul, Bali |
+| Broken Beach            | Nusa Penida   |
+| Tukad Cepung Waterfall  | Bangli, Bali  |
+| Jatiluwih Rice Terrace  | Tabanan, Bali |
+| Mount Batur             | Kintamani     |
 
 ---
 

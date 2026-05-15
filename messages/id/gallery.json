@@ -38,6 +38,42 @@
       "location": "Bali Timur",
       "image": "/images/lempuyang-temple.png",
       "description": "Gerbang Surga yang terkenal membingkai pemandangan sempurna Gunung Agung, gunung tertinggi dan paling sakral di Bali. Kunjungan pagi hari akan memanjakan mata dengan pemandangan berkabut yang magis."
+    },
+    {
+      "title": "Pura Ulun Danu Beratan",
+      "location": "Bedugul, Bali",
+      "image": "/images/ulun-danu-beratan.png",
+      "description": "Pura air Hindu yang sangat indah di tepi Danau Beratan. Danau yang tenang dengan latar belakang pegunungan menciptakan ilusi pura yang mengapung di atas air."
+    },
+    {
+      "title": "Gerbang Handara",
+      "location": "Bedugul, Bali",
+      "image": "/images/handara-gate.png",
+      "description": "Salah satu spot foto paling ikonik di Bali. Gerbang tradisional Bali yang menjulang tinggi ini dikelilingi oleh pegunungan hijau yang asri dan kabut dataran tinggi."
+    },
+    {
+      "title": "Broken Beach (Pasih Uug)",
+      "location": "Nusa Penida",
+      "image": "/images/broken-beach.png",
+      "description": "Teluk melingkar spektakuler yang terbentuk dari tebing karang yang runtuh. Lengkungan alaminya memungkinkan air laut masuk, menciptakan pemandangan pesisir yang dramatis."
+    },
+    {
+      "title": "Air Terjun Tukad Cepung",
+      "location": "Bangli, Bali",
+      "image": "/images/tukad-cepung.png",
+      "description": "Air terjun tersembunyi yang unik di dalam gua. Saat cerah, pancaran sinar matahari menembus dari celah atas gua, menerangi air terjun dengan sangat magis."
+    },
+    {
+      "title": "Terasering Jatiluwih",
+      "location": "Tabanan, Bali",
+      "image": "/images/jatiluwih-rice-terrace.png",
+      "description": "Membentang lebih dari 600 hektar, sawah terasering Warisan Dunia UNESCO ini menawarkan pemandangan pertanian tradisional Bali yang sangat luas dengan latar Gunung Batukaru."
+    },
+    {
+      "title": "Gunung Batur",
+      "location": "Kintamani, Bali",
+      "image": "/images/mount-batur.png",
+      "description": "Gunung berapi aktif yang terletak di dalam kaldera raksasa. Titik pandang Kintamani menawarkan panorama puncak gunung yang luar biasa, ladang lava hitam, dan Danau Batur."
     }
   ],
   "prev": "Sebelumnya",

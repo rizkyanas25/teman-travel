@@ -2,7 +2,7 @@
   "badge": "✦ Our Packages",
   "heading": "Choose Your <highlight>Tour</highlight> Package",
   "subtitle": "Handcrafted Bali & Nusa Penida itineraries designed to fit every budget and travel style.",
-  "viewDetails": "View full inclusions →",
+  "viewDetails": "View full inclusions",
   "featureLabels": {
     "hotel": "Hotel",
     "meals": "Meals",
@@ -21,23 +21,44 @@
         { "pax": "14–20 Guests", "price": "$139" }
       ],
       "includes": [
-        "Hotel room for 2 (extra bed available)",
-        "Staying at Bhanuswari Resort & Spa (Sukawati - Ubud area)",
-        "Sunset seafood dinner at Jimbaran",
-        "Meals included (3× breakfast, 2× lunch, 2× dinner)",
-        "Fully private tour",
-        "Bali & Nusa Penida excursion",
-        "All entrance fees covered",
-        "Airport pickup & drop-off",
-        "English-speaking driver guide",
-        "Complimentary cinematic travel video",
-        "Bottled water throughout"
+        {
+          "title": "Hotel",
+          "description": "Hotel room for 2 (extra bed available). Staying at Bhanuswari Resort & Spa (Sukawati - Ubud area)."
+        },
+        {
+          "title": "Meals",
+          "description": "Meals included (3× breakfast, 2× lunch, 2× dinner). Sunset seafood dinner at Jimbaran."
+        },
+        {
+          "title": "Tickets & Tours",
+          "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
+        },
+        {
+          "title": "Transfer & Guide",
+          "description": "Airport pickup & drop-off. English-speaking driver guide."
+        },
+        {
+          "title": "Video & Extras",
+          "description": "Complimentary cinematic travel video. Bottled water throughout."
+        }
       ],
       "excludes": [
-        "Flights",
-        "Personal shopping",
-        "Optional activities",
-        "Kecak Dance ticket"
+        {
+          "title": "Flights",
+          "description": "Round-trip flight tickets to and from Bali are not included."
+        },
+        {
+          "title": "Personal Expenses",
+          "description": "Shopping, souvenirs, laundry, and other personal spending."
+        },
+        {
+          "title": "Optional Activities",
+          "description": "Additional activities or upgrades not explicitly listed."
+        },
+        {
+          "title": "Kecak Dance Ticket",
+          "description": "Tickets for the optional Kecak Fire Dance at Uluwatu Temple."
+        }
       ],
       "itinerary": [
         {
@@ -98,23 +119,44 @@
         { "pax": "14–20 Guests", "price": "$219" }
       ],
       "includes": [
-        "Hotel room for 2 (extra bed available)",
-        "Staying at Bhanuswari Resort & Spa (Sukawati - Ubud area)",
-        "Sunset seafood dinner at Jimbaran",
-        "Meals included (4× breakfast, 3× lunch, 3× dinner)",
-        "Fully private tour",
-        "Bali & Nusa Penida excursion",
-        "All entrance fees covered",
-        "Airport pickup & drop-off",
-        "English-speaking driver guide",
-        "Complimentary cinematic travel video",
-        "Bottled water throughout"
+        {
+          "title": "Hotel",
+          "description": "Hotel room for 2 (extra bed available). Night 1–2: Bhanuswari Resort & Spa (Ubud area) · Night 3–4: Jimbaran Bay Beach Resort (South Bali)."
+        },
+        {
+          "title": "Meals",
+          "description": "Meals included (4× breakfast, 3× lunch, 3× dinner). Sunset seafood dinner at Jimbaran."
+        },
+        {
+          "title": "Tickets & Tours",
+          "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
+        },
+        {
+          "title": "Transfer & Guide",
+          "description": "Airport pickup & drop-off. English-speaking driver guide."
+        },
+        {
+          "title": "Video & Extras",
+          "description": "Complimentary cinematic travel video. Bottled water throughout."
+        }
       ],
       "excludes": [
-        "Flights",
-        "Personal shopping",
-        "Optional activities",
-        "Kecak Dance ticket"
+        {
+          "title": "Flights",
+          "description": "Round-trip flight tickets to and from Bali are not included."
+        },
+        {
+          "title": "Personal Expenses",
+          "description": "Shopping, souvenirs, laundry, and other personal spending."
+        },
+        {
+          "title": "Optional Activities",
+          "description": "Additional activities or upgrades not explicitly listed."
+        },
+        {
+          "title": "Kecak Dance Ticket",
+          "description": "Tickets for the optional Kecak Fire Dance at Uluwatu Temple."
+        }
       ],
       "itinerary": [
         {
@@ -151,8 +193,7 @@
             "Lunch at Kintamani with Mount Batur volcano view",
             "Tegalalang Rice Terrace walk & swing (optional)",
             "Tegenungan Waterfall",
-            "Dinner",
-            "Return to hotel"
+            "Transfer to Jimbaran Bay Beach Resort (South Bali)"
           ]
         },
         {
@@ -181,7 +222,7 @@
     },
     {
       "title": "6D5N Package",
-      "image": "/images/tanah-lot-temple.png",
+      "image": "/images/lempuyang-temple.png",
       "pricing": [
         { "pax": "2–3 Guests", "price": "$389" },
         { "pax": "4–5 Guests", "price": "$359" },
@@ -189,23 +230,44 @@
         { "pax": "14–20 Guests", "price": "$299" }
       ],
       "includes": [
-        "Hotel room for 2 (extra bed available)",
-        "Staying at Bhanuswari Resort & Spa (Sukawati - Ubud area)",
-        "Sunset seafood dinner at Jimbaran",
-        "Meals included (5× breakfast, 4× lunch, 4× dinner)",
-        "Fully private tour",
-        "Bali & Nusa Penida excursion",
-        "All entrance fees covered",
-        "Airport pickup & drop-off",
-        "English-speaking driver guide",
-        "Complimentary cinematic travel video",
-        "Bottled water throughout"
+        {
+          "title": "Hotel",
+          "description": "Hotel room for 2 (extra bed available). Night 1–3: Bhanuswari Resort & Spa (Ubud area) · Night 4–5: Jimbaran Bay Beach Resort (South Bali)."
+        },
+        {
+          "title": "Meals",
+          "description": "Meals included (5× breakfast, 4× lunch, 4× dinner). Sunset seafood dinner at Jimbaran."
+        },
+        {
+          "title": "Tickets & Tours",
+          "description": "Fully private tour for Bali & Nusa Penida excursion. All entrance fees covered."
+        },
+        {
+          "title": "Transfer & Guide",
+          "description": "Airport pickup & drop-off. English-speaking driver guide."
+        },
+        {
+          "title": "Video & Extras",
+          "description": "Complimentary cinematic travel video. Bottled water throughout."
+        }
       ],
       "excludes": [
-        "Flights",
-        "Personal shopping",
-        "Optional activities",
-        "Kecak Dance ticket"
+        {
+          "title": "Flights",
+          "description": "Round-trip flight tickets to and from Bali are not included."
+        },
+        {
+          "title": "Personal Expenses",
+          "description": "Shopping, souvenirs, laundry, and other personal spending."
+        },
+        {
+          "title": "Optional Activities",
+          "description": "Additional activities or upgrades not explicitly listed."
+        },
+        {
+          "title": "Kecak Dance Ticket",
+          "description": "Tickets for the optional Kecak Fire Dance at Uluwatu Temple."
+        }
       ],
       "itinerary": [
         {
@@ -247,19 +309,6 @@
         },
         {
           "day": "Day 4",
-          "title": "Uluwatu & South Coast",
-          "items": [
-            "Pandawa Beach — stunning hidden beach",
-            "GWK Cultural Park — Garuda Wisnu Kencana statue",
-            "Lunch",
-            "Uluwatu Temple — clifftop temple at sunset",
-            "Kecak Fire Dance performance (optional)",
-            "Dinner",
-            "Return to hotel"
-          ]
-        },
-        {
-          "day": "Day 5",
           "title": "Tanah Lot & Bedugul Highlands",
           "items": [
             "Tanah Lot — iconic sea temple",
@@ -268,6 +317,18 @@
             "Ulun Danu Beratan — serene lake temple",
             "Handara Iconic Gate photo stop",
             "Taman Ayun — royal family temple",
+            "Transfer to Jimbaran Bay Beach Resort (South Bali)"
+          ]
+        },
+        {
+          "day": "Day 5",
+          "title": "Uluwatu & South Coast",
+          "items": [
+            "Pandawa Beach — stunning hidden beach",
+            "GWK Cultural Park — Garuda Wisnu Kencana statue",
+            "Lunch",
+            "Uluwatu Temple — clifftop temple at sunset",
+            "Kecak Fire Dance performance (optional)",
             "Dinner",
             "Return to hotel"
           ]
@@ -288,7 +349,7 @@
   "notesTitle": "Additional Notes",
   "sharedIncludes": {
     "hotel": "Hotel room for 2 guests (extra bed available for 3rd guest)",
-    "hotelArea": "Staying at Bhanuswari Resort & Spa (Sukawati - Ubud area)",
+    "hotelArea": "Bhanuswari Resort & Spa (Ubud) · Jimbaran Bay Beach Resort (South Bali)",
     "sunsetDinner": "Sunset seafood dinner at Jimbaran",
     "privateTour": "Fully private tour",
     "baliNusaPenida": "Bali & Nusa Penida island excursion",

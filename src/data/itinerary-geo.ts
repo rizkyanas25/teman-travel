@@ -48,6 +48,7 @@ export const ROUTE_COLORS = [
 const L: Record<string, GeoStop> = {
   airport:       { name: 'Ngurah Rai Airport',       coordinates: [115.1667, -8.7482], type: 'airport' },
   hotel:         { name: 'Bhanuswari Resort & Spa',   coordinates: [115.2893, -8.5447], type: 'hotel' },
+  hotelSouth:    { name: 'Jimbaran Bay Beach Resort', coordinates: [115.1700, -8.7560], type: 'hotel' },
   jimbaran:      { name: 'Jimbaran Beach',            coordinates: [115.1614, -8.7838], type: 'restaurant' },
   sanur:         { name: 'Sanur Port',                coordinates: [115.2685, -8.6867], type: 'port' },
   kelingking:    { name: 'Kelingking Beach',           coordinates: [115.4471, -8.7515], type: 'destination' },
@@ -130,24 +131,27 @@ export const PACKAGE_GEO_DATA: PackageGeoData[] = [
       DAY1_ARRIVAL,
       DAY_NUSA_PENIDA,
       {
+        // Day 3: Ubud Cultural Tour → transfer to Jimbaran hotel
         dayIndex: 2,
         color: ROUTE_COLORS[2],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.tukadCepung, L.tirtaEmpul, L.coffee, L.kintamani, L.tegalalang, L.tegenungan, L.hotel] },
+          { transport: 'driving', stops: [L.hotel, L.tukadCepung, L.tirtaEmpul, L.coffee, L.kintamani, L.tegalalang, L.tegenungan, L.hotelSouth] },
         ],
       },
       {
+        // Day 4: South Coast (from Jimbaran hotel)
         dayIndex: 3,
         color: ROUTE_COLORS[3],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.pandawa, L.gwk, L.uluwatu, L.hotel] },
+          { transport: 'driving', stops: [L.hotelSouth, L.pandawa, L.gwk, L.uluwatu, L.hotelSouth] },
         ],
       },
       {
+        // Day 5: Departure (Jimbaran → Airport, ~15 min)
         dayIndex: 4,
         color: ROUTE_COLORS[4],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.airport] },
+          { transport: 'driving', stops: [L.hotelSouth, L.airport] },
         ],
       },
     ],
@@ -161,6 +165,7 @@ export const PACKAGE_GEO_DATA: PackageGeoData[] = [
       DAY1_ARRIVAL,
       DAY_NUSA_PENIDA,
       {
+        // Day 3: Ubud & East Bali (returns to Ubud hotel)
         dayIndex: 2,
         color: ROUTE_COLORS[2],
         segments: [
@@ -168,24 +173,27 @@ export const PACKAGE_GEO_DATA: PackageGeoData[] = [
         ],
       },
       {
+        // Day 4: Bedugul & Tanah Lot → transfer to Jimbaran hotel
         dayIndex: 3,
         color: ROUTE_COLORS[3],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.pandawa, L.gwk, L.uluwatu, L.hotel] },
+          { transport: 'driving', stops: [L.hotel, L.tanahLot, L.jatiluwih, L.ulunDanu, L.handara, L.tamanAyun, L.hotelSouth] },
         ],
       },
       {
+        // Day 5: South Coast (from Jimbaran hotel)
         dayIndex: 4,
         color: ROUTE_COLORS[4],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.tanahLot, L.jatiluwih, L.ulunDanu, L.handara, L.tamanAyun, L.hotel] },
+          { transport: 'driving', stops: [L.hotelSouth, L.pandawa, L.gwk, L.uluwatu, L.hotelSouth] },
         ],
       },
       {
+        // Day 6: Departure (Jimbaran → Airport, ~15 min)
         dayIndex: 5,
         color: ROUTE_COLORS[5],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.airport] },
+          { transport: 'driving', stops: [L.hotelSouth, L.airport] },
         ],
       },
     ],
