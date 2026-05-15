@@ -62,6 +62,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
   const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const layerIdsRef = useRef<string[]>([]);
   const sourceIdsRef = useRef<string[]>([]);
+  const markerDataRef = useRef<Map<string, { el: HTMLElement, totalStops: number, visited: number }>>(new Map());
 
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
   const routesData = ALL_ROUTES[packageIndex] || null;
@@ -224,6 +225,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
     });
 
     const placedCoords = new Set<string>();
+    markerDataRef.current.clear();
 
     allStops.forEach((stop) => {
       const key = stop.coordinates.join(',');
@@ -263,6 +265,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
 
       inner.innerText = label;
       el.appendChild(inner);
+
+      // Store in ref to animate colors later
+      markerDataRef.current.set(key, { el: inner, totalStops: numbers.length, visited: 0 });
 
       // Hover scale on inner div (not the Mapbox-controlled outer)
       el.addEventListener('mouseenter', () => { inner.style.transform = 'scale(1.3)'; });
@@ -326,6 +331,14 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
       if (!dayRouteGeo || !dayData) { onAnimationEnd(); return; }
 
       const allStops = getDayStops(dayData);
+
+      // Reset markers to base color
+      markerDataRef.current.forEach(data => {
+        data.visited = 0;
+        data.el.style.backgroundColor = dayData.color;
+        data.el.style.color = '#000000';
+        data.el.style.opacity = '1';
+      });
 
       interface AnimPoint { coord: [number, number]; transport: string; }
       const animPoints: AnimPoint[] = [];
@@ -440,6 +453,21 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(({ packageIndex, activeD
 
         if (hitCP) {
           hitCheckpoints.add(hitCP.stopIdx);
+
+          // Update marker color
+          const key = hitCP.coord.join(',');
+          const markerData = markerDataRef.current.get(key);
+          if (markerData) {
+            markerData.visited += 1;
+            if (markerData.visited >= markerData.totalStops) {
+              markerData.el.style.backgroundColor = '#ffffff';
+              markerData.el.style.color = '#000000';
+              markerData.el.style.opacity = '1';
+            } else {
+              markerData.el.style.opacity = '0.5';
+            }
+          }
+
           if (onStopReached) onStopReached(hitCP.stopIdx);
           flashStopPopup(hitCP.coord, hitCP.name, 1200);
           m.easeTo({ center: hitCP.coord, duration: 400 });

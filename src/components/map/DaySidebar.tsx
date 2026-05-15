@@ -38,9 +38,6 @@ export default function DaySidebar({
   return (
     <div className='h-full overflow-y-auto px-6 py-6 custom-scrollbar'>
       <div className='space-y-6 relative'>
-        {/* Connecting Line */}
-        <div className='absolute left-[11px] top-4 bottom-4 w-0.5 bg-white/10' />
-
         {pkgData.days.map((day, idx) => {
           const isActive = activeDayIndex === day.dayIndex;
           const isCompleted = completedDays.has(day.dayIndex);
@@ -49,9 +46,15 @@ export default function DaySidebar({
           const stops = getDayStops(day);
           const shouldPulseBullet =
             shouldPulseNextDay && day.dayIndex === nextUncompletedIdx;
+          const isLastDay = idx === pkgData.days.length - 1;
 
           return (
             <div key={day.dayIndex} className='relative'>
+              {/* Per-item Timeline Connecting Line */}
+              {!isLastDay && (
+                <div className='absolute top-[24px] bottom-[-24px] left-[11px] w-0.5 bg-white/10' />
+              )}
+
               {/* Day Header: Flex container ensures perfect vertical alignment */}
               <div
                 className={`flex items-center gap-3 transition-opacity duration-300 cursor-pointer ${isActive ? 'opacity-100' : isCompleted ? 'opacity-70 hover:opacity-90' : 'opacity-50 hover:opacity-80'}`}

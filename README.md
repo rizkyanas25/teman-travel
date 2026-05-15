@@ -37,7 +37,7 @@ npm run dev
 - **Full Internationalization** — English & Indonesian with automatic locale detection
 - **Smart Currency Display** — USD for international visitors, IDR for Indonesian market
 - **Interactive Carousel** — Destination gallery with image-description split layout
-- **🗺️ Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback
+- **🗺️ Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, dynamic marker states, and stop sync
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries
 - **Legal & Trust Integration** — Terms, Privacy, and Cancellation pages with official payment badges
 - **SEO Optimized** — JSON-LD structured data, OpenGraph, sitemap, robots.txt
