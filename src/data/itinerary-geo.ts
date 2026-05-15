@@ -180,7 +180,7 @@ export const PACKAGE_GEO_DATA: PackageGeoData[] = [
         dayIndex: 3,
         color: ROUTE_COLORS[3],
         segments: [
-          { transport: 'driving', stops: [L.hotel, L.tanahLot, L.jatiluwih, L.ulunDanu, L.handara, L.tamanAyun, L.hotelSouth] },
+          { transport: 'driving', stops: [L.hotel, L.tamanAyun, L.ulunDanu, L.handara, L.jatiluwih, L.tanahLot, L.hotelSouth] },
         ],
       },
       {

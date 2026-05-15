@@ -67,13 +67,14 @@
           "items": [
             "Airport pickup",
             "Sunset seafood dinner at Jimbaran Beach",
-            "Hotel check-in & rest"
+            "Hotel check-in (Ubud area) & rest"
           ]
         },
         {
           "day": "Day 2",
           "title": "Nusa Penida Adventure",
           "items": [
+            "Breakfast at hotel",
             "Early departure 06:30 AM to Sanur Port",
             "Cross to Nusa Penida by fast boat",
             "Arrival at Banjar Nyuh Harbour",
@@ -90,6 +91,7 @@
           "day": "Day 3",
           "title": "Ubud Cultural Tour",
           "items": [
+            "Breakfast at hotel",
             "Tegenungan Waterfall",
             "Tirta Empul — sacred spring purification",
             "Balinese coffee & tea plantation tasting",
@@ -166,21 +168,23 @@
           "items": [
             "Airport pickup",
             "Sunset seafood dinner at Jimbaran Beach",
-            "Hotel check-in & rest"
+            "Hotel check-in (Ubud area) & rest"
           ]
         },
         {
           "day": "Day 2",
           "title": "Nusa Penida Adventure",
           "items": [
-            "Early departure 06:30 AM to Sanur port",
-            "Fast boat to Nusa Penida",
+            "Breakfast at hotel",
+            "Early departure 06:30 AM to Sanur Port",
+            "Cross to Nusa Penida by fast boat",
+            "Arrival at Banjar Nyuh Harbour",
             "Kelingking Beach — iconic T-Rex cliff viewpoint",
             "Broken Beach — dramatic natural arch",
             "Angel Billabong — natural infinity pool",
             "Lunch break",
             "Crystal Bay Beach — swimming & snorkeling",
-            "Return to Bali by fast boat",
+            "Return to harbour & cross back to Bali",
             "Return to hotel"
           ]
         },
@@ -188,19 +192,22 @@
           "day": "Day 3",
           "title": "Ubud Cultural Tour",
           "items": [
+            "Breakfast at hotel",
             "Tukad Cepung Waterfall — hidden cave waterfall",
             "Tirta Empul — sacred spring purification",
             "Balinese coffee & tea plantation tasting",
             "Lunch at Kintamani with Mount Batur volcano view",
             "Tegalalang Rice Terrace walk & swing (optional)",
             "Tegenungan Waterfall",
-            "Transfer to Jimbaran Bay Beach Resort (South Bali)"
+            "Transfer to Jimbaran Bay Beach Resort (South Bali)",
+            "Check-in & rest"
           ]
         },
         {
           "day": "Day 4",
           "title": "Uluwatu & South Coast",
           "items": [
+            "Breakfast at hotel",
             "Pandawa Beach — stunning hidden beach",
             "GWK Cultural Park — Garuda Wisnu Kencana statue",
             "Lunch",
@@ -277,21 +284,23 @@
           "items": [
             "Airport pickup",
             "Sunset seafood dinner at Jimbaran Beach",
-            "Hotel check-in & rest"
+            "Hotel check-in (Ubud area) & rest"
           ]
         },
         {
           "day": "Day 2",
           "title": "Nusa Penida Adventure",
           "items": [
-            "Early departure 06:30 AM to Sanur port",
-            "Fast boat to Nusa Penida",
+            "Breakfast at hotel",
+            "Early departure 06:30 AM to Sanur Port",
+            "Cross to Nusa Penida by fast boat",
+            "Arrival at Banjar Nyuh Harbour",
             "Kelingking Beach — iconic T-Rex cliff viewpoint",
             "Broken Beach — dramatic natural arch",
             "Angel Billabong — natural infinity pool",
             "Lunch break",
             "Crystal Bay Beach — swimming & snorkeling",
-            "Return to Bali by fast boat",
+            "Return to harbour & cross back to Bali",
             "Return to hotel"
           ]
         },
@@ -299,6 +308,7 @@
           "day": "Day 3",
           "title": "Ubud & East Bali",
           "items": [
+            "Breakfast at hotel",
             "Tukad Cepung Waterfall — hidden cave waterfall",
             "Tirta Empul — sacred spring purification",
             "Tegalalang Rice Terrace walk & swing (optional)",
@@ -312,19 +322,22 @@
           "day": "Day 4",
           "title": "Tanah Lot & Bedugul Highlands",
           "items": [
-            "Tanah Lot — iconic sea temple",
+            "Breakfast at hotel",
+            "Taman Ayun Temple — royal temple",
+            "Ulun Danu Beratan Temple — serene lake temple",
+            "Photo at the iconic Handara Gate",
             "Jatiluwih Rice Terrace — UNESCO World Heritage",
-            "Lunch",
-            "Ulun Danu Beratan — serene lake temple",
-            "Handara Iconic Gate photo stop",
-            "Taman Ayun — royal family temple",
-            "Transfer to Jimbaran Bay Beach Resort (South Bali)"
+            "Lunch break",
+            "Tanah Lot Temple — iconic sea temple at sunset",
+            "Transfer to Jimbaran Bay Beach Resort (South Bali)",
+            "Check-in & rest"
           ]
         },
         {
           "day": "Day 5",
           "title": "Uluwatu & South Coast",
           "items": [
+            "Breakfast at hotel",
             "Pandawa Beach — stunning hidden beach",
             "GWK Cultural Park — Garuda Wisnu Kencana statue",
             "Lunch",
