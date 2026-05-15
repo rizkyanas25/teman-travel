@@ -41,7 +41,6 @@ npm run dev
 - **Interactive Carousel** — Premium destination gallery with image-description split layout
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries and gold-themed feature badges
 - **SEO & PWA** — JSON-LD structured data, OpenGraph support, sitemap, and standalone manifest configuration
-- **Professional Terminology** — Consistent use of "Transport" vs "Transfer" for clear, unambiguous communication across all locales
 
 ---
 
