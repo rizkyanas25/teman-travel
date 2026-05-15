@@ -42,7 +42,7 @@ export default function Navbar() {
             <Image src="/images/logotype-nobg.png" alt="Teman Travel" width={200} height={60} className="w-auto h-7 object-contain" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="text-sm font-medium text-white/80 hover:text-gold-400 transition">
                 {link.label}
@@ -53,7 +53,7 @@ export default function Navbar() {
 
           <button 
             onClick={() => setMenuOpen(!menuOpen)} 
-            className="md:hidden text-white focus:outline-none flex items-center justify-center h-10 w-10" 
+            className="lg:hidden text-white focus:outline-none flex items-center justify-center h-10 w-10" 
             aria-label="Toggle menu"
           >
             {menuOpen ? <FiX className="w-7 h-7" /> : <FiMenu className="w-7 h-7" />}
@@ -63,11 +63,11 @@ export default function Navbar() {
 
       {/* Premium Mobile Menu Dropdown */}
       <div 
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-4 py-6 space-y-2 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-2 border-t border-white/5">
           {navLinks.map((link) => (
             <Link 
               key={link.href} 
