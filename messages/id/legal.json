@@ -1,14 +1,72 @@
 {
   "terms": {
     "title": "Syarat & Ketentuan",
-    "content": "Selamat datang di Teman Travel. Dengan memesan layanan kami, Anda menyetujui syarat dan ketentuan kami. Ini mencakup peraturan mengenai perilaku Anda, tanggung jawab kami sebagai agen perjalanan Anda, dan prosedur pemesanan standar. Harap baca dengan saksama sebelum melanjutkan transaksi apa pun."
+    "description": "Harap baca syarat dan ketentuan ini dengan saksama sebelum memesan tur Anda.",
+    "sections": [
+      {
+        "heading": "1. Pemesanan & Pembayaran",
+        "content": "Semua pemesanan bergantung pada ketersediaan. Untuk mengamankan reservasi Anda, diperlukan deposit sebesar 30% dari total biaya tur. Sisa pembayaran harus dilunasi paling lambat 7 hari sebelum tur dimulai. Pembayaran dapat dilakukan melalui transfer bank atau kartu kredit."
+      },
+      {
+        "heading": "2. Harga",
+        "content": "Harga yang tertera menggunakan mata uang yang ditentukan (IDR atau USD) dan dapat berubah tanpa pemberitahuan sebelumnya. Namun, setelah pemesanan dikonfirmasi dan deposit diterima, harga tur Anda dijamin tidak akan berubah."
+      },
+      {
+        "heading": "3. Kesehatan & Kebugaran",
+        "content": "Wisatawan bertanggung jawab untuk memastikan kondisi fisik mereka sesuai untuk tur yang dipilih. Beberapa aktivitas, terutama di Nusa Penida, melibatkan tangga curam dan medan tidak rata. Harap informasikan kondisi medis atau pantangan makanan kepada kami saat pemesanan."
+      },
+      {
+        "heading": "4. Tanggung Jawab Wisatawan",
+        "content": "Wisatawan harus memiliki dokumen perjalanan yang valid dan asuransi perjalanan komprehensif. Teman Travel berhak menolak atau mengeluarkan penumpang dari tur jika perilakunya dianggap mengganggu atau membahayakan orang lain."
+      },
+      {
+        "heading": "5. Keadaan Kahar (Force Majeure)",
+        "content": "Teman Travel tidak bertanggung jawab atas keterlambatan, perubahan rencana perjalanan, atau pembatalan yang disebabkan oleh keadaan kahar. Ini termasuk, namun tidak terbatas pada, cuaca ekstrem, bencana alam, pemogokan, atau kebijakan pemerintah."
+      }
+    ]
   },
   "privacy": {
     "title": "Kebijakan Privasi",
-    "content": "Privasi Anda penting bagi kami. Teman Travel mengumpulkan dan menggunakan informasi pribadi Anda secara eksklusif untuk memproses pemesanan, mengomunikasikan rencana perjalanan, dan meningkatkan layanan kami. Kami tidak menjual atau membagikan data Anda kepada pihak ketiga tanpa persetujuan eksplisit dari Anda."
+    "description": "Bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda.",
+    "sections": [
+      {
+        "heading": "1. Pengumpulan Informasi",
+        "content": "Kami mengumpulkan informasi pribadi yang diperlukan untuk mengatur tur Anda. Ini biasanya mencakup nama lengkap, alamat email, nomor telepon (WhatsApp), kewarganegaraan, pantangan makanan, dan rincian pembayaran."
+      },
+      {
+        "heading": "2. Penggunaan Informasi",
+        "content": "Data Anda digunakan secara eksklusif untuk memproses pemesanan, mengirimkan rencana perjalanan, memberikan dukungan pelanggan, dan meningkatkan layanan kami. Kami sesekali dapat mengirimkan penawaran promosi, di mana Anda dapat berhenti berlangganan kapan saja."
+      },
+      {
+        "heading": "3. Perlindungan Data",
+        "content": "Kami menerapkan langkah keamanan standar industri untuk melindungi data pribadi Anda dari akses, perubahan, pengungkapan, atau penghancuran yang tidak sah. Transaksi pembayaran dienkripsi dan diproses melalui gateway yang aman."
+      },
+      {
+        "heading": "4. Layanan Pihak Ketiga",
+        "content": "Kami tidak menjual atau menyewakan informasi pribadi Anda. Kami hanya membagikan rincian yang diperlukan (seperti nama dan kebutuhan diet Anda) dengan mitra pihak ketiga terpercaya—termasuk hotel, sopir, dan operator lokal—yang terlibat langsung dalam memberikan pengalaman tur Anda."
+      }
+    ]
   },
   "cancellation": {
     "title": "Kebijakan Pembatalan",
-    "content": "Kami mengerti bahwa rencana dapat berubah. Teman Travel menawarkan kebijakan pembatalan yang fleksibel. Pembatalan yang dilakukan 14 hari sebelum tanggal tur akan menerima pengembalian dana penuh. Pembatalan dalam waktu 7 hari akan dikenakan biaya 50%, dan ketidakhadiran tidak dapat dikembalikan."
+    "description": "Aturan fleksibel kami terkait pembatalan pemesanan dan pengembalian dana.",
+    "sections": [
+      {
+        "heading": "1. Tingkat Pembatalan Standar",
+        "content": "Kami memahami bahwa rencana dapat berubah. Pembatalan harus diajukan secara tertulis via email atau WhatsApp. Standar pengembalian dana kami adalah sebagai berikut:\n• 14+ hari sebelum keberangkatan: Pengembalian dana penuh (100%).\n• 7 hingga 13 hari sebelum keberangkatan: Pengembalian dana 50%.\n• Kurang dari 7 hari sebelum keberangkatan: Tidak ada pengembalian dana."
+      },
+      {
+        "heading": "2. Kebijakan Ketidakhadiran (No-Show)",
+        "content": "Kegagalan untuk tiba di lokasi penjemputan yang ditentukan pada waktu yang dijadwalkan tanpa pemberitahuan sebelumnya akan dianggap sebagai 'no-show'. Tidak ada pengembalian dana untuk kasus no-show."
+      },
+      {
+        "heading": "3. Perubahan & Penjadwalan Ulang",
+        "content": "Permintaan untuk menjadwalkan ulang tur bergantung pada ketersediaan. Jika diajukan setidaknya 14 hari sebelum tanggal asli, kami akan memfasilitasi perubahan tanpa biaya. Penjadwalan ulang dalam waktu 14 hari dapat dikenakan biaya administrasi atau penalti dari hotel."
+      },
+      {
+        "heading": "4. Pembatalan Terkait Cuaca",
+        "content": "Keselamatan Anda adalah prioritas kami. Jika tur (atau sebagian dari tur, seperti fast boat ke Nusa Penida) dibatalkan oleh operator kami karena cuaca buruk atau penutupan pelabuhan, Anda akan ditawarkan aktivitas alternatif yang sesuai, tanggal pengganti, atau pengembalian dana penuh untuk bagian yang terdampak."
+      }
+    ]
   }
 }

@@ -1,14 +1,72 @@
 {
   "terms": {
     "title": "Terms & Conditions",
-    "content": "Welcome to Teman Travel. By booking our services, you agree to our terms and conditions. These include regulations regarding your conduct, our responsibilities as your travel agent, and standard booking procedures. Please read them carefully before proceeding with any transactions."
+    "description": "Please read these terms carefully before booking your tour.",
+    "sections": [
+      {
+        "heading": "1. Booking & Payment",
+        "content": "All bookings are subject to availability. To secure your reservation, a deposit of 30% of the total tour cost is required. The remaining balance must be paid in full at least 7 days prior to the start of the tour. Payments can be made via bank transfer or credit card."
+      },
+      {
+        "heading": "2. Pricing",
+        "content": "Prices quoted are in the currency specified (IDR or USD) and are subject to change without prior notice. However, once a booking is confirmed and a deposit is received, the price of your tour is guaranteed."
+      },
+      {
+        "heading": "3. Health & Fitness",
+        "content": "Travelers are responsible for ensuring they are in suitable physical condition for the selected tour. Some activities, particularly in Nusa Penida, involve steep steps and uneven terrain. Please inform us of any medical conditions or dietary restrictions at the time of booking."
+      },
+      {
+        "heading": "4. Traveler Responsibilities",
+        "content": "Travelers must hold valid travel documents and comprehensive travel insurance. Teman Travel reserves the right to decline or remove any passenger from a tour if their behavior is deemed disruptive or unsafe to others."
+      },
+      {
+        "heading": "5. Force Majeure",
+        "content": "Teman Travel is not liable for any delays, changes in itinerary, or cancellations caused by force majeure events. These include, but are not limited to, extreme weather conditions, natural disasters, strikes, or governmental actions."
+      }
+    ]
   },
   "privacy": {
     "title": "Privacy Policy",
-    "content": "Your privacy is important to us. Teman Travel collects and uses your personal information exclusively for processing bookings, communicating itineraries, and improving our services. We do not sell or share your data with third parties without your explicit consent."
+    "description": "How we collect, use, and protect your personal information.",
+    "sections": [
+      {
+        "heading": "1. Information Collection",
+        "content": "We collect personal information necessary to arrange your tour. This typically includes your full name, email address, phone number (WhatsApp), nationality, dietary requirements, and payment details."
+      },
+      {
+        "heading": "2. Use of Information",
+        "content": "Your data is used exclusively to process your bookings, communicate travel itineraries, provide customer support, and improve our services. We may occasionally send promotional offers, from which you can opt out at any time."
+      },
+      {
+        "heading": "3. Data Protection",
+        "content": "We implement industry-standard security measures to protect your personal data from unauthorized access, alteration, disclosure, or destruction. Payment transactions are encrypted and processed through secure gateways."
+      },
+      {
+        "heading": "4. Third-Party Services",
+        "content": "We do not sell or rent your personal information. We only share necessary details (such as your name and dietary needs) with trusted third-party partners—including hotels, drivers, and local operators—who are directly involved in delivering your tour experience."
+      }
+    ]
   },
   "cancellation": {
     "title": "Cancellation Policy",
-    "content": "We understand that plans can change. Teman Travel offers a flexible cancellation policy. Cancellations made 14 days prior to the tour date will receive a full refund. Cancellations within 7 days will incur a 50% fee, and no-shows are non-refundable."
+    "description": "Our flexible rules regarding booking cancellations and refunds.",
+    "sections": [
+      {
+        "heading": "1. Standard Cancellation Tiers",
+        "content": "We understand that plans can change. Cancellations must be submitted in writing via email or WhatsApp. Our standard refund tiers are as follows:\n• 14+ days before departure: 100% full refund.\n• 7 to 13 days before departure: 50% refund.\n• Less than 7 days before departure: No refund."
+      },
+      {
+        "heading": "2. No-Show Policy",
+        "content": "Failure to arrive at the designated pickup location at the scheduled time without prior notice will be considered a 'no-show'. No-shows are strictly non-refundable."
+      },
+      {
+        "heading": "3. Amendments & Rescheduling",
+        "content": "Requests to reschedule a tour are subject to availability. If requested at least 14 days prior to the original date, we will accommodate the change free of charge. Rescheduling within 14 days may incur administrative or hotel penalty fees."
+      },
+      {
+        "heading": "4. Weather-Related Cancellations",
+        "content": "Your safety is our priority. If a tour (or part of a tour, such as a fast boat to Nusa Penida) is cancelled by our operators due to unsafe weather conditions or port closures, you will be offered a suitable alternative activity, a rescheduled date, or a full refund for the affected portion."
+      }
+    ]
   }
 }
