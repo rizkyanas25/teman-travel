@@ -43,7 +43,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-10 pt-8 text-center">
+        <div className="border-t border-white/10 mt-10 pt-8 text-center space-y-2">
+          <p className="text-white/40 text-xs">{t("disclaimer")}</p>
           <p className="text-white/30 text-sm">{t("copyright")}</p>
         </div>
       </div>

@@ -1,0 +1,61 @@
+{
+  "badge": "✦ Testimoni",
+  "heading": "Kata <highlight>Wisatawan</highlight> Kami",
+  "subtitle": "Pengalaman nyata dari wisatawan yang menjelajahi Bali & Nusa Penida bersama kami.",
+  "items": [
+    {
+      "name": "Sarah & James",
+      "origin": "Melbourne, Australia",
+      "flag": "🇦🇺",
+      "package": "Paket 5H4M",
+      "rating": 5,
+      "quote": "Luar biasa! Driver guide kami tahu semua tempat tersembunyi di Ubud. Day trip ke Nusa Penida jadi highlight — Kelingking Beach bikin kami terpukau. Worth every cent.",
+      "avatar": "/images/avatar-sarah-james.png"
+    },
+    {
+      "name": "Yuki Tanaka",
+      "origin": "Tokyo, Jepang",
+      "flag": "🇯🇵",
+      "package": "Paket 4H3M",
+      "rating": 5,
+      "quote": "Sebagai solo traveler, saya merasa aman dan diurus dengan baik. Pengalaman melukat di Tirta Empul sangat spiritual. Video sinematik yang dibuat untuk saya jadi suvenir paling berharga.",
+      "avatar": "/images/avatar-yuki.png"
+    },
+    {
+      "name": "Rina & Keluarga",
+      "origin": "Jakarta, Indonesia",
+      "flag": "🇮🇩",
+      "package": "Paket 6H5M",
+      "rating": 5,
+      "quote": "Bawa anak kecil ke Bali biasanya ribet, tapi Teman Travel bikin semuanya smooth. Driver-nya sabar banget, itinerary-nya fleksibel. Tanah Lot sunset sama anak itu momen yang ga terlupakan.",
+      "avatar": "/images/avatar-rina.png"
+    },
+    {
+      "name": "Thomas Mueller",
+      "origin": "Berlin, Jerman",
+      "flag": "🇩🇪",
+      "package": "Paket 5H4M",
+      "rating": 5,
+      "quote": "Tur dengan value terbaik yang pernah saya ikuti di Asia Tenggara. Sawah Tegalalang, sunset di Uluwatu, dan tempat makan lokal yang mereka bawa — semuanya autentik. Sangat direkomendasikan!",
+      "avatar": "/images/avatar-thomas.png"
+    },
+    {
+      "name": "Maria Santos",
+      "origin": "São Paulo, Brasil",
+      "flag": "🇧🇷",
+      "package": "Paket 5H4M",
+      "rating": 5,
+      "quote": "Pertama kali ke Bali dan melebihi semua ekspektasi. Dinner sunset di Jimbaran di hari pertama langsung set the tone untuk seluruh trip. Sudah planning comeback untuk paket 6H5M!",
+      "avatar": "/images/avatar-maria.png"
+    },
+    {
+      "name": "David & Lisa",
+      "origin": "London, Inggris",
+      "flag": "🇬🇧",
+      "package": "Paket 6H5M",
+      "rating": 5,
+      "quote": "Kami pesan paket 6 hari untuk anniversary dan semuanya sempurna. Dari Gates of Heaven di Lempuyang sampai Pura Ulun Danu — setiap hari terasa seperti petualangan baru. Private tour-nya bikin beda banget.",
+      "avatar": "/images/avatar-david-lisa.png"
+    }
+  ]
+}

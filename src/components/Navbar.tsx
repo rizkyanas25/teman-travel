@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "#about", label: t("about") },
     { href: "#packages", label: t("packages") },
     { href: "#gallery", label: t("gallery") },
+    { href: "#testimonials", label: t("testimonials") },
   ];
 
   useEffect(() => {

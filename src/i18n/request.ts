@@ -9,6 +9,7 @@ const messageModules = [
   'about',
   'packages',
   'gallery',
+  'testimonials',
   'contact',
   'footer',
 ] as const;

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import PackagesSection from "@/components/PackagesSection";
 import Gallery from "@/components/Gallery";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -15,6 +16,7 @@ export default function Home() {
       <About />
       <PackagesSection />
       <Gallery />
+      <Testimonials />
       <Contact />
       <Footer />
       <FloatingWhatsApp />

@@ -1,0 +1,61 @@
+{
+  "badge": "✦ Testimonials",
+  "heading": "What Our <highlight>Travelers</highlight> Say",
+  "subtitle": "Real experiences from travelers who explored Bali & Nusa Penida with us.",
+  "items": [
+    {
+      "name": "Sarah & James",
+      "origin": "Melbourne, Australia",
+      "flag": "🇦🇺",
+      "package": "5D4N Package",
+      "rating": 5,
+      "quote": "Absolutely incredible! Our driver guide knew all the hidden spots in Ubud. The Nusa Penida day trip was the highlight — Kelingking Beach took our breath away. Worth every cent.",
+      "avatar": "/images/avatar-sarah-james.png"
+    },
+    {
+      "name": "Yuki Tanaka",
+      "origin": "Tokyo, Japan",
+      "flag": "🇯🇵",
+      "package": "4D3N Package",
+      "rating": 5,
+      "quote": "As a solo traveler, I felt completely safe and well taken care of. The Tirta Empul purification experience was deeply spiritual. The cinematic video they made for me is my most treasured souvenir.",
+      "avatar": "/images/avatar-yuki.png"
+    },
+    {
+      "name": "Rina & Family",
+      "origin": "Jakarta, Indonesia",
+      "flag": "🇮🇩",
+      "package": "6D5N Package",
+      "rating": 5,
+      "quote": "Bringing a young child to Bali can be stressful, but Teman Travel made everything smooth. Our driver was incredibly patient and the itinerary was flexible. The Tanah Lot sunset with our kid is a moment we won't forget.",
+      "avatar": "/images/avatar-rina.png"
+    },
+    {
+      "name": "Thomas Mueller",
+      "origin": "Berlin, Germany",
+      "flag": "🇩🇪",
+      "package": "5D4N Package",
+      "rating": 5,
+      "quote": "Best value tour I've done in Southeast Asia. The Tegalalang rice terraces, Uluwatu sunset, and the local food spots they took us to — nothing touristy, all authentic. Highly recommend!",
+      "avatar": "/images/avatar-thomas.png"
+    },
+    {
+      "name": "Maria Santos",
+      "origin": "São Paulo, Brazil",
+      "flag": "🇧🇷",
+      "package": "5D4N Package",
+      "rating": 5,
+      "quote": "My first time in Bali and it exceeded every expectation. The Jimbaran sunset dinner on day one set the tone for the whole trip. Already planning to come back for the 6D5N package!",
+      "avatar": "/images/avatar-maria.png"
+    },
+    {
+      "name": "David & Lisa",
+      "origin": "London, UK",
+      "flag": "🇬🇧",
+      "package": "6D5N Package",
+      "rating": 5,
+      "quote": "We booked the 6-day package for our anniversary and it was perfect. From the Gates of Heaven at Lempuyang to the Ulun Danu lake temple — every day felt like a new adventure. The private tour made all the difference.",
+      "avatar": "/images/avatar-david-lisa.png"
+    }
+  ]
+}
