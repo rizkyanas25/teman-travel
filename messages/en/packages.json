@@ -384,7 +384,7 @@
   "mapTitle": "Itinerary Route Map",
   "playJourney": "Play Journey",
   "pauseJourney": "Pause",
-  "stops": "stops",
+  "stops": "points",
   "driveTime": "drive time",
   "dayOf": "Day {current} of {total}"
 }

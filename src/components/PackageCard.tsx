@@ -29,6 +29,7 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
   const t = useTranslations("packages");
   const messages = useMessages();
   const [openDay, setOpenDay] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const packagesMessages = messages.packages as { items: PackageItem[] };
   const pkg = packagesMessages.items[parseInt(index)];
@@ -42,8 +43,6 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
     t("featureLabels.transfer"),
     t("featureLabels.video"),
   ];
-
-  const [copied, setCopied] = useState(false);
 
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -99,11 +99,11 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div 
-        className="relative w-full h-full md:w-[95vw] md:h-[90vh] md:max-h-[900px] md:max-w-[1400px] bg-dark-800 flex flex-col md:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
+        className="relative w-full h-full lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-4 py-3 md:px-6 md:py-4 flex items-center justify-between z-10 shrink-0">
+        <div className="sticky top-0 bg-dark-800/95 backdrop-blur-sm border-b border-white/10 px-4 py-3 lg:px-6 lg:py-4 flex items-center justify-between z-10 shrink-0">
           <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white flex items-center gap-2">
             {pkgData.title} <span className="hidden sm:inline text-white/40 font-normal text-base">— {t("mapTitle")}</span>
           </h3>
@@ -116,10 +116,10 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
         </div>
 
         {/* Content Body */}
-        <div className="flex flex-col md:flex-row flex-1 min-h-0 overflow-hidden">
+        <div className="flex flex-col lg:flex-row flex-1 min-h-0 overflow-hidden">
           
           {/* Map Area */}
-          <div className="relative order-1 md:order-2 flex-1 h-[50vh] md:h-auto" style={{ minHeight: '300px' }}>
+          <div className="relative order-1 lg:order-2 flex-1 h-[50vh] lg:h-auto" style={{ minHeight: '300px' }}>
              <MapView 
                 key={packageIndex}
                 ref={mapRef} 
@@ -131,7 +131,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
           </div>
 
           {/* Sidebar Area */}
-          <div className="w-full md:w-[320px] lg:w-[380px] bg-dark-800 flex flex-col order-2 md:order-1 border-t md:border-t-0 md:border-r border-white/10 h-[50vh] md:h-full shrink-0 z-10">
+          <div className="w-full lg:w-[380px] bg-dark-800 flex flex-col order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/10 h-[50vh] lg:h-full shrink-0 z-10">
             {/* Timeline */}
             <div className="flex-1 overflow-hidden min-h-0">
               <DaySidebar 

@@ -384,7 +384,7 @@
   "mapTitle": "Peta Rute Perjalanan",
   "playJourney": "Putar Perjalanan",
   "pauseJourney": "Jeda",
-  "stops": "destinasi",
+  "stops": "titik",
   "driveTime": "waktu tempuh",
   "dayOf": "Hari {current} dari {total}"
 }
