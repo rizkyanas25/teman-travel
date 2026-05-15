@@ -51,10 +51,11 @@ const L: Record<string, GeoStop> = {
   hotelSouth:    { name: 'Jimbaran Bay Beach Resort', coordinates: [115.1700, -8.7560], type: 'hotel' },
   jimbaran:      { name: 'Jimbaran Beach',            coordinates: [115.1614, -8.7838], type: 'restaurant' },
   sanur:         { name: 'Sanur Port',                coordinates: [115.2685, -8.6867], type: 'port' },
-  kelingking:    { name: 'Kelingking Beach',           coordinates: [115.4471, -8.7515], type: 'destination' },
-  brokenBeach:   { name: 'Broken Beach',               coordinates: [115.4800, -8.7313], type: 'destination' },
-  angelBillabong:{ name: 'Angel Billabong',            coordinates: [115.4815, -8.7290], type: 'destination' },
-  crystalBay:    { name: 'Crystal Bay',                coordinates: [115.4583, -8.7200], type: 'destination' },
+  banjarNyuh:    { name: 'Banjar Nyuh Harbour',       coordinates: [115.5085, -8.6738], type: 'port' },
+  kelingking:    { name: 'Kelingking Beach',          coordinates: [115.4705, -8.7505], type: 'destination' },
+  brokenBeach:   { name: 'Broken Beach',              coordinates: [115.4526, -8.7297], type: 'destination' },
+  angelBillabong:{ name: 'Angel Billabong',           coordinates: [115.4510, -8.7290], type: 'destination' },
+  crystalBay:    { name: 'Crystal Bay',               coordinates: [115.4583, -8.7200], type: 'destination' },
   tegenungan:    { name: 'Tegenungan Waterfall',       coordinates: [115.2893, -8.5753], type: 'destination' },
   tirtaEmpul:    { name: 'Tirta Empul',                coordinates: [115.3153, -8.4153], type: 'destination' },
   coffee:        { name: 'Coffee Plantation',          coordinates: [115.3050, -8.4300], type: 'destination' },
@@ -75,10 +76,10 @@ const L: Record<string, GeoStop> = {
 // Nusa Penida segments (shared across all packages)
 const NUSA_PENIDA_SEGMENTS: GeoSegment[] = [
   { transport: 'driving', stops: [L.hotel, L.sanur] },                                      // Drive to port
-  { transport: 'sea',     stops: [L.sanur, L.kelingking] },                                  // Boat crossing
-  { transport: 'driving', stops: [L.kelingking, L.brokenBeach, L.angelBillabong, L.crystalBay] }, // Tour Nusa Penida by land
-  { transport: 'sea',     stops: [L.crystalBay, L.sanur] },                                  // Boat back
-  { transport: 'driving', stops: [L.sanur, L.hotel] },                                       // Drive back to hotel
+  { transport: 'sea',     stops: [L.sanur, L.banjarNyuh] },                                 // Boat crossing
+  { transport: 'driving', stops: [L.banjarNyuh, L.kelingking, L.brokenBeach, L.angelBillabong, L.crystalBay, L.banjarNyuh] }, // Tour Nusa Penida by land
+  { transport: 'sea',     stops: [L.banjarNyuh, L.sanur] },                                 // Boat back
+  { transport: 'driving', stops: [L.sanur, L.hotel] },                                      // Drive back to hotel
 ];
 
 // Day 1: Airport → Jimbaran (nearby for sunset dinner) → Hotel
