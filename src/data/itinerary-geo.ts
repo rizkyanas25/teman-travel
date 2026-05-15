@@ -1,7 +1,7 @@
 export interface GeoStop {
   name: string;
   coordinates: [number, number]; // [lng, lat]
-  type: 'airport' | 'hotel' | 'destination' | 'port' | 'restaurant';
+  type: 'airport' | 'hotel' | 'destination' | 'port' | 'restaurant' | 'waypoint';
 }
 
 export interface GeoSegment {
@@ -27,8 +27,8 @@ export function getDayStops(day: GeoDayRoute): GeoStop[] {
   const stops: GeoStop[] = [];
   for (const seg of day.segments) {
     for (const stop of seg.stops) {
-      // Avoid duplicate consecutive stops at segment boundaries
-      if (stops.length === 0 || stops[stops.length - 1].coordinates.toString() !== stop.coordinates.toString()) {
+      // Avoid duplicate consecutive stops at segment boundaries and skip waypoints
+      if (stop.type !== 'waypoint' && (stops.length === 0 || stops[stops.length - 1].coordinates.toString() !== stop.coordinates.toString())) {
         stops.push(stop);
       }
     }
@@ -52,6 +52,8 @@ const L: Record<string, GeoStop> = {
   jimbaran:      { name: 'Jimbaran Beach',            coordinates: [115.1614, -8.7838], type: 'restaurant' },
   sanur:         { name: 'Sanur Port',                coordinates: [115.2685, -8.6867], type: 'port' },
   banjarNyuh:    { name: 'Banjar Nyuh Harbour',       coordinates: [115.5085, -8.6738], type: 'port' },
+  seaWP1:        { name: 'Sea Waypoint 1',            coordinates: [115.3500, -8.6500], type: 'waypoint' },
+  seaWP2:        { name: 'Sea Waypoint 2',            coordinates: [115.4200, -8.6400], type: 'waypoint' },
   kelingking:    { name: 'Kelingking Beach',          coordinates: [115.4705, -8.7505], type: 'destination' },
   brokenBeach:   { name: 'Broken Beach',              coordinates: [115.4526, -8.7297], type: 'destination' },
   angelBillabong:{ name: 'Angel Billabong',           coordinates: [115.4510, -8.7290], type: 'destination' },
@@ -76,9 +78,9 @@ const L: Record<string, GeoStop> = {
 // Nusa Penida segments (shared across all packages)
 const NUSA_PENIDA_SEGMENTS: GeoSegment[] = [
   { transport: 'driving', stops: [L.hotel, L.sanur] },                                      // Drive to port
-  { transport: 'sea',     stops: [L.sanur, L.banjarNyuh] },                                 // Boat crossing
+  { transport: 'sea',     stops: [L.sanur, L.seaWP1, L.seaWP2, L.banjarNyuh] },             // Boat crossing (curved)
   { transport: 'driving', stops: [L.banjarNyuh, L.kelingking, L.brokenBeach, L.angelBillabong, L.crystalBay, L.banjarNyuh] }, // Tour Nusa Penida by land
-  { transport: 'sea',     stops: [L.banjarNyuh, L.sanur] },                                 // Boat back
+  { transport: 'sea',     stops: [L.banjarNyuh, L.seaWP2, L.seaWP1, L.sanur] },             // Boat back (curved)
   { transport: 'driving', stops: [L.sanur, L.hotel] },                                      // Drive back to hotel
 ];
 
