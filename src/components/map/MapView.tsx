@@ -73,7 +73,16 @@ function hexToRgb(hex: string): [number, number, number] {
 
 /** Convert RGB to hex */
 function rgbToHex(r: number, g: number, b: number): string {
-  return '#' + [r, g, b].map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+  return (
+    '#' +
+    [r, g, b]
+      .map((v) =>
+        Math.round(Math.max(0, Math.min(255, v)))
+          .toString(16)
+          .padStart(2, '0'),
+      )
+      .join('')
+  );
 }
 
 /** Mix a color towards white (amount 0-1) */
@@ -89,11 +98,7 @@ function lightenColor(hex: string, amount: number): string {
 /** Mix a color towards black (amount 0-1) */
 function darkenColor(hex: string, amount: number): string {
   const [r, g, b] = hexToRgb(hex);
-  return rgbToHex(
-    r * (1 - amount),
-    g * (1 - amount),
-    b * (1 - amount),
-  );
+  return rgbToHex(r * (1 - amount), g * (1 - amount), b * (1 - amount));
 }
 
 const MapView = forwardRef<MapViewHandle, MapViewProps>(
@@ -676,12 +681,18 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
               markerData.visited += 1;
               if (markerData.visited >= markerData.totalStops) {
                 // Fully visited → darker/muted day color
-                markerData.el.style.backgroundColor = darkenColor(dayData.color, 0.4);
+                markerData.el.style.backgroundColor = darkenColor(
+                  dayData.color,
+                  0.4,
+                );
                 markerData.el.style.color = '#ffffff';
                 markerData.el.style.opacity = '1';
               } else {
                 // Partially visited → lighter day color
-                markerData.el.style.backgroundColor = lightenColor(dayData.color, 0.3);
+                markerData.el.style.backgroundColor = lightenColor(
+                  dayData.color,
+                  0.3,
+                );
                 markerData.el.style.color = '#000000';
                 markerData.el.style.opacity = '1';
               }
@@ -756,7 +767,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             <button
               key={speed}
               onClick={() => handleSpeedChange(speed)}
-              className={`px-2.5 py-1 text-[11px] font-semibold rounded transition-all duration-150 ${
+              className={`px-2.5 py-1 text-[11px] font-extrabold rounded transition-all duration-150 ${
                 speedMultiplierUI === speed
                   ? 'bg-[#333] text-white shadow-sm'
                   : 'text-[#555] hover:text-[#222]'

@@ -34,17 +34,14 @@ npm run dev
 ## 🎨 Features
 
 - **Dark Tropical Theme** — Deep teal/jungle green palette, luxury gold accents, and unified glassmorphism
-- **Full Internationalization** — English & Indonesian with automatic locale detection
-- **Smart Currency Display** — USD for international visitors, IDR for Indonesian market
-- **Interactive Carousel** — Destination gallery with image-description split layout
-- **Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, adjustable speed control (1x/1.5x/2x), dynamic marker color states, and stop sync
-- **Package Comparison** — 3 tiered tour packages with collapsible itineraries
-- **Customer Testimonials** — Social proof section with rotating review cards
-- **FAQ Section** — Expandable accordion with common travel questions
-- **Legal & Trust Integration** — Terms, Privacy, and Cancellation pages with official payment badges
-- **SEO Optimized** — JSON-LD structured data, OpenGraph, sitemap, robots.txt
-- **PWA Ready** — Web manifest, favicons, and apple-touch-icon
-- **Fully Responsive** — Mobile-first design across all breakpoints
+- **Full Internationalization** — English & Indonesian with automatic locale detection and USD/IDR smart currency switching
+- **Locale-Neutral Sharing** — Smart shareable links (`/#pkg-{index}`) that adapt to the recipient's system language
+- **Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, adjustable speed control (1x/1.5x/2x), dynamic marker states, and synchronized stop progress
+- **Adaptive Breakpoints** — Optimized layout switching (Stacked vs Side-by-side) specifically tuned for tablet and mobile usability
+- **Interactive Carousel** — Premium destination gallery with image-description split layout
+- **Package Comparison** — 3 tiered tour packages with collapsible itineraries and gold-themed feature badges
+- **SEO & PWA** — JSON-LD structured data, OpenGraph support, sitemap, and standalone manifest configuration
+- **Professional Terminology** — Consistent use of "Transport" vs "Transfer" for clear, unambiguous communication across all locales
 
 ---
 

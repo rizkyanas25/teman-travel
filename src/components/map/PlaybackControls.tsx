@@ -42,11 +42,11 @@ export default function PlaybackControls({ isPlaying, onPlayToggle, currentDayLa
         </div>
 
         {/* Middle: Day Info */}
-        <div className="flex flex-col min-w-0 flex-1">
-          <span className="text-sm lg:text-base font-bold text-white">
+        <div className="flex flex-col min-w-0 flex-1 px-2">
+          <span className="text-sm lg:text-base font-bold text-white whitespace-nowrap">
             {currentDayLabel}
           </span>
-          <span className="text-xs lg:text-sm text-white/50">
+          <span className="text-xs lg:text-sm text-white/50 whitespace-nowrap">
             {stopCount} {t("stops")}
           </span>
         </div>
@@ -56,11 +56,11 @@ export default function PlaybackControls({ isPlaying, onPlayToggle, currentDayLa
           href={getWhatsAppUrl(packageTitle ? tc("whatsappBookMessage", { title: packageTitle }) : tc("whatsappGenericMessage"))}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 flex items-center justify-center h-10 px-4 lg:h-11 lg:px-5 bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/30 rounded-xl transition-colors text-[#25D366]"
+          className="shrink-0 flex items-center justify-center h-9 px-3 lg:h-10 lg:px-4 bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/30 rounded-xl transition-colors text-[#25D366]"
           title={tc("bookNow")}
         >
-          <FaWhatsapp className="w-4 h-4 lg:w-5 lg:h-5 shrink-0" />
-          <span className="font-medium ml-2 text-sm lg:text-base">
+          <FaWhatsapp className="w-3.5 h-3.5 lg:w-4 lg:h-4 shrink-0" />
+          <span className="font-medium ml-1.5 text-xs lg:text-sm whitespace-nowrap">
             {tc("bookNow")}
           </span>
         </a>
