@@ -33,12 +33,14 @@ npm run dev
 
 ## 🎨 Features
 
-- **Dark Tropical Theme** — Deep teal/jungle green palette, luxury gold assets, and unified glassmorphism
+- **Dark Tropical Theme** — Deep teal/jungle green palette, luxury gold accents, and unified glassmorphism
 - **Full Internationalization** — English & Indonesian with automatic locale detection
 - **Smart Currency Display** — USD for international visitors, IDR for Indonesian market
 - **Interactive Carousel** — Destination gallery with image-description split layout
-- **🗺️ Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, dynamic marker states, and stop sync
+- **Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, adjustable speed control (1x/1.5x/2x), dynamic marker color states, and stop sync
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries
+- **Customer Testimonials** — Social proof section with rotating review cards
+- **FAQ Section** — Expandable accordion with common travel questions
 - **Legal & Trust Integration** — Terms, Privacy, and Cancellation pages with official payment badges
 - **SEO Optimized** — JSON-LD structured data, OpenGraph, sitemap, robots.txt
 - **PWA Ready** — Web manifest, favicons, and apple-touch-icon
@@ -50,51 +52,53 @@ npm run dev
 
 ### Sections
 
-| Section             | Description                                                              |
-| ------------------- | ------------------------------------------------------------------------ |
-| **Hero**            | Full-screen background with CTA buttons and animated text                |
-| **About**           | Company story with stats (5+ years, 1K+ travelers, 6+ packages)         |
-| **Tour Packages**   | 3 packages (4D3N / 5D4N / 6D5N) with pricing, icon badges & itinerary  |
-| **Route Map**       | Animated Mapbox itinerary visualizer with per-day playback & stop sync  |
-| **Destinations**    | Image carousel with 6 iconic Bali & Nusa Penida spots                   |
-| **Contact**         | Contact form, address, WhatsApp link, and social media icons             |
-| **Footer**          | Quick links, package list, and copyright info                            |
+| Section           | Description                                                             |
+| ----------------- | ----------------------------------------------------------------------- |
+| **Hero**          | Full-screen background with CTA buttons and animated text               |
+| **About**         | Company story with stats (5+ years, 1K+ travelers, 6+ packages)         |
+| **Tour Packages** | 3 packages (4D3N / 5D4N / 6D5N) with pricing, icon badges & itinerary   |
+| **Route Map**     | Animated Mapbox itinerary with speed control, marker states & stop sync |
+| **Destinations**  | Image carousel with 6 iconic Bali & Nusa Penida spots                   |
+| **Testimonials**  | Customer reviews with star ratings and rotating cards                   |
+| **FAQ**           | Expandable accordion with common travel questions                       |
+| **Contact**       | Contact form, address, WhatsApp link, and social media icons            |
+| **Footer**        | Quick links, package list, and copyright info                           |
 
 ### Tour Packages
 
-| Package   | Price From (USD) | Price From (IDR) | Highlights                                   |
-| --------- | ---------------- | ---------------- | -------------------------------------------- |
-| **4D3N**  | $139             | Rp 2.200.000     | Nusa Penida + Ubud Cultural Tour             |
-| **5D4N**  | $219             | Rp 3.450.000     | + Uluwatu, GWK & South Coast                 |
-| **6D5N**  | $299             | Rp 4.700.000     | + Tanah Lot, Bedugul, Lempuyang & Jatiluwih  |
+| Package  | Price From (USD) | Price From (IDR) | Highlights                                  |
+| -------- | ---------------- | ---------------- | ------------------------------------------- |
+| **4D3N** | $139             | Rp 2.200.000     | Nusa Penida + Ubud Cultural Tour            |
+| **5D4N** | $219             | Rp 3.450.000     | + Uluwatu, GWK & South Coast                |
+| **6D5N** | $299             | Rp 4.700.000     | + Tanah Lot, Bedugul, Lempuyang & Jatiluwih |
 
 ### Destinations Featured
 
-| Destination              | Location        |
-| ------------------------ | --------------- |
-| Kelingking Beach         | Nusa Penida     |
-| Tegalalang Rice Terrace  | Ubud, Bali      |
-| Uluwatu Temple           | South Bali      |
-| Tanah Lot Temple         | Tabanan, Bali   |
-| Tirta Empul              | Tampaksiring    |
-| Lempuyang Temple         | East Bali       |
+| Destination             | Location      |
+| ----------------------- | ------------- |
+| Kelingking Beach        | Nusa Penida   |
+| Tegalalang Rice Terrace | Ubud, Bali    |
+| Uluwatu Temple          | South Bali    |
+| Tanah Lot Temple        | Tabanan, Bali |
+| Tirta Empul             | Tampaksiring  |
+| Lempuyang Temple        | East Bali     |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category          | Technologies                          |
-| ----------------- | ------------------------------------- |
-| **Framework**     | Next.js 16 (App Router, Turbopack)    |
-| **UI Library**    | React 19                              |
-| **Language**      | TypeScript 5                          |
-| **Styling**       | Tailwind CSS 4                        |
-| **Icons**         | React Icons (`react-icons/fa`)        |
-| **Maps**          | Mapbox GL JS 3                        |
-| **i18n**          | next-intl 4 (locale routing + proxy)  |
-| **Images**        | Next.js Image (optimized, lazy-load)  |
-| **SEO**           | Next.js Metadata API, JSON-LD         |
-| **Fonts**         | Google Fonts (Playfair Display, Inter) |
+| Category       | Technologies                           |
+| -------------- | -------------------------------------- |
+| **Framework**  | Next.js 16 (App Router, Turbopack)     |
+| **UI Library** | React 19                               |
+| **Language**   | TypeScript 5                           |
+| **Styling**    | Tailwind CSS 4                         |
+| **Icons**      | React Icons (`react-icons/fa`)         |
+| **Maps**       | Mapbox GL JS 3                         |
+| **i18n**       | next-intl 4 (locale routing + proxy)   |
+| **Images**     | Next.js Image (optimized, lazy-load)   |
+| **SEO**        | Next.js Metadata API, JSON-LD          |
+| **Fonts**      | Google Fonts (Playfair Display, Inter) |
 
 ---
 
@@ -106,11 +110,14 @@ npm run dev
 │   │   ├── about.json
 │   │   ├── common.json
 │   │   ├── contact.json
+│   │   ├── faq.json
 │   │   ├── footer.json
 │   │   ├── gallery.json
 │   │   ├── hero.json
+│   │   ├── legal.json
 │   │   ├── navbar.json
-│   │   └── packages.json
+│   │   ├── packages.json
+│   │   └── testimonials.json
 │   └── id/                    # Indonesian translations (same structure)
 ├── public/
 │   ├── images/                # Destination & hero images
@@ -121,7 +128,10 @@ npm run dev
 │   ├── app/
 │   │   ├── [locale]/          # Locale-aware pages
 │   │   │   ├── layout.tsx     # SEO metadata, JSON-LD, fonts
-│   │   │   └── page.tsx       # Main page (assembles all sections)
+│   │   │   ├── page.tsx       # Main page (assembles all sections)
+│   │   │   ├── terms/         # Terms & Conditions page
+│   │   │   ├── privacy/       # Privacy Policy page
+│   │   │   └── cancellation/  # Cancellation Policy page
 │   │   ├── layout.tsx         # Root layout (delegates to [locale])
 │   │   ├── globals.css        # Design tokens, animations, utilities
 │   │   ├── sitemap.ts         # Dynamic sitemap with hreflang
@@ -129,6 +139,7 @@ npm run dev
 │   ├── components/
 │   │   ├── About.tsx          # Company story + stats
 │   │   ├── Contact.tsx        # Contact form + info
+│   │   ├── FAQ.tsx            # Expandable FAQ accordion
 │   │   ├── FloatingWhatsApp.tsx
 │   │   ├── Footer.tsx
 │   │   ├── Gallery.tsx        # Destination carousel
@@ -140,8 +151,9 @@ npm run dev
 │   │   ├── PackageDetailsModal.tsx  # Shared includes/excludes modal
 │   │   ├── PackagesSection.tsx
 │   │   ├── SocialSidebar.tsx
+│   │   ├── Testimonials.tsx   # Customer testimonial cards
 │   │   └── map/
-│   │       ├── MapView.tsx    # Mapbox map + animation engine
+│   │       ├── MapView.tsx    # Mapbox map + animation engine + speed control
 │   │       ├── DaySidebar.tsx # Day timeline with stop progress
 │   │       └── PlaybackControls.tsx # Play/pause + day info
 │   ├── data/
@@ -163,9 +175,10 @@ npm run dev
 
 ### Colors
 
-- **Primary**: `#D4A843` (Gold)
-- **Background**: `#0B1121` (Dark Navy) → `#0F172A` (Dark Slate)
-- **Glass**: `rgba(255,255,255,0.05)` with backdrop blur
+- **Primary**: `#d4a843` (Gold)
+- **Background Dark**: `#05100e` (Almost Black Teal) / `#0a1c19` (Deep Jungle Green)
+- **Card Surface**: `#13322d` (Deep Forest Teal)
+- **Glass**: `rgba(255,255,255,0.08)` with backdrop blur
 
 ### Typography
 
@@ -205,30 +218,30 @@ npm run dev
 
 ## 🔍 SEO
 
-| Feature               | Details                                                |
-| --------------------- | ------------------------------------------------------ |
-| **Title Tags**        | Locale-aware, keyword-optimized                        |
-| **Meta Description**  | Dynamic from hero translations                         |
-| **Open Graph**        | Full OG tags with 1200×630 image                       |
-| **Twitter Cards**     | `summary_large_image` with image                       |
-| **JSON-LD**           | `TravelAgency` + `WebSite` schemas with tour offers    |
-| **Sitemap**           | `/sitemap.xml` with hreflang xhtml:link                |
-| **Robots**            | `/robots.txt` with sitemap reference                   |
-| **Canonical URLs**    | Per-locale canonical + alternates                      |
-| **Keywords**          | 11 locale-specific travel keywords                     |
-| **PWA Manifest**      | Theme color, icons, standalone display                 |
+| Feature              | Details                                             |
+| -------------------- | --------------------------------------------------- |
+| **Title Tags**       | Locale-aware, keyword-optimized                     |
+| **Meta Description** | Dynamic from hero translations                      |
+| **Open Graph**       | Full OG tags with 1200×630 image                    |
+| **Twitter Cards**    | `summary_large_image` with image                    |
+| **JSON-LD**          | `TravelAgency` + `WebSite` schemas with tour offers |
+| **Sitemap**          | `/sitemap.xml` with hreflang xhtml:link             |
+| **Robots**           | `/robots.txt` with sitemap reference                |
+| **Canonical URLs**   | Per-locale canonical + alternates                   |
+| **Keywords**         | 11 locale-specific travel keywords                  |
+| **PWA Manifest**     | Theme color, icons, standalone display              |
 
 ---
 
 ## 📜 Available Scripts
 
-| Command                  | Description                             |
-| ------------------------ | --------------------------------------- |
-| `npm run dev`            | Start development server with Turbopack |
-| `npm run build`          | Create production build                 |
-| `npm run start`          | Start production server                 |
-| `npm run lint`           | Run ESLint                              |
-| `npm run generate-routes`| Re-generate Mapbox route data           |
+| Command                   | Description                             |
+| ------------------------- | --------------------------------------- |
+| `npm run dev`             | Start development server with Turbopack |
+| `npm run build`           | Create production build                 |
+| `npm run start`           | Start production server                 |
+| `npm run lint`            | Run ESLint                              |
+| `npm run generate-routes` | Re-generate Mapbox route data           |
 
 ---
 
@@ -240,9 +253,9 @@ Deploy easily on [Vercel](https://vercel.com):
 
 ### Environment Variables
 
-| Variable                     | Required | Description                        |
-| ---------------------------- | -------- | ---------------------------------- |
-| `NEXT_PUBLIC_MAPBOX_TOKEN`   | Yes      | Mapbox GL JS access token          |
+| Variable                   | Required | Description               |
+| -------------------------- | -------- | ------------------------- |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Yes      | Mapbox GL JS access token |
 
 ### Notes
 

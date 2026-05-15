@@ -61,6 +61,41 @@ function coordDist(a: [number, number], b: [number, number]): number {
   return Math.sqrt(dx * dx + dy * dy);
 }
 
+/** Parse hex color to RGB */
+function hexToRgb(hex: string): [number, number, number] {
+  const h = hex.replace('#', '');
+  return [
+    parseInt(h.substring(0, 2), 16),
+    parseInt(h.substring(2, 4), 16),
+    parseInt(h.substring(4, 6), 16),
+  ];
+}
+
+/** Convert RGB to hex */
+function rgbToHex(r: number, g: number, b: number): string {
+  return '#' + [r, g, b].map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+}
+
+/** Mix a color towards white (amount 0-1) */
+function lightenColor(hex: string, amount: number): string {
+  const [r, g, b] = hexToRgb(hex);
+  return rgbToHex(
+    r + (255 - r) * amount,
+    g + (255 - g) * amount,
+    b + (255 - b) * amount,
+  );
+}
+
+/** Mix a color towards black (amount 0-1) */
+function darkenColor(hex: string, amount: number): string {
+  const [r, g, b] = hexToRgb(hex);
+  return rgbToHex(
+    r * (1 - amount),
+    g * (1 - amount),
+    b * (1 - amount),
+  );
+}
+
 const MapView = forwardRef<MapViewHandle, MapViewProps>(
   ({ packageIndex, activeDayIndex, onAnimationEnd, onStopReached }, ref) => {
     const mapContainer = useRef<HTMLDivElement>(null);
@@ -416,6 +451,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       coord: [number, number],
       name: string,
       durationMs: number,
+      color: string,
     ) => {
       if (!map.current) return;
       const popup = new mapboxgl.Popup({
@@ -434,7 +470,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         .setLngLat(coord)
         .addTo(map.current);
 
-      popup.getElement()?.style.setProperty('--popup-color', '#ffffff');
+      popup.getElement()?.style.setProperty('--popup-color', color);
 
       setTimeout(() => popup.remove(), durationMs);
     };
@@ -549,9 +585,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             source: animSourceId,
             layout: { 'line-join': 'round', 'line-cap': 'round' },
             paint: {
-              'line-color': '#ffffff',
+              'line-color': lightenColor(dayData.color, 0.5),
               'line-width': 5,
-              'line-opacity': 1,
+              'line-opacity': 0.9,
             },
           });
           sourceIdsRef.current.push(animSourceId);
@@ -639,16 +675,20 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             if (markerData) {
               markerData.visited += 1;
               if (markerData.visited >= markerData.totalStops) {
-                markerData.el.style.backgroundColor = '#ffffff';
-                markerData.el.style.color = '#000000';
+                // Fully visited → darker/muted day color
+                markerData.el.style.backgroundColor = darkenColor(dayData.color, 0.4);
+                markerData.el.style.color = '#ffffff';
                 markerData.el.style.opacity = '1';
               } else {
-                markerData.el.style.opacity = '0.5';
+                // Partially visited → lighter day color
+                markerData.el.style.backgroundColor = lightenColor(dayData.color, 0.3);
+                markerData.el.style.color = '#000000';
+                markerData.el.style.opacity = '1';
               }
             }
 
             if (onStopReached) onStopReached(hitCP.stopIdx);
-            flashStopPopup(hitCP.coord, hitCP.name, 1200);
+            flashStopPopup(hitCP.coord, hitCP.name, 1200, dayData.color);
             m.easeTo({ center: hitCP.coord, duration: 400 });
 
             const pausedElapsed = elapsed;
@@ -704,9 +744,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           style={{ zIndex: 1 }}
         />
 
-        {/* Speed Controls (Mapbox style) */}
+        {/* Speed Controls (Segmented control style) */}
         <div
-          className='absolute bottom-3 right-3 flex bg-white rounded shadow-[0_0_0_2px_rgba(0,0,0,0.1)] overflow-hidden'
+          className='absolute bottom-3 right-3 flex gap-0.5 rounded-md bg-white/90 p-0.5 backdrop-blur-sm'
           style={{
             zIndex: 10,
             fontFamily: 'Helvetica Neue, Arial, Helvetica, sans-serif',
@@ -716,10 +756,10 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             <button
               key={speed}
               onClick={() => handleSpeedChange(speed)}
-              className={`px-3 py-1.5 text-[11px] transition-colors border-r border-gray-200 last:border-r-0 ${
+              className={`px-2.5 py-1 text-[11px] font-semibold rounded transition-all duration-150 ${
                 speedMultiplierUI === speed
-                  ? 'bg-[#D4A843] text-[#05100E] font-bold'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  ? 'bg-[#333] text-white shadow-sm'
+                  : 'text-[#555] hover:text-[#222]'
               }`}
             >
               {speed}x

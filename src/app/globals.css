@@ -198,21 +198,18 @@ html {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Animated popup entrance */
-.anim-popup .mapboxgl-popup-content {
-  animation: popupBounceIn 0.3s ease;
+/* Animated popup entrance — applied to wrapper so box + tip animate together */
+.anim-popup {
+  animation: popupFadeIn 0.25s ease;
 }
-@keyframes popupBounceIn {
+@keyframes popupFadeIn {
   0% {
     opacity: 0;
-    transform: scale(0.7) translateY(5px);
-  }
-  70% {
-    transform: scale(1.05) translateY(-2px);
+    transform: scale(0.85);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
