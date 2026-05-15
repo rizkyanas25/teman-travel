@@ -51,14 +51,14 @@ npm run dev
 | Section           | Description                                                             |
 | ----------------- | ----------------------------------------------------------------------- |
 | **Hero**          | Full-screen background with CTA buttons and animated text               |
-| **About**         | Company story with stats (5+ years, 1K+ travelers, 6+ packages)         |
+| **About**         | Company story with stats (5+ years, 1K+ travelers, 3+ packages)         |
 | **Tour Packages** | 3 packages (4D3N / 5D4N / 6D5N) with pricing, icon badges & itinerary   |
-| **Route Map**     | Animated Mapbox itinerary with speed control, marker states & stop sync |
-| **Destinations**  | Image carousel with 6 iconic Bali & Nusa Penida spots                   |
+| **Route Map**     | Interactive modal with speed control, marker states & stop sync         |
+| **Destinations**  | Image carousel with 12 iconic Bali & Nusa Penida spots                  |
 | **Testimonials**  | Customer reviews with star ratings and rotating cards                   |
 | **FAQ**           | Expandable accordion with common travel questions                       |
 | **Contact**       | Contact form, address, WhatsApp link, and social media icons            |
-| **Footer**        | Quick links, package list, and copyright info                           |
+| **Footer**        | Brand logo, description, quick links, legal pages, payment badges, and TripAdvisor recognition |
 
 ### Tour Packages
 
