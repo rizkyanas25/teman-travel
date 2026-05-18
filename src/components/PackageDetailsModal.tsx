@@ -23,13 +23,13 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const agentTip = pkg.agentTip as string | undefined;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center lg:p-4" onClick={onClose}>
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl max-h-[85vh] flex flex-col bg-dark-800 rounded-2xl border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease] overflow-hidden"
+        className="relative w-full h-screen h-[100dvh] lg:h-auto lg:max-h-[85vh] lg:max-w-2xl flex flex-col bg-dark-800 lg:rounded-2xl lg:border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - Fixed at top */}

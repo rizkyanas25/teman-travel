@@ -99,7 +99,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div 
-        className="relative w-full h-full lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
+        className="relative w-full h-screen h-[100dvh] lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
