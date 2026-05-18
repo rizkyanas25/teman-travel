@@ -23,7 +23,13 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const agentTip = pkg.agentTip as string | undefined;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" onClick={onClose}>
+    <>
+      <style>{`
+        body {
+          overflow: hidden !important;
+        }
+      `}</style>
+      <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" onClick={onClose}>
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
@@ -116,5 +122,6 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
         </div>
       </div>
     </div>
-  );
+  </>
+);
 }

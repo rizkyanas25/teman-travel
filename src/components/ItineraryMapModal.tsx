@@ -94,9 +94,15 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center" onClick={onClose}>
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+    <>
+      <style>{`
+        body {
+          overflow: hidden !important;
+        }
+      `}</style>
+      <div className="fixed inset-0 z-[70] flex items-center justify-center" onClick={onClose}>
+        {/* Backdrop */}
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div 
         className="relative w-full h-full lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
@@ -160,5 +166,6 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
         </div>
       </div>
     </div>
-  );
+  </>
+);
 }
