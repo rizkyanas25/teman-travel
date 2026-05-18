@@ -25,7 +25,39 @@ const featureIcons = [
   { icon: FiVideo, label: "video" },
 ];
 
-export default function PackageCard({ index, onViewDetails, onViewRoute }: { index: string; onViewDetails: () => void; onViewRoute?: () => void }) {
+const getTierIndex = (pax: number): number => {
+  if (pax >= 2 && pax <= 3) return 0;
+  if (pax >= 4 && pax <= 5) return 1;
+  if (pax >= 6 && pax <= 13) return 2;
+  if (pax >= 14 && pax <= 20) return 3;
+  return 0; // fallback
+};
+
+const parsePrice = (priceStr: string): number => {
+  return parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
+};
+
+const formatPrice = (value: number, originalStr: string): string => {
+  if (originalStr.includes("Rp")) {
+    return "Rp " + value.toLocaleString("id-ID");
+  }
+  if (originalStr.includes("$")) {
+    return "$" + value.toLocaleString("en-US");
+  }
+  return value.toString();
+};
+
+export default function PackageCard({ 
+  index, 
+  onViewDetails, 
+  onViewRoute, 
+  paxCount = 2 
+}: { 
+  index: string; 
+  onViewDetails: () => void; 
+  onViewRoute?: () => void; 
+  paxCount?: number 
+}) {
   const tc = useTranslations("common");
   const t = useTranslations("packages");
   const messages = useMessages();
@@ -88,20 +120,40 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900/95 via-dark-900/40 to-transparent z-10 pointer-events-none translate-z-[1px] backface-hidden" />
         <div className="absolute bottom-4 left-6 z-20 pointer-events-none translate-z-[2px] backface-hidden">
           <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">{pkg.title}</h3>
-          <p className="text-gold-400 text-sm mt-1">{tc("perPerson")}</p>
         </div>
       </div>
 
       <div className="p-6 space-y-5">
-        {/* Pricing */}
-        <div className="space-y-2">
-          {pkg.pricing.map((p) => (
-            <div key={p.pax} className="flex justify-between items-center py-2 border-b border-white/5">
-              <span className="text-sm text-white/60">{p.pax}</span>
-              <span className="text-gold-400 font-semibold">{p.price}</span>
+        {/* Dynamic Pricing - Single Price Hero - STA-D / SPM-A */}
+        {(() => {
+          const tierIdx = getTierIndex(paxCount);
+          const activePricing = pkg.pricing[tierIdx] || pkg.pricing[0];
+          const currentPrice = activePricing.price;
+          const currentPaxLabel = activePricing.pax;
+
+          // Compute dynamic total group price
+          const priceInt = parsePrice(currentPrice);
+          const totalPriceVal = priceInt * paxCount;
+          const totalPriceStr = formatPrice(totalPriceVal, currentPrice);
+          const totalPriceText = t("totalForGuests", { total: totalPriceStr, pax: paxCount });
+
+          return (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center text-center select-none relative overflow-hidden group/price">
+              <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">
+                {currentPaxLabel}
+              </span>
+              <div className="flex items-baseline justify-center gap-1.5 mt-2 flex-nowrap whitespace-nowrap">
+                <span className="text-2xl sm:text-3xl md:text-2xl lg:text-xl xl:text-3xl font-black text-gold-400 tracking-tight transition-all duration-300 transform scale-100 group-hover/price:scale-105 whitespace-nowrap">
+                  {currentPrice}
+                </span>
+                <span className="text-[10px] sm:text-xs text-white/50 shrink-0 whitespace-nowrap">/ {tc("perPerson")}</span>
+              </div>
+              <span className="text-[9px] sm:text-[10px] xl:text-[11px] text-white/35 font-medium mt-3 bg-white/5 px-2 py-1 rounded-full border border-white/5 block whitespace-nowrap">
+                {totalPriceText}
+              </span>
             </div>
-          ))}
-        </div>
+          );
+        })()}
 
         {/* Icon Badges — at-a-glance features */}
         <div className="flex flex-wrap items-center gap-2">
@@ -193,7 +245,7 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
 
         {/* CTA */}
         <a
-          href={getWhatsAppUrl(tc("whatsappBookMessage", { title: pkg.title }))}
+          href={getWhatsAppUrl(tc("whatsappBookMessage", { title: `${pkg.title} (${paxCount} ${t("guestLabel")})` }))}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl font-semibold transition-all hover:scale-[1.02] shadow-lg shadow-[#25D366]/20"

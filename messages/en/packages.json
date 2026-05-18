@@ -374,6 +374,9 @@
     }
   ],
   "packageIncludes": "{name} Details",
+  "numberOfGuests": "Number of Guests in Group",
+  "guestLabel": "Guests",
+  "totalForGuests": "Total: {total} for {pax} Guests",
   "infoTitle": "All Packages Include",
   "notesTitle": "Notes",
   "sharedIncludes": {

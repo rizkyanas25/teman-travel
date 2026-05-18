@@ -57,9 +57,6 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-24 bg-dark-950 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-400/5 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-12">
@@ -72,13 +69,13 @@ export default function Testimonials() {
           <p className="text-white/50 max-w-2xl mx-auto">{t("subtitle")}</p>
         </div>
 
-        {/* Carousel */}
-        <div className="relative">
+        {/* Carousel - Relative wrapper without overflow-hidden so chevrons aren't clipped */}
+        <div className="relative w-full max-w-full">
           {/* Scroll arrows */}
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex"
+              className="absolute -left-3 lg:-left-5 top-[calc(50%-16px)] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex cursor-pointer"
               aria-label="Scroll left"
             >
               <FiChevronLeft className="w-5 h-5" />
@@ -87,41 +84,52 @@ export default function Testimonials() {
           {canScrollRight && (
             <button
               onClick={() => scroll("right")}
-              className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex"
+              className="absolute -right-3 lg:-right-5 top-[calc(50%-16px)] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-dark-800/90 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-dark-700 transition backdrop-blur-sm shadow-xl hidden md:flex cursor-pointer"
               aria-label="Scroll right"
             >
               <FiChevronRight className="w-5 h-5" />
             </button>
           )}
 
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none" />
+          {/* Fade edges - Fully restored on all viewports, set exactly to bottom-8 to align with card height */}
+          <div className="absolute left-0 top-0 bottom-8 w-12 sm:w-16 bg-gradient-to-r from-dark-950 to-transparent z-[5] pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-8 w-12 sm:w-16 bg-gradient-to-l from-dark-950 to-transparent z-[5] pointer-events-none" />
 
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-[calc(50%-150px)] sm:px-[calc(50%-190px)]"
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-[calc(50%-150px)] sm:px-[calc(50%-190px)] w-full max-w-full touch-pan-x"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
           >
             {items.map((item, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-[300px] sm:w-[380px] snap-center bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group"
+                className="flex-shrink-0 w-[300px] sm:w-[380px] snap-center bg-dark-800 rounded-2xl border border-white/10 p-6 hover:border-gold-400/20 transition-colors group flex flex-col justify-between"
               >
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: item.rating }).map((_, s) => (
-                    <FaStar key={s} className="w-4 h-4 text-gold-400 shrink-0" />
-                  ))}
+                <div>
+                  {/* Top Row: Stars & Package Badge */}
+                  <div className="flex justify-between items-center mb-4 gap-4">
+                    {/* Stars */}
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: item.rating }).map((_, s) => (
+                        <FaStar key={s} className="w-4 h-4 text-gold-400 shrink-0" />
+                      ))}
+                    </div>
+                    {/* Package Badge */}
+                    <span className="text-[10px] px-2.5 py-1 rounded-full bg-gold-400/10 text-gold-400 font-semibold whitespace-nowrap shrink-0 border border-gold-400/10">
+                      {item.package}
+                    </span>
+                  </div>
+
+                  {/* Quote - Full Display (No truncation for authenticity!) */}
+                  <p className="text-white/70 text-sm leading-relaxed mb-6">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
                 </div>
 
-                {/* Quote */}
-                <p className="text-white/70 text-sm leading-relaxed mb-6 line-clamp-4">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-3 mt-auto">
+                {/* Author Block - Fully Visible and Partitioned */}
+                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/5">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-gold-400/30 transition shrink-0">
                     <Image
                       src={item.avatar}
@@ -132,12 +140,9 @@ export default function Testimonials() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-white font-semibold text-sm truncate">{item.name}</p>
+                    <p className="text-white font-bold text-sm truncate">{item.name}</p>
                     <p className="text-white/40 text-xs truncate">{item.flag} {item.origin}</p>
                   </div>
-                  <span className="ml-auto text-[10px] px-2 py-1 rounded-full bg-gold-400/10 text-gold-400 font-medium whitespace-nowrap shrink-0">
-                    {item.package}
-                  </span>
                 </div>
               </div>
             ))}

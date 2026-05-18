@@ -374,6 +374,9 @@
     }
   ],
   "packageIncludes": "Detail {name}",
+  "numberOfGuests": "Jumlah Tamu dalam Grup",
+  "guestLabel": "Tamu",
+  "totalForGuests": "Total: {total} untuk {pax} Tamu",
   "infoTitle": "Semua Paket Sudah Termasuk",
   "notesTitle": "Catatan",
   "sharedIncludes": {
