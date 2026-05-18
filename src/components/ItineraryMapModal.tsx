@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import DaySidebar from "./map/DaySidebar";
 import PlaybackControls from "./map/PlaybackControls";
@@ -22,6 +22,30 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
   const [prevPackage, setPrevPackage] = useState<number | null>(null);
   const mapRef = useRef<MapViewHandle>(null);
+
+  useEffect(() => {
+    if (packageIndex === null) return;
+
+    const scrollY = window.scrollY;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.paddingRight = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [packageIndex]);
 
   // Synchronous reset when package changes — uses state (safe to read during render)
   if (packageIndex !== null && packageIndex !== prevPackage) {
@@ -94,18 +118,12 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   };
 
   return (
-    <>
-      <style>{`
-        body {
-          overflow: hidden !important;
-        }
-      `}</style>
-      <div className="fixed inset-0 z-[70] flex items-center justify-center" onClick={onClose}>
-        {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+    <div className="fixed inset-0 z-[70] flex items-center justify-center lg:p-4" onClick={onClose}>
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div 
-        className="relative w-full h-full lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
+        className="relative w-full h-[100dvh] lg:w-[95vw] lg:h-[90vh] lg:max-h-[900px] lg:max-w-[1400px] bg-dark-800 flex flex-col lg:rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-[fadeInUp_0.3s_ease]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -125,7 +143,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
         <div className="flex flex-col lg:flex-row flex-1 min-h-0 overflow-hidden">
           
           {/* Map Area */}
-          <div className="relative order-1 lg:order-2 flex-1 h-[50vh] lg:h-auto" style={{ minHeight: '300px' }}>
+          <div className="relative order-1 lg:order-2 flex-1 h-[50%] lg:h-auto" style={{ minHeight: '300px' }}>
              <MapView 
                 key={packageIndex}
                 ref={mapRef} 
@@ -137,7 +155,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
           </div>
 
           {/* Sidebar Area */}
-          <div className="w-full lg:w-[380px] bg-dark-800 flex flex-col order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/10 h-[50vh] lg:h-full shrink-0 z-10">
+          <div className="w-full lg:w-[380px] bg-dark-800 flex flex-col order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/10 h-[50%] lg:h-full shrink-0 z-10 pb-[env(safe-area-inset-bottom)] lg:pb-0">
             {/* Timeline */}
             <div className="flex-1 overflow-hidden min-h-0">
               <DaySidebar 
@@ -166,6 +184,5 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
         </div>
       </div>
     </div>
-  </>
-);
+  );
 }

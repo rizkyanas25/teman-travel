@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import { FiCheck, FiX, FiInfo } from "react-icons/fi";
 interface Props {
@@ -10,6 +11,30 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const t = useTranslations("packages");
   const tc = useTranslations("common");
   const messages = useMessages();
+
+  useEffect(() => {
+    if (packageIndex === null) return;
+
+    const scrollY = window.scrollY;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.paddingRight = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [packageIndex]);
 
   if (packageIndex === null) return null;
 
@@ -23,13 +48,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const agentTip = pkg.agentTip as string | undefined;
 
   return (
-    <>
-      <style>{`
-        body {
-          overflow: hidden !important;
-        }
-      `}</style>
-      <div className="fixed inset-0 z-[60] flex items-center justify-center lg:p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center lg:p-4" onClick={onClose}>
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
@@ -122,6 +141,5 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
         </div>
       </div>
     </div>
-  </>
-);
+  );
 }
