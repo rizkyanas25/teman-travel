@@ -3,6 +3,7 @@
   "heading": "Choose Your <highlight>Tour</highlight> Package",
   "subtitle": "Handcrafted Bali & Nusa Penida itineraries designed to fit every budget and travel style.",
   "viewDetails": "View full inclusions",
+  "agentInsightTitle": "Local Friend Says:",
   "featureLabels": {
     "hotel": "Hotel",
     "meals": "Meals",
@@ -14,6 +15,8 @@
     {
       "title": "4D3N Package",
       "image": "/images/kelingking-beach.png",
+      "tags": ["Weekend Escape", "Active Explore"],
+      "agentTip": "This package perfectly balances Ubud's peaceful culture and Nusa Penida's breathtaking beaches. It is highly popular for weekend travelers. We recommend packing a swimsuit, sunscreen, and sandals for Nusa Penida's wet boat landing.",
       "pricing": [
         { "pax": "2–3 Guests", "price": "$199" },
         { "pax": "4–5 Guests", "price": "$179" },
@@ -85,7 +88,8 @@
             "Crystal Bay Beach — swimming & snorkeling",
             "Return to harbour & cross back to Bali",
             "Return to hotel"
-          ]
+          ],
+          "tip": "Fast boat boarding at Sanur port requires stepping directly into shallow seawater. Wear sandals and shorts/comfortable clothes!"
         },
         {
           "day": "Day 3",
@@ -99,7 +103,8 @@
             "Tegalalang Rice Terrace walk & swing (optional)",
             "Dinner",
             "Return to hotel"
-          ]
+          ],
+          "tip": "Bring a sarong or wear long pants/skirts for Tirta Empul temple. Local sarongs are also available for rent at the temple gate."
         },
         {
           "day": "Day 4",
@@ -115,6 +120,8 @@
     {
       "title": "5D4N Package",
       "image": "/images/uluwatu-temple.png",
+      "tags": ["Family & Couples", "Slow & Relaxed"],
+      "agentTip": "Ideal for families and couples who want to experience Ubud and South Bali without rush. Includes strategic hotel switching between Ubud (greenery) and Jimbaran (coastline) to dodge Bali's main traffic congestion.",
       "pricing": [
         { "pax": "2–3 Guests", "price": "$279" },
         { "pax": "4–5 Guests", "price": "$259" },
@@ -186,7 +193,8 @@
             "Crystal Bay Beach — swimming & snorkeling",
             "Return to harbour & cross back to Bali",
             "Return to hotel"
-          ]
+          ],
+          "tip": "Nusa Penida roads are narrow and winding. Our driver is highly experienced, but if you are prone to motion sickness, taking medication 30 minutes before arrival is highly recommended."
         },
         {
           "day": "Day 3",
@@ -215,7 +223,8 @@
             "Kecak Fire Dance performance (optional)",
             "Dinner",
             "Return to hotel"
-          ]
+          ],
+          "tip": "Keep your sunglasses, hats, and shiny jewelry secure in your bag when walking around Uluwatu Temple, as the resident monkeys love to grab loose objects."
         },
         {
           "day": "Day 5",
@@ -231,6 +240,8 @@
     {
       "title": "6D5N Package",
       "image": "/images/lempuyang-temple.png",
+      "tags": ["Grand Explorer", "Ultimate Coverage"],
+      "agentTip": "Our ultimate signature package covering all 5 geographical zones of Bali. From UNESCO rice terraces to clifftop temples, this itinerary is packed with high-value photo spots. Make sure your phone and camera batteries are fully charged!",
       "pricing": [
         { "pax": "2–3 Guests", "price": "$389" },
         { "pax": "4–5 Guests", "price": "$359" },
@@ -302,7 +313,8 @@
             "Crystal Bay Beach — swimming & snorkeling",
             "Return to harbour & cross back to Bali",
             "Return to hotel"
-          ]
+          ],
+          "tip": "A waterproof bag is highly useful for the boat landing and Crystal Bay beach activities."
         },
         {
           "day": "Day 3",
@@ -316,7 +328,8 @@
             "Lempuyang Temple — Gates of Heaven with Mt. Agung view",
             "Dinner",
             "Return to hotel"
-          ]
+          ],
+          "tip": "Lempuyang Temple's 'Gate of Heaven' queue can get extremely long. We recommend departing Ubud at 5:00 AM sharp with our driver to get a priority queue ticket."
         },
         {
           "day": "Day 4",
@@ -331,7 +344,8 @@
             "Tanah Lot Temple — iconic sea temple at sunset",
             "Transport to Jimbaran Bay Beach Resort (South Bali)",
             "Check-in & rest"
-          ]
+          ],
+          "tip": "Ulun Danu Beratan is situated in the high mountains, meaning it can be chilly and foggy. Bringing a light jacket/sweater is highly recommended."
         },
         {
           "day": "Day 5",
@@ -359,7 +373,7 @@
       ]
     }
   ],
-  "packageIncludes": "{name} Inclusions",
+  "packageIncludes": "{name} Details",
   "infoTitle": "All Packages Include",
   "notesTitle": "Notes",
   "sharedIncludes": {

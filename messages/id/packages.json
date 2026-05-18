@@ -3,6 +3,7 @@
   "heading": "Pilih Paket <highlight>Tour</highlight> Anda",
   "subtitle": "Itinerari Bali & Nusa Penida yang dirancang khusus untuk setiap budget dan gaya perjalanan Anda.",
   "viewDetails": "Lihat detail lengkap",
+  "agentInsightTitle": "Kata Teman Lokal:",
   "featureLabels": {
     "hotel": "Hotel",
     "meals": "Makan",
@@ -14,6 +15,8 @@
     {
       "title": "Paket 4H3M",
       "image": "/images/kelingking-beach.png",
+      "tags": ["Liburan Akhir Pekan", "Eksplorasi Aktif"],
+      "agentTip": "Paket ini menyeimbangkan kebudayaan Ubud yang damai dan pantai Nusa Penida yang memukau. Sangat populer untuk liburan akhir pekan. Kami menyarankan membawa pakaian renang, tabir surya, dan sandal untuk penyeberangan basah di Nusa Penida.",
       "pricing": [
         { "pax": "2–3 Tamu", "price": "Rp 3.100.000" },
         { "pax": "4–5 Tamu", "price": "Rp 2.800.000" },
@@ -85,7 +88,8 @@
             "Crystal Bay Beach — berenang & snorkeling",
             "Kembali ke dermaga & menyeberang ke Bali",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Saat naik fast boat di Pelabuhan Sanur, Anda akan melangkah langsung ke air laut dangkal. Kenakan celana pendek dan sandal santai!"
         },
         {
           "day": "Hari 3",
@@ -99,7 +103,8 @@
             "Jalan-jalan di Terasering Tegalalang & ayunan (opsional)",
             "Makan malam",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Bawa kain sarung atau kenakan pakaian sopan di bawah lutut untuk Tirta Empul. Kain sarung sewa juga tersedia di gerbang pura."
         },
         {
           "day": "Hari 4",
@@ -115,6 +120,8 @@
     {
       "title": "Paket 5H4M",
       "image": "/images/uluwatu-temple.png",
+      "tags": ["Keluarga & Pasangan", "Santai Tanpa Buru-Buru"],
+      "agentTip": "Sangat cocok untuk keluarga dan pasangan yang ingin menikmati Ubud dan Bali Selatan tanpa terburu-buru. Pemindahan hotel yang strategis dari Ubud ke Jimbaran membantu menghindari kemacetan utama di jalanan Bali.",
       "pricing": [
         { "pax": "2–3 Tamu", "price": "Rp 4.350.000" },
         { "pax": "4–5 Tamu", "price": "Rp 4.050.000" },
@@ -186,7 +193,8 @@
             "Crystal Bay Beach — berenang & snorkeling",
             "Kembali ke dermaga & menyeberang ke Bali",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Jalanan di Nusa Penida sempit dan berliku. Jika Anda mudah mabuk perjalanan, kami sarankan meminum obat anti-mabuk 30 menit sebelum tiba."
         },
         {
           "day": "Hari 3",
@@ -215,7 +223,8 @@
             "Pertunjukan Tari Kecak (opsional)",
             "Makan malam",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Amankan kacamata, topi, dan barang berkilau di dalam tas saat berjalan di Pura Uluwatu, karena monyet setempat sangat usil dan suka mengambilnya."
         },
         {
           "day": "Hari 5",
@@ -231,6 +240,8 @@
     {
       "title": "Paket 6H5M",
       "image": "/images/lempuyang-temple.png",
+      "tags": ["Penjelajah Sejati", "Rute Terlengkap"],
+      "agentTip": "Paket terlengkap kami yang mencakup 5 zona geografis Bali. Dari terasering UNESCO hingga pura tebing ikonik, rute ini dipenuhi spot foto bernilai tinggi. Pastikan baterai HP dan kamera Anda terisi penuh!",
       "pricing": [
         { "pax": "2–3 Tamu", "price": "Rp 6.050.000" },
         { "pax": "4–5 Tamu", "price": "Rp 5.600.000" },
@@ -302,7 +313,8 @@
             "Crystal Bay Beach — berenang & snorkeling",
             "Kembali ke dermaga & menyeberang ke Bali",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Membawa tas tahan air (waterproof bag) sangat berguna untuk pendaratan boat dan aktivitas di Pantai Crystal Bay."
         },
         {
           "day": "Hari 3",
@@ -316,7 +328,8 @@
             "Pura Lempuyang — Gerbang Surga dengan pemandangan Gunung Agung",
             "Makan malam",
             "Kembali ke hotel"
-          ]
+          ],
+          "tip": "Antrean foto di 'Gerbang Surga' Pura Lempuyang bisa sangat panjang. Kami menyarankan berangkat jam 5 pagi dari Ubud bersama driver kami agar mendapat nomor antrean awal."
         },
         {
           "day": "Hari 4",
@@ -331,7 +344,8 @@
             "Pura Tanah Lot — pura laut ikonik saat sunset",
             "Pindah hotel ke Jimbaran Bay Beach Resort (Bali Selatan)",
             "Check-in & istirahat"
-          ]
+          ],
+          "tip": "Kawasan Ulun Danu Beratan berada di pegunungan tinggi, sehingga udaranya sejuk bahkan cenderung dingin dan berkabut. Membawa jaket tipis/sweater sangat disarankan."
         },
         {
           "day": "Hari 5",
@@ -359,7 +373,7 @@
       ]
     }
   ],
-  "packageIncludes": "{name} Sudah Termasuk",
+  "packageIncludes": "Detail {name}",
   "infoTitle": "Semua Paket Sudah Termasuk",
   "notesTitle": "Catatan",
   "sharedIncludes": {

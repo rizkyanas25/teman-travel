@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import { FiHome, FiCoffee, FiMapPin, FiTruck, FiVideo, FiChevronRight, FiChevronDown, FiMap, FiShare2 } from "react-icons/fi";
+import { FiHome, FiCoffee, FiMapPin, FiTruck, FiVideo, FiChevronRight, FiChevronDown, FiMap, FiShare2, FiInfo } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 interface PricingItem { pax: string; price: string; }
-interface ItineraryDay { day: string; title: string; items: string[]; }
+interface ItineraryDay { day: string; title: string; items: string[]; tip?: string; }
 interface PackageItem {
   title: string;
   image: string;
@@ -14,6 +14,7 @@ interface PackageItem {
   includes: { title: string; description: string }[];
   excludes: string[];
   itinerary: ItineraryDay[];
+  tags?: string[];
 }
 
 const featureIcons = [
@@ -61,6 +62,20 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
     >
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden rounded-t-2xl [mask-image:linear-gradient(white,white)]">
+        {/* Floating Mood Tags - STA-A */}
+        {pkg.tags && (
+          <div className="absolute top-4 left-6 z-20 flex flex-wrap gap-1.5 pointer-events-none animate-[fadeInUp_0.3s_ease]">
+            {pkg.tags.map((tag: string) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider bg-dark-950/80 backdrop-blur-md border border-white/10 text-gold-400 shadow-lg"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image 
             src={pkg.image} 
@@ -133,6 +148,15 @@ export default function PackageCard({ index, onViewDetails, onViewRoute }: { ind
                         <span className="text-sm text-white/50">{item}</span>
                       </div>
                     ))}
+                    {/* Logistical Day Tip - STA-B.2 */}
+                    {day.tip && (
+                      <div className="mt-3 pt-3 border-t border-white/5 flex gap-2 items-start text-xs text-gold-400/80 leading-relaxed animate-[fadeInUp_0.15s_ease]">
+                        <FiInfo className="w-3.5 h-3.5 text-gold-400 shrink-0 mt-0.5" />
+                        <p className="italic">
+                          <strong>Tip:</strong> {day.tip}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

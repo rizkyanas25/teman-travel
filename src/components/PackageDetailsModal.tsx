@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations, useMessages } from "next-intl";
-import { FiCheck, FiX } from "react-icons/fi";
+import { FiCheck, FiX, FiInfo } from "react-icons/fi";
 interface Props {
   packageIndex: number | null;
   onClose: () => void;
@@ -20,6 +20,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
 
   const includes = pkg.includes as { title: string; description: string }[];
   const excludes = pkg.excludes as { title: string; description: string }[];
+  const agentTip = pkg.agentTip as string | undefined;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" onClick={onClose}>
@@ -46,19 +47,44 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
 
         {/* Content - Scrollable area */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
-          {/* Included Items */}
-          <div className="space-y-4">
-            {pkg.includes.map((item: any, i: number) => (
-              <div key={i} className="p-4 bg-white/5 rounded-xl border border-white/10 flex gap-4">
-                <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <FiCheck className="w-3.5 h-3.5 text-green-500" />
+          {/* Global Agent Tip Box - STA-B.1 */}
+          {agentTip && (
+            <div className="p-4 bg-white/5 rounded-xl border border-gold-400/20 flex flex-col gap-2.5 animate-[fadeInUp_0.2s_ease]">
+              {/* Baris Judul & Ikon - Sejajar Sempurna */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-gold-400/10 flex items-center justify-center shrink-0">
+                  <FiInfo className="w-3.5 h-3.5 text-gold-400" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-white mb-1">{item.title}</h4>
-                  <p className="text-xs text-white/50 leading-relaxed">{item.description}</p>
-                </div>
+                <h4 className="text-sm font-semibold text-gold-400">
+                  {t("agentInsightTitle")}
+                </h4>
               </div>
-            ))}
+              
+              {/* Baris Deskripsi - Indentasi Lurus Sejajar Teks Judul */}
+              <p className="text-xs sm:text-sm text-white/60 leading-relaxed italic pl-9">
+                "{agentTip}"
+              </p>
+            </div>
+          )}
+
+          {/* Included Section */}
+          <div>
+            <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mb-4">
+              {tc("included")}
+            </h4>
+            <div className="space-y-3">
+              {pkg.includes.map((item: any, i: number) => (
+                <div key={i} className="p-3 bg-white/5 rounded-xl border border-white/10 flex gap-3">
+                  <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <FiCheck className="w-3 text-green-500" />
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-semibold text-white/90 leading-tight">{item.title}</h5>
+                    <p className="text-xs text-white/50 leading-relaxed mt-1">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Not Included Section */}
@@ -73,8 +99,8 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
                     <FiX className="w-3 text-red-500" />
                   </div>
                   <div>
-                    <h5 className="text-sm font-medium text-white/80 leading-tight">{item.title}</h5>
-                    <p className="text-[11px] text-white/40 mt-0.5">{item.description}</p>
+                    <h5 className="text-sm font-semibold text-white/90 leading-tight">{item.title}</h5>
+                    <p className="text-xs text-white/50 leading-relaxed mt-1">{item.description}</p>
                   </div>
                 </div>
               ))}
