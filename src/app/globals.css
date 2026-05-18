@@ -54,12 +54,28 @@ html {
 }
 
 .hero-bg {
+  position: relative;
+  /* GPU-accelerated clipping to force the fixed background pseudo-element to stay bounded within the hero section */
+  clip-path: inset(0);
+  overflow: hidden;
+}
+
+.hero-bg::before {
+  content: "";
+  position: fixed; /* Fixed relative to the viewport to bypass iOS WebKit background-attachment bugs completely */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image:
     linear-gradient(to bottom, rgba(10, 28, 25, 0.55), rgba(10, 28, 25, 0.85)),
     url('/images/hero.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
+  z-index: -1; /* Render behind the Hero text content */
+  transform: translate3d(0, 0, 0); /* Force hardware GPU acceleration in WebKit */
+  will-change: transform;
 }
 
 @keyframes float {
