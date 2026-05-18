@@ -43,7 +43,16 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
       document.body.style.right = "";
       document.body.style.paddingRight = "";
       document.body.style.overflow = "";
+
+      // Temporarily disable smooth scroll on html to prevent visual jump/glide
+      const htmlStyle = document.documentElement.style;
+      const originalScrollBehavior = htmlStyle.scrollBehavior;
+      htmlStyle.scrollBehavior = "auto";
+
       window.scrollTo(0, scrollY);
+
+      // Restore original scroll behavior after a brief layout settle
+      htmlStyle.scrollBehavior = originalScrollBehavior;
     };
   }, [packageIndex]);
 
@@ -166,6 +175,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
                 dayLabels={dayLabels}
                 activeStopIndex={isPlaying ? activeStopIndex : (completedDays.has(activeDayIndex) ? 999 : -1)}
                 completedDays={completedDays}
+                isPlaying={isPlaying}
               />
             </div>
 

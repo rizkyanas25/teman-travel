@@ -10,6 +10,7 @@ interface DaySidebarProps {
   dayLabels: string[];
   activeStopIndex?: number; // -1 = none, 999 = all reached (completed)
   completedDays?: Set<number>;
+  isPlaying?: boolean;
 }
 
 export default function DaySidebar({
@@ -20,6 +21,7 @@ export default function DaySidebar({
   dayLabels,
   activeStopIndex = -1,
   completedDays = new Set(),
+  isPlaying = false,
 }: DaySidebarProps) {
   const t = useTranslations('packages');
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
@@ -118,24 +120,29 @@ export default function DaySidebar({
                 <div className='pl-9 mt-3 space-y-2 animate-[fadeInUp_0.3s_ease]'>
                   {stops.map((stop, sIdx) => {
                     const isReached = activeStopIndex >= sIdx;
-                    const isCurrent = activeStopIndex === sIdx;
+                    const isCurrent = isPlaying 
+                      ? (activeStopIndex + 1 === sIdx)
+                      : (activeStopIndex === sIdx);
+                    const isEnRoute = isPlaying && activeStopIndex + 1 === sIdx;
 
                     return (
                       <div
                         key={sIdx}
                         className={`flex items-center gap-2.5 text-xs transition-all duration-300 ${
-                          isReached ? 'opacity-100' : 'opacity-40'
+                          isReached || isEnRoute ? 'opacity-100' : 'opacity-40'
                         }`}
                       >
                         <div
                           className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
                             isCurrent ? 'scale-125 ring-2 ring-white/30' : ''
+                          } ${
+                            isEnRoute ? 'animate-pulse ring-2 ring-white/40' : ''
                           }`}
                           style={{
-                            backgroundColor: isReached
+                            backgroundColor: isReached || isEnRoute
                               ? day.color
                               : 'rgba(255,255,255,0.15)',
-                            color: isReached ? '#000' : 'rgba(255,255,255,0.4)',
+                            color: isReached || isEnRoute ? '#000' : 'rgba(255,255,255,0.4)',
                           }}
                         >
                           {isReached ? (
@@ -150,9 +157,11 @@ export default function DaySidebar({
                           className={`leading-snug mt-0.5 transition-colors duration-300 ${
                             isCurrent
                               ? 'text-white font-semibold'
-                              : isReached
-                                ? 'text-white/80'
-                                : 'text-white/40'
+                              : isEnRoute
+                                ? 'text-white font-medium animate-pulse'
+                                : isReached
+                                  ? 'text-white/80'
+                                  : 'text-white/40'
                           }`}
                         >
                           {stop.name}

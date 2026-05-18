@@ -209,10 +209,32 @@ html {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Animated popup entrance — applied to wrapper so box + tip animate together */
-.anim-popup {
-  animation: popupFadeIn 0.25s ease;
+/* Animated popup entrance — applied to content container to keep Mapbox coordinates intact */
+.anim-popup .mapboxgl-popup-content {
+  animation: popupFadeIn 0.25s ease forwards;
+  transform-origin: bottom center !important;
 }
+
+/* Hide Mapbox's default separate tip for animated popups to prevent disjointed transitions */
+.anim-popup .mapboxgl-popup-tip {
+  display: none !important;
+}
+
+/* Render a custom tip directly attached inside the content wrapper so they scale as one unified DOM element */
+.anim-popup .mapboxgl-popup-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--popup-color, white);
+  z-index: 1;
+}
+
 @keyframes popupFadeIn {
   0% {
     opacity: 0;
