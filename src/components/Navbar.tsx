@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -7,7 +7,11 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { Link } from "@/i18n/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 
+// Isomorphic layout effect to run synchronously on client before paint, preventing hydration flash/warnings
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export default function Navbar() {
+  // Revert to simple false initialization to guarantee 100% hydration compatibility between SSR and client
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const t = useTranslations("navbar");
@@ -21,10 +25,24 @@ export default function Navbar() {
     { href: "/#faq", label: t("faq") },
   ];
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
+
+    // Check initial scroll position immediately on mount
+    onScroll();
+
+    // Check after short delays to catch async browser scroll-to-hash jumps
+    const t1 = setTimeout(onScroll, 100);
+    const t2 = setTimeout(onScroll, 300);
+    const t3 = setTimeout(onScroll, 600);
+
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const isGlass = scrolled || menuOpen;

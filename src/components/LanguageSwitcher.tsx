@@ -13,8 +13,25 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const getActiveSectionHash = () => {
+    if (typeof window === "undefined") return "";
+    const sections = ["home", "about", "packages", "gallery", "testimonials", "faq"];
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 200 && rect.bottom >= 200) {
+          return `#${id}`;
+        }
+      }
+    }
+    return window.location.hash || "";
+  };
+
   const handleSwitch = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    const hash = getActiveSectionHash();
+    router.replace(`${pathname}${search}${hash}`, { locale: newLocale, scroll: false });
   };
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import PackageCard from "./PackageCard";
@@ -12,6 +12,31 @@ export default function PackagesSection() {
   const [modalPackageIndex, setModalPackageIndex] = useState<number | null>(null);
   const [mapModalPackageIndex, setMapModalPackageIndex] = useState<number | null>(null);
   const [paxCount, setPaxCount] = useState<number>(2);
+
+  // Hydration-safe URL query parameter initialization for 'pax'
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get("pax");
+      if (p) {
+        const val = parseInt(p);
+        if (!isNaN(val) && val >= 2 && val <= 20) {
+          setPaxCount(val);
+        }
+      }
+    }
+  }, []);
+
+  // Performant and silent URL query parameter update (no React/network reload overhead)
+  const handlePaxChange = (val: number) => {
+    setPaxCount(val);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      params.set("pax", val.toString());
+      const hash = window.location.hash || "";
+      window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}${hash}`);
+    }
+  };
 
   const itemKeys = ["0", "1", "2"] as const;
 
@@ -60,7 +85,7 @@ export default function PackagesSection() {
                 min="2"
                 max="20"
                 value={paxCount}
-                onChange={(e) => setPaxCount(parseInt(e.target.value))}
+                onChange={(e) => handlePaxChange(parseInt(e.target.value))}
                 onTouchStart={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
                 className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30 transition-all touch-none"

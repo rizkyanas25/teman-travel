@@ -79,8 +79,10 @@ export default function PackageCard({
 
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Use origin only (no locale) and index-based ID for consistency across languages
-    const pureUrl = `${window.location.origin}/#pkg-${index}`;
+    // Capture the current query params (e.g. ?pax=10) to make guest count persistent upon sharing
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    // Combine origin, query params, and specific card anchor ID for the perfect shareable URL
+    const pureUrl = `${window.location.origin}/${search}#pkg-${index}`;
     
     navigator.clipboard.writeText(pureUrl);
     setCopied(true);
