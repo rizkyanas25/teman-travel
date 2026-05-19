@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
 import { FiCheck } from 'react-icons/fi';
 
@@ -23,7 +22,6 @@ export default function DaySidebar({
   completedDays = new Set(),
   isPlaying = false,
 }: DaySidebarProps) {
-  const t = useTranslations('packages');
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
 
   if (!pkgData) return null;
@@ -89,7 +87,7 @@ export default function DaySidebar({
                       <div className='w-2 h-2 bg-dark-900 rounded-full' />
                     )}
                     {!isActive && isCompleted && (
-                      <FiCheck className="w-4 h-4 text-white" />
+                      <FiCheck className='w-4 h-4 text-white' />
                     )}
                   </button>
                 </div>
@@ -120,9 +118,9 @@ export default function DaySidebar({
                 <div className='pl-9 mt-3 space-y-2 animate-[fadeInUp_0.3s_ease]'>
                   {stops.map((stop, sIdx) => {
                     const isReached = activeStopIndex >= sIdx;
-                    const isCurrent = isPlaying 
-                      ? (activeStopIndex + 1 === sIdx)
-                      : (activeStopIndex === sIdx);
+                    const isCurrent = isPlaying
+                      ? activeStopIndex + 1 === sIdx
+                      : activeStopIndex === sIdx;
                     const isEnRoute = isPlaying && activeStopIndex + 1 === sIdx;
 
                     return (
@@ -136,13 +134,19 @@ export default function DaySidebar({
                           className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
                             isCurrent ? 'scale-125 ring-2 ring-white/30' : ''
                           } ${
-                            isEnRoute ? 'animate-pulse ring-2 ring-white/40' : ''
+                            isEnRoute
+                              ? 'animate-pulse ring-2 ring-white/40'
+                              : ''
                           }`}
                           style={{
-                            backgroundColor: isReached || isEnRoute
-                              ? day.color
-                              : 'rgba(255,255,255,0.15)',
-                            color: isReached || isEnRoute ? '#000' : 'rgba(255,255,255,0.4)',
+                            backgroundColor:
+                              isReached || isEnRoute
+                                ? day.color
+                                : 'rgba(255,255,255,0.15)',
+                            color:
+                              isReached || isEnRoute
+                                ? '#000'
+                                : 'rgba(255,255,255,0.4)',
                           }}
                         >
                           {isReached ? (

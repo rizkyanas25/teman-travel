@@ -21,7 +21,9 @@ export default function PackagesSection() {
       if (p) {
         const val = parseInt(p);
         if (!isNaN(val) && val >= 2 && val <= 20) {
-          setPaxCount(val);
+          requestAnimationFrame(() => {
+            setPaxCount(val);
+          });
         }
       }
     }
