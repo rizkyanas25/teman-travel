@@ -5,6 +5,7 @@ import {
   useImperativeHandle,
   forwardRef,
   useState,
+  useCallback,
 } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
@@ -33,6 +34,7 @@ interface MapViewProps {
   activeDayIndex: number;
   onAnimationEnd: () => void;
   onStopReached?: (stopIndex: number) => void;
+  onDepartStop?: (stopIndex: number) => void;
 }
 
 /** Interpolate extra points along a straight line so sea segments animate smoothly */
@@ -102,7 +104,7 @@ function darkenColor(hex: string, amount: number): string {
 }
 
 const MapView = forwardRef<MapViewHandle, MapViewProps>(
-  ({ packageIndex, activeDayIndex, onAnimationEnd, onStopReached }, ref) => {
+  ({ packageIndex, activeDayIndex, onAnimationEnd, onStopReached, onDepartStop }, ref) => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<mapboxgl.Map | null>(null);
     const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -146,43 +148,247 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
     );
     const routesData = ALL_ROUTES[packageIndex] || null;
 
-    const doFlyToDay = (dayIdx: number, duration: number = 1000) => {
-      if (!map.current || !pkgData || !routesData) return;
-      const dayRouteGeo = routesData.days.find(
-        (d: DayRoute) => d.dayIndex === dayIdx,
-      );
+    const removeMovingMarker = useCallback(() => {
+      if (movingMarkerRef.current) {
+        movingMarkerRef.current.remove();
+        movingMarkerRef.current = null;
+      }
+    }, []);
 
-      if (dayRouteGeo && dayRouteGeo.segments) {
-        const allCoords: [number, number][] = [];
-        for (const seg of dayRouteGeo.segments) {
-          if (seg.geometry && seg.geometry.coordinates)
-            allCoords.push(...seg.geometry.coordinates);
-        }
-        if (allCoords.length > 0) {
-          const bounds = allCoords.reduce(
-            (b: mapboxgl.LngLatBounds, coord: [number, number]) =>
-              b.extend(coord),
-            new mapboxgl.LngLatBounds(allCoords[0], allCoords[0]),
-          );
-          map.current.fitBounds(bounds, {
-            padding: 60,
-            duration,
-            essential: true,
-          });
-          return;
-        }
+    const cancelAllTimers = useCallback(() => {
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
+      if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+      animationFrameRef.current = null;
+      pauseTimerRef.current = null;
+      animStateRef.current.isPlaying = false;
+      removeMovingMarker();
+      // Clean up active popup timeouts
+      activeTimeoutsRef.current.forEach(clearTimeout);
+      activeTimeoutsRef.current = [];
+    }, [removeMovingMarker]);
+
+    const clearMarkers = useCallback(() => {
+      markersRef.current.forEach((m) => m.remove());
+      markersRef.current = [];
+    }, []);
+
+    const clearPopups = useCallback(() => {
+      popupsRef.current.forEach((p) => p.remove());
+      popupsRef.current = [];
+    }, []);
+
+    const clearLayers = useCallback(() => {
+      if (!map.current) return;
+      const m = map.current;
+      for (const id of layerIdsRef.current) {
+        if (m.getLayer(id)) m.removeLayer(id);
       }
-      const dayData = pkgData.days.find((d) => d.dayIndex === dayIdx);
-      if (dayData) {
-        const stops = getDayStops(dayData);
-        if (stops.length > 0)
-          map.current.flyTo({
-            center: stops[0].coordinates as [number, number],
-            zoom: 12,
-            duration,
-          });
+      for (const id of sourceIdsRef.current) {
+        if (m.getSource(id)) m.removeSource(id);
       }
-    };
+      layerIdsRef.current = [];
+      sourceIdsRef.current = [];
+    }, []);
+
+    const doFlyToDay = useCallback(
+      (dayIdx: number, duration: number = 1000) => {
+        if (!map.current || !pkgData || !routesData) return;
+        const dayRouteGeo = routesData.days.find(
+          (d: DayRoute) => d.dayIndex === dayIdx,
+        );
+
+        if (dayRouteGeo && dayRouteGeo.segments) {
+          const allCoords: [number, number][] = [];
+          for (const seg of dayRouteGeo.segments) {
+            if (seg.geometry && seg.geometry.coordinates)
+              allCoords.push(...seg.geometry.coordinates);
+          }
+          if (allCoords.length > 0) {
+            const bounds = allCoords.reduce(
+              (b: mapboxgl.LngLatBounds, coord: [number, number]) =>
+                b.extend(coord),
+              new mapboxgl.LngLatBounds(allCoords[0], allCoords[0]),
+            );
+            map.current.fitBounds(bounds, {
+              padding: 60,
+              duration,
+              essential: true,
+            });
+            return;
+          }
+        }
+        const dayData = pkgData.days.find((d) => d.dayIndex === dayIdx);
+        if (dayData) {
+          const stops = getDayStops(dayData);
+          if (stops.length > 0)
+            map.current.flyTo({
+              center: stops[0].coordinates as [number, number],
+              zoom: 12,
+              duration,
+            });
+        }
+      },
+      [pkgData, routesData],
+    );
+
+    const renderDay = useCallback(
+      (dayIdx: number) => {
+        if (!map.current || !pkgData || !routesData) return;
+        const m = map.current;
+
+        clearMarkers();
+        clearPopups();
+        clearLayers();
+        removeMovingMarker();
+
+        const dayData = pkgData.days.find((d) => d.dayIndex === dayIdx);
+        const dayRouteGeo = routesData.days.find(
+          (d: DayRoute) => d.dayIndex === dayIdx,
+        );
+        if (!dayData || !dayRouteGeo) return;
+
+        // 1. Draw route segments
+        const segments = dayRouteGeo.segments || [];
+        segments.forEach((seg: RouteSegment, segIdx: number) => {
+          if (!seg.geometry) return;
+          const sourceId = `route-seg-${segIdx}`;
+          const layerId = `route-seg-line-${segIdx}`;
+          const isSea = seg.transport === 'sea';
+
+          m.addSource(sourceId, {
+            type: 'geojson',
+            data: { type: 'Feature', properties: {}, geometry: seg.geometry },
+          });
+
+          m.addLayer({
+            id: layerId,
+            type: 'line',
+            source: sourceId,
+            layout: { 'line-join': 'round', 'line-cap': 'round' },
+            paint: {
+              'line-color': isSea ? '#60A5FA' : dayData.color,
+              'line-width': isSea ? 3 : 4,
+              'line-opacity': isSea ? 0.5 : 0.7,
+              'line-dasharray': isSea ? [4, 4] : [2, 2],
+            },
+          });
+
+          sourceIdsRef.current.push(sourceId);
+          layerIdsRef.current.push(layerId);
+        });
+
+        // 2. Add markers (merge duplicates with &)
+        const allStops = getDayStops(dayData);
+        const coordMap = new Map<string, number[]>();
+        allStops.forEach((stop, index) => {
+          const key = stop.coordinates.join(',');
+          if (!coordMap.has(key)) coordMap.set(key, []);
+          coordMap.get(key)!.push(index + 1);
+        });
+
+        const placedCoords = new Set<string>();
+        markerDataRef.current.clear();
+
+        allStops.forEach((stop) => {
+          const key = stop.coordinates.join(',');
+          if (placedCoords.has(key)) return;
+          placedCoords.add(key);
+
+          const numbers = coordMap.get(key)!;
+          const label = numbers.join('&');
+
+          // Outer container — Mapbox controls its transform for positioning, so keep it clean
+          const el = document.createElement('div');
+          el.style.cursor = 'pointer';
+
+          // Inner pill — we scale this on hover, not the outer element
+          const inner = document.createElement('div');
+          inner.style.display = 'flex';
+          inner.style.alignItems = 'center';
+          inner.style.justifyContent = 'center';
+          inner.style.fontWeight = '700';
+          inner.style.borderRadius = '9999px';
+          inner.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+          inner.style.border = '2px solid #0f172a';
+          inner.style.backgroundColor = dayData.color;
+          inner.style.color = '#000';
+          inner.style.transition = 'transform 0.15s ease';
+
+          if (numbers.length > 1) {
+            inner.style.minWidth = '40px';
+            inner.style.height = '24px';
+            inner.style.padding = '0 6px';
+            inner.style.fontSize = '10px';
+          } else {
+            inner.style.width = '24px';
+            inner.style.height = '24px';
+            inner.style.fontSize = '11px';
+          }
+
+          inner.innerText = label;
+          el.appendChild(inner);
+
+          // Store in ref to animate colors later
+          markerDataRef.current.set(key, {
+            el: inner,
+            totalStops: numbers.length,
+            visited: 0,
+          });
+
+          // Hover scale on inner div (not the Mapbox-controlled outer)
+          el.addEventListener('mouseenter', () => {
+            inner.style.transform = 'scale(1.3)';
+          });
+          el.addEventListener('mouseleave', () => {
+            inner.style.transform = 'scale(1)';
+          });
+
+          const popup = new mapboxgl.Popup({
+            offset: 15,
+            closeButton: false,
+            closeOnClick: false,
+            className: 'custom-popup',
+          }).setHTML(`
+            <div class="popup-inner">
+              <p>📍 ${stop.name}</p>
+            </div>
+          `);
+
+          const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
+            .setLngLat(stop.coordinates as [number, number])
+            .addTo(m);
+
+          // Show popup on hover
+          el.addEventListener('mouseenter', () => {
+            popup.setLngLat(stop.coordinates as [number, number]).addTo(m);
+
+            popup.getElement()?.style.setProperty('--popup-color', dayData.color);
+          });
+
+          el.addEventListener('mouseleave', () => {
+            popup.remove();
+          });
+
+          markersRef.current.push(marker);
+          popupsRef.current.push(popup);
+        });
+      },
+      [
+        pkgData,
+        routesData,
+        clearMarkers,
+        clearPopups,
+        clearLayers,
+        removeMovingMarker,
+      ],
+    );
+
+    // Keep a ref of activeDayIndex to avoid map re-initialization inside useEffect
+    const activeDayIndexRef = useRef(activeDayIndex);
+    useEffect(() => {
+      activeDayIndexRef.current = activeDayIndex;
+    }, [activeDayIndex]);
 
     // Initialize Map
     useEffect(() => {
@@ -196,7 +402,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         if (map.current) {
           try {
             map.current.remove();
-          } catch (e) {
+          } catch {
             /* ignore */
           }
           map.current = null;
@@ -218,8 +424,8 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
         m.on('load', () => {
           m.resize();
-          renderDay(activeDayIndex);
-          doFlyToDay(activeDayIndex, 800);
+          renderDay(activeDayIndexRef.current);
+          doFlyToDay(activeDayIndexRef.current, 800);
         });
         m.on('style.load', () => {
           m.resize();
@@ -232,13 +438,13 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         if (map.current) {
           try {
             map.current.remove();
-          } catch (e) {
+          } catch {
             /* ignore */
           }
           map.current = null;
         }
       };
-    }, [pkgData]);
+    }, [pkgData, cancelAllTimers, doFlyToDay, renderDay]);
 
     useEffect(() => {
       if (
@@ -249,192 +455,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       )
         return;
       renderDay(activeDayIndex);
-    }, [activeDayIndex, routesData, pkgData]);
-
-    const cancelAllTimers = () => {
-      if (animationFrameRef.current)
-        cancelAnimationFrame(animationFrameRef.current);
-      if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
-      animationFrameRef.current = null;
-      pauseTimerRef.current = null;
-      animStateRef.current.isPlaying = false;
-      removeMovingMarker();
-      // Clean up active popup timeouts
-      activeTimeoutsRef.current.forEach(clearTimeout);
-      activeTimeoutsRef.current = [];
-    };
-
-    const clearMarkers = () => {
-      markersRef.current.forEach((m) => m.remove());
-      markersRef.current = [];
-    };
-
-    const clearPopups = () => {
-      popupsRef.current.forEach((p) => p.remove());
-      popupsRef.current = [];
-    };
-
-    const removeMovingMarker = () => {
-      if (movingMarkerRef.current) {
-        movingMarkerRef.current.remove();
-        movingMarkerRef.current = null;
-      }
-    };
-
-    const clearLayers = () => {
-      if (!map.current) return;
-      const m = map.current;
-      for (const id of layerIdsRef.current) {
-        if (m.getLayer(id)) m.removeLayer(id);
-      }
-      for (const id of sourceIdsRef.current) {
-        if (m.getSource(id)) m.removeSource(id);
-      }
-      layerIdsRef.current = [];
-      sourceIdsRef.current = [];
-    };
-
-    const renderDay = (dayIdx: number) => {
-      if (!map.current || !pkgData || !routesData) return;
-      const m = map.current;
-
-      clearMarkers();
-      clearPopups();
-      clearLayers();
-      removeMovingMarker();
-
-      const dayData = pkgData.days.find((d) => d.dayIndex === dayIdx);
-      const dayRouteGeo = routesData.days.find(
-        (d: DayRoute) => d.dayIndex === dayIdx,
-      );
-      if (!dayData || !dayRouteGeo) return;
-
-      // 1. Draw route segments
-      const segments = dayRouteGeo.segments || [];
-      segments.forEach((seg: RouteSegment, segIdx: number) => {
-        if (!seg.geometry) return;
-        const sourceId = `route-seg-${segIdx}`;
-        const layerId = `route-seg-line-${segIdx}`;
-        const isSea = seg.transport === 'sea';
-
-        m.addSource(sourceId, {
-          type: 'geojson',
-          data: { type: 'Feature', properties: {}, geometry: seg.geometry },
-        });
-
-        m.addLayer({
-          id: layerId,
-          type: 'line',
-          source: sourceId,
-          layout: { 'line-join': 'round', 'line-cap': 'round' },
-          paint: {
-            'line-color': isSea ? '#60A5FA' : dayData.color,
-            'line-width': isSea ? 3 : 4,
-            'line-opacity': isSea ? 0.5 : 0.7,
-            'line-dasharray': isSea ? [4, 4] : [2, 2],
-          },
-        });
-
-        sourceIdsRef.current.push(sourceId);
-        layerIdsRef.current.push(layerId);
-      });
-
-      // 2. Add markers (merge duplicates with &)
-      const allStops = getDayStops(dayData);
-      const coordMap = new Map<string, number[]>();
-      allStops.forEach((stop, index) => {
-        const key = stop.coordinates.join(',');
-        if (!coordMap.has(key)) coordMap.set(key, []);
-        coordMap.get(key)!.push(index + 1);
-      });
-
-      const placedCoords = new Set<string>();
-      markerDataRef.current.clear();
-
-      allStops.forEach((stop) => {
-        const key = stop.coordinates.join(',');
-        if (placedCoords.has(key)) return;
-        placedCoords.add(key);
-
-        const numbers = coordMap.get(key)!;
-        const label = numbers.join('&');
-
-        // Outer container — Mapbox controls its transform for positioning, so keep it clean
-        const el = document.createElement('div');
-        el.style.cursor = 'pointer';
-
-        // Inner pill — we scale this on hover, not the outer element
-        const inner = document.createElement('div');
-        inner.style.display = 'flex';
-        inner.style.alignItems = 'center';
-        inner.style.justifyContent = 'center';
-        inner.style.fontWeight = '700';
-        inner.style.borderRadius = '9999px';
-        inner.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-        inner.style.border = '2px solid #0f172a';
-        inner.style.backgroundColor = dayData.color;
-        inner.style.color = '#000';
-        inner.style.transition = 'transform 0.15s ease';
-
-        if (numbers.length > 1) {
-          inner.style.minWidth = '40px';
-          inner.style.height = '24px';
-          inner.style.padding = '0 6px';
-          inner.style.fontSize = '10px';
-        } else {
-          inner.style.width = '24px';
-          inner.style.height = '24px';
-          inner.style.fontSize = '11px';
-        }
-
-        inner.innerText = label;
-        el.appendChild(inner);
-
-        // Store in ref to animate colors later
-        markerDataRef.current.set(key, {
-          el: inner,
-          totalStops: numbers.length,
-          visited: 0,
-        });
-
-        // Hover scale on inner div (not the Mapbox-controlled outer)
-        el.addEventListener('mouseenter', () => {
-          inner.style.transform = 'scale(1.3)';
-        });
-        el.addEventListener('mouseleave', () => {
-          inner.style.transform = 'scale(1)';
-        });
-
-        const popup = new mapboxgl.Popup({
-          offset: 15,
-          closeButton: false,
-          closeOnClick: false,
-          className: 'custom-popup',
-        }).setHTML(`
-          <div class="popup-inner">
-            <p>📍 ${stop.name}</p>
-          </div>
-        `);
-
-        const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
-          .setLngLat(stop.coordinates as [number, number])
-          .addTo(m);
-
-        // Show popup on hover
-        el.addEventListener('mouseenter', () => {
-          popup.setLngLat(stop.coordinates as [number, number]).addTo(m);
-
-          popup.getElement()?.style.setProperty('--popup-color', dayData.color);
-        });
-
-        el.addEventListener('mouseleave', () => {
-          popup.remove();
-        });
-
-        markersRef.current.push(marker);
-        popupsRef.current.push(popup);
-      });
-    };
+    }, [activeDayIndex, routesData, pkgData, renderDay]);
 
     /** Create the moving vehicle marker */
     const createMovingMarker = (
@@ -713,6 +734,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
             const pausedElapsed = elapsed;
             pauseTimerRef.current = setTimeout(() => {
+              if (onDepartStop) onDepartStop(hitCP.stopIdx);
               animStateRef.current.timeOffset = pausedElapsed;
               animStateRef.current.animStartTime = performance.now();
               animStateRef.current.lastCameraTime = pausedElapsed;

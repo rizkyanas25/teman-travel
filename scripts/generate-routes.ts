@@ -4,7 +4,7 @@ import 'dotenv/config';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.join(__dirname, '../.env.local') });
 import { PACKAGE_GEO_DATA } from '../src/data/itinerary-geo';
-import type { RouteSegment, DayRoute, PackageRoutes } from '../src/types/routes';
+import type { DayRoute, PackageRoutes } from '../src/types/routes';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const OUT_DIR = path.join(__dirname, '../src/data/routes');

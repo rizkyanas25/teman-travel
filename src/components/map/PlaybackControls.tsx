@@ -5,13 +5,12 @@ interface PlaybackControlsProps {
   isPlaying: boolean;
   onPlayToggle: () => void;
   currentDayLabel: string;
-  totalDays: number;
   stopCount: number;
   shouldPulse?: boolean;
   packageTitle?: string;
 }
 
-export default function PlaybackControls({ isPlaying, onPlayToggle, currentDayLabel, totalDays, stopCount, shouldPulse = false, packageTitle }: PlaybackControlsProps) {
+export default function PlaybackControls({ isPlaying, onPlayToggle, currentDayLabel, stopCount, shouldPulse = false, packageTitle }: PlaybackControlsProps) {
   const t = useTranslations("packages");
   const tc = useTranslations("common");
 

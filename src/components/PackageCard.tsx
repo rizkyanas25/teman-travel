@@ -104,7 +104,7 @@ export default function PackageCard({
             src={pkg.image} 
             alt={pkg.title} 
             fill 
-            className="object-cover transition-transform duration-500 group-hover:scale-110 transform-gpu will-change-transform" 
+            className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 transform-gpu will-change-transform" 
             sizes="(max-width: 768px) 100vw, 33vw" 
           />
         </div>
@@ -129,12 +129,12 @@ export default function PackageCard({
           const totalPriceText = t("totalForGuests", { total: totalPriceStr, pax: paxCount });
 
           return (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center text-center select-none relative overflow-hidden group/price">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center text-center select-none relative overflow-hidden">
               <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">
                 {currentPaxLabel}
               </span>
               <div className="flex items-baseline justify-center gap-1.5 mt-2 flex-nowrap whitespace-nowrap">
-                <span className="text-2xl sm:text-3xl md:text-2xl lg:text-xl xl:text-3xl font-black text-gold-400 tracking-tight transition-all duration-300 transform scale-100 group-hover/price:scale-105 whitespace-nowrap">
+                <span className="text-2xl sm:text-3xl md:text-2xl lg:text-xl xl:text-3xl font-black text-gold-400 tracking-tight whitespace-nowrap">
                   {currentPrice}
                 </span>
                 <span className="text-[10px] sm:text-xs text-white/50 shrink-0 whitespace-nowrap">/ {tc("perPerson")}</span>
@@ -242,7 +242,7 @@ export default function PackageCard({
           href={getWhatsAppUrl(tc("whatsappBookMessage", { title: `${pkg.title} (${paxCount} ${t("guestLabel")})` }))}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl font-semibold transition-all hover:scale-[1.02] shadow-lg shadow-[#25D366]/20"
+          className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-xl font-semibold transition-all duration-300 hover:translate-y-[-2px] hover:scale-[1.02] shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/30"
         >
           <FaWhatsapp className="w-5 h-5 shrink-0" />
           {tc("bookNow")}

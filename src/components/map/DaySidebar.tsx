@@ -10,6 +10,7 @@ interface DaySidebarProps {
   activeStopIndex?: number; // -1 = none, 999 = all reached (completed)
   completedDays?: Set<number>;
   isPlaying?: boolean;
+  isTransit?: boolean;
 }
 
 export default function DaySidebar({
@@ -21,6 +22,7 @@ export default function DaySidebar({
   activeStopIndex = -1,
   completedDays = new Set(),
   isPlaying = false,
+  isTransit = false,
 }: DaySidebarProps) {
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
 
@@ -119,9 +121,11 @@ export default function DaySidebar({
                   {stops.map((stop, sIdx) => {
                     const isReached = activeStopIndex >= sIdx;
                     const isCurrent = isPlaying
-                      ? activeStopIndex + 1 === sIdx
+                      ? isTransit
+                        ? activeStopIndex + 1 === sIdx
+                        : activeStopIndex === sIdx
                       : activeStopIndex === sIdx;
-                    const isEnRoute = isPlaying && activeStopIndex + 1 === sIdx;
+                    const isEnRoute = isPlaying && isTransit && activeStopIndex + 1 === sIdx;
 
                     return (
                       <div
