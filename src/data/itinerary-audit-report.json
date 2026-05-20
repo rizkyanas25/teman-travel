@@ -1,0 +1,402 @@
+[
+  {
+    "stopName": "Ngurah Rai Airport",
+    "type": "airport",
+    "currentCoords": [
+      115.1667,
+      -8.7482
+    ],
+    "googleCoords": [
+      115.1681655,
+      -8.7469933
+    ],
+    "googlePlaceName": "I Gusti Ngurah Rai International Airport",
+    "googlePlaceId": "ChIJM2khUBZE0i0RH8x73W3acd8",
+    "distanceMeters": 210,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Jimbaran Beach",
+    "type": "restaurant",
+    "currentCoords": [
+      115.1614,
+      -8.7838
+    ],
+    "googleCoords": [
+      115.16637010000001,
+      -8.7765946
+    ],
+    "googlePlaceName": "Jimbaran Beach",
+    "googlePlaceId": "ChIJBV2KW_NE0i0ROKlKpKZNLdQ",
+    "distanceMeters": 970,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Bhanuswari Resort & Spa",
+    "type": "hotel",
+    "currentCoords": [
+      115.2893,
+      -8.5447
+    ],
+    "googleCoords": [
+      115.28725410000001,
+      -8.5397666
+    ],
+    "googlePlaceName": "Bhanuswari Resort & Spa",
+    "googlePlaceId": "ChIJw8kin3M90i0RM3XlhtBa9Gk",
+    "distanceMeters": 593,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Sanur Port",
+    "type": "port",
+    "currentCoords": [
+      115.2685,
+      -8.6867
+    ],
+    "googleCoords": [
+      115.2608268,
+      -8.6695742
+    ],
+    "googlePlaceName": "Sanur Harbour",
+    "googlePlaceId": "ChIJvV1RakpB0i0RJ3spgkJsiA0",
+    "distanceMeters": 2083,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Banjar Nyuh Harbour",
+    "type": "port",
+    "currentCoords": [
+      115.5085,
+      -8.6738
+    ],
+    "googleCoords": [
+      115.4884519,
+      -8.6781579
+    ],
+    "googlePlaceName": "Banjar nyuh harbour",
+    "googlePlaceId": "ChIJ1YleV2Ry0i0RXyQ9te6ZSv0",
+    "distanceMeters": 2256,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Kelingking Beach",
+    "type": "destination",
+    "currentCoords": [
+      115.4705,
+      -8.7505
+    ],
+    "googleCoords": [
+      115.47320429999998,
+      -8.7513849
+    ],
+    "googlePlaceName": "Kelingking Beach",
+    "googlePlaceId": "ChIJy3kHnSpu0i0Rbu3sQlSDkLM",
+    "distanceMeters": 313,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Broken Beach",
+    "type": "destination",
+    "currentCoords": [
+      115.4526,
+      -8.7297
+    ],
+    "googleCoords": [
+      115.4508319,
+      -8.7327938
+    ],
+    "googlePlaceName": "Broken Beach",
+    "googlePlaceId": "ChIJyy2nId9v0i0RpUc5EjA_2y8",
+    "distanceMeters": 395,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Angel Billabong",
+    "type": "destination",
+    "currentCoords": [
+      115.451,
+      -8.729
+    ],
+    "googleCoords": [
+      115.44897879999998,
+      -8.7335003
+    ],
+    "googlePlaceName": "Angel's Billabong",
+    "googlePlaceId": "ChIJC7KcfoFv0i0ReRXz2tOmixY",
+    "distanceMeters": 548,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Crystal Bay",
+    "type": "destination",
+    "currentCoords": [
+      115.4583,
+      -8.72
+    ],
+    "googleCoords": [
+      115.45905649999999,
+      -8.7151611
+    ],
+    "googlePlaceName": "Crystal Bay Nusa Penida",
+    "googlePlaceId": "ChIJ418qTAhu0i0RY8dRJ4VbTk0",
+    "distanceMeters": 544,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Tegenungan Waterfall",
+    "type": "destination",
+    "currentCoords": [
+      115.2893,
+      -8.5753
+    ],
+    "googleCoords": [
+      115.2889599,
+      -8.5753621
+    ],
+    "googlePlaceName": "Tegenungan Waterfall",
+    "googlePlaceId": "ChIJYQy97hsW0i0RXgxBuN15rsE",
+    "distanceMeters": 38,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Tirta Empul",
+    "type": "destination",
+    "currentCoords": [
+      115.3153,
+      -8.4153
+    ],
+    "googleCoords": [
+      115.3153284,
+      -8.4156589
+    ],
+    "googlePlaceName": "Pura Tirta Empul",
+    "googlePlaceId": "ChIJtTFh4PQY0i0RwewUdwFaolM",
+    "distanceMeters": 40,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Coffee Plantation",
+    "type": "destination",
+    "currentCoords": [
+      115.305,
+      -8.43
+    ],
+    "googleCoords": [
+      115.27903839999999,
+      -8.422796
+    ],
+    "googlePlaceName": "Bali Pulina, Tegallang Gianyar",
+    "googlePlaceId": "ChIJC_kBAJki0i0R8gpLyMN9EUY",
+    "distanceMeters": 2966,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Kintamani",
+    "type": "restaurant",
+    "currentCoords": [
+      115.3519,
+      -8.255
+    ],
+    "googleCoords": [
+      115.3374441,
+      -8.259093
+    ],
+    "googlePlaceName": "Kintamani",
+    "googlePlaceId": "ChIJIfzvpG_00S0RICx9yvsLAwQ",
+    "distanceMeters": 1655,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Tegalalang Rice Terrace",
+    "type": "destination",
+    "currentCoords": [
+      115.2793,
+      -8.4313
+    ],
+    "googleCoords": [
+      115.279303,
+      -8.431711199999999
+    ],
+    "googlePlaceName": "Tegallalang Rice Terrace",
+    "googlePlaceId": "ChIJ4wD5Iwsi0i0R7QRsOGmJGo0",
+    "distanceMeters": 46,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Tukad Cepung Waterfall",
+    "type": "destination",
+    "currentCoords": [
+      115.36,
+      -8.46
+    ],
+    "googleCoords": [
+      115.3868079,
+      -8.4410173
+    ],
+    "googlePlaceName": "Tukad Cepung Waterfall",
+    "googlePlaceId": "ChIJQ6ocSKAb0i0RP1CIrkak0ws",
+    "distanceMeters": 3626,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "stopName": "Jimbaran Bay Beach Resort",
+    "type": "hotel",
+    "currentCoords": [
+      115.17,
+      -8.756
+    ],
+    "googleCoords": [
+      115.1703122,
+      -8.766544699999999
+    ],
+    "googlePlaceName": "Jimbaran Bay Beach Resort & Spa",
+    "googlePlaceId": "ChIJvbSkZ2ZE0i0Rh0cDbyZMpLc",
+    "distanceMeters": 1173,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Pandawa Beach",
+    "type": "destination",
+    "currentCoords": [
+      115.1847,
+      -8.8436
+    ],
+    "googleCoords": [
+      115.1870679,
+      -8.8452802
+    ],
+    "googlePlaceName": "Pandawa Beach",
+    "googlePlaceId": "ChIJMR-62Hxb0i0RpLJV0F14uEE",
+    "distanceMeters": 320,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "GWK Cultural Park",
+    "type": "destination",
+    "currentCoords": [
+      115.1673,
+      -8.8103
+    ],
+    "googleCoords": [
+      115.16759859999999,
+      -8.8104228
+    ],
+    "googlePlaceName": "Garuda Wisnu Kencana Cultural Park",
+    "googlePlaceId": "ChIJx97hVM9E0i0RUVpPBj5miBk",
+    "distanceMeters": 36,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Uluwatu Temple",
+    "type": "destination",
+    "currentCoords": [
+      115.0849,
+      -8.8291
+    ],
+    "googleCoords": [
+      115.08490690000001,
+      -8.829143199999999
+    ],
+    "googlePlaceName": "Uluwatu Temple",
+    "googlePlaceId": "ChIJkYHLIPxP0i0RlQTbpxuNuQw",
+    "distanceMeters": 5,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Lempuyang Temple",
+    "type": "destination",
+    "currentCoords": [
+      115.6384,
+      -8.3934
+    ],
+    "googleCoords": [
+      115.63155569999998,
+      -8.3917875
+    ],
+    "googlePlaceName": "Penataran Agung Lempuyang Temple",
+    "googlePlaceId": "ChIJkygiUxcH0i0RY5J3_lj9oEA",
+    "distanceMeters": 774,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "stopName": "Taman Ayun",
+    "type": "destination",
+    "currentCoords": [
+      115.1728,
+      -8.5417
+    ],
+    "googleCoords": [
+      115.17248430000001,
+      -8.5418425
+    ],
+    "googlePlaceName": "Taman Ayun Temple",
+    "googlePlaceId": "ChIJAUB625A70i0R7crEj_IvJq8",
+    "distanceMeters": 38,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Ulun Danu Beratan",
+    "type": "destination",
+    "currentCoords": [
+      115.1673,
+      -8.2753
+    ],
+    "googleCoords": [
+      115.16682340000001,
+      -8.2751807
+    ],
+    "googlePlaceName": "Ulun Danu Beratan Temple",
+    "googlePlaceId": "ChIJVwisn2yJ0S0RUxvb5GhlJBg",
+    "distanceMeters": 54,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Handara Gate",
+    "type": "destination",
+    "currentCoords": [
+      115.1937,
+      -8.253
+    ],
+    "googleCoords": [
+      115.15827569999999,
+      -8.2529949
+    ],
+    "googlePlaceName": "Bali Handara Gate",
+    "googlePlaceId": "ChIJbzqpVBWJ0S0R05zES7guCTk",
+    "distanceMeters": 3898,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "stopName": "Jatiluwih Rice Terrace",
+    "type": "destination",
+    "currentCoords": [
+      115.1318,
+      -8.3698
+    ],
+    "googleCoords": [
+      115.1312269,
+      -8.3700942
+    ],
+    "googlePlaceName": "Jatiluwih Rice Terraces",
+    "googlePlaceId": "ChIJ-9cMAqsn0i0RmoPm81-HDy8",
+    "distanceMeters": 71,
+    "status": "✅ MATCH"
+  },
+  {
+    "stopName": "Tanah Lot",
+    "type": "destination",
+    "currentCoords": [
+      115.0868,
+      -8.6213
+    ],
+    "googleCoords": [
+      115.086807,
+      -8.621213
+    ],
+    "googlePlaceName": "Tanah Lot",
+    "googlePlaceId": "ChIJq95xT4I30i0RaU3j93Diq8o",
+    "distanceMeters": 10,
+    "status": "✅ MATCH"
+  }
+]

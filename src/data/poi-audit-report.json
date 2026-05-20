@@ -1,0 +1,850 @@
+[
+  {
+    "parentStop": "Kelingking Beach",
+    "poiName": "Paluang Cliff (Spot Foto Tebing Nusa Penida)",
+    "currentCoords": [
+      115.467,
+      -8.7515
+    ],
+    "googleCoords": [
+      115.4769013,
+      -8.753658399999999
+    ],
+    "googlePlaceName": "Paluang Cliff",
+    "googlePlaceId": "ChIJEXpDKtVx0i0R5pwEc4IcYU4",
+    "distanceMeters": 1114,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Kelingking Beach",
+    "poiName": "Secret Point Warung Kelingking (Kuliner Lokal & View)",
+    "currentCoords": [
+      115.4715,
+      -8.7495
+    ],
+    "googleCoords": [
+      115.47721449999999,
+      -8.7466472
+    ],
+    "googlePlaceName": "Kelingking Bar and Restaurant",
+    "googlePlaceId": "ChIJQ0pdVrFx0i0RrGetzOcugF8",
+    "distanceMeters": 704,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Kelingking Beach",
+    "poiName": "Kelingking Sunset Point Bar",
+    "currentCoords": [
+      115.469,
+      -8.7485
+    ],
+    "googleCoords": [
+      115.47659759999999,
+      -8.750579499999999
+    ],
+    "googlePlaceName": "Kelingking Sunset Point Hotel & Spa",
+    "googlePlaceId": "ChIJn_FNCRRx0i0RxbrPPS1rzC4",
+    "distanceMeters": 866,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Broken Beach",
+    "poiName": "Angel's Billabong (Kolam Alami Sangat Dekat)",
+    "currentCoords": [
+      115.451,
+      -8.729
+    ],
+    "googleCoords": [
+      115.44897879999998,
+      -8.7335003
+    ],
+    "googlePlaceName": "Angel's Billabong",
+    "googlePlaceId": "ChIJC7KcfoFv0i0ReRXz2tOmixY",
+    "distanceMeters": 548,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Broken Beach",
+    "poiName": "Angel's Billabong Cafe",
+    "currentCoords": [
+      115.452,
+      -8.7285
+    ],
+    "googleCoords": [
+      115.44897879999998,
+      -8.7335003
+    ],
+    "googlePlaceName": "Angel's Billabong",
+    "googlePlaceId": "ChIJC7KcfoFv0i0ReRXz2tOmixY",
+    "distanceMeters": 648,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Angel Billabong",
+    "poiName": "Broken Beach (Tegeh Cliff View)",
+    "currentCoords": [
+      115.4526,
+      -8.7297
+    ],
+    "googleCoords": [
+      115.4508319,
+      -8.7327938
+    ],
+    "googlePlaceName": "Broken Beach",
+    "googlePlaceId": "ChIJyy2nId9v0i0RpUc5EjA_2y8",
+    "distanceMeters": 395,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Angel Billabong",
+    "poiName": "Warung Angel Nusa Penida",
+    "currentCoords": [
+      115.4505,
+      -8.728
+    ],
+    "googleCoords": [
+      115.5285565,
+      -8.6773838
+    ],
+    "googlePlaceName": "AngelCafee_penida",
+    "googlePlaceId": "ChIJzcIL3fdz0i0R5QrBXR_r50c",
+    "distanceMeters": 10261,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Crystal Bay",
+    "poiName": "Crystal Bay Beach Club (Sunset Drinks)",
+    "currentCoords": [
+      115.459,
+      -8.7205
+    ],
+    "googleCoords": [
+      115.45920009999999,
+      -8.715614799999999
+    ],
+    "googlePlaceName": "Crystal Bay Beach",
+    "googlePlaceId": "ChIJ32EYUAhu0i0RNeHYNdKWWcw",
+    "distanceMeters": 544,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Crystal Bay",
+    "poiName": "Snorkeling Point Crystal Bay (Sewa Perahu Lokal)",
+    "currentCoords": [
+      115.4575,
+      -8.719
+    ],
+    "googleCoords": [
+      115.4591365,
+      -8.715550799999999
+    ],
+    "googlePlaceName": "Crystal Bay Snorkeling",
+    "googlePlaceId": "ChIJtSNjWjpv0i0RxQ7w5w5YCm0",
+    "distanceMeters": 424,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Tegenungan Waterfall",
+    "poiName": "Omma Dayclub Bali (Luxury Pool Club & View)",
+    "currentCoords": [
+      115.2885,
+      -8.5748
+    ],
+    "googleCoords": [
+      115.28949709999999,
+      -8.5756152
+    ],
+    "googlePlaceName": "Omma Dayclub Bali",
+    "googlePlaceId": "ChIJ49kn4n0V0i0RjtqUIkEdXBw",
+    "distanceMeters": 142,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Tegenungan Waterfall",
+    "poiName": "Tegenungan Swing & Photo Point",
+    "currentCoords": [
+      115.29,
+      -8.5755
+    ],
+    "googleCoords": [
+      115.2889599,
+      -8.5753621
+    ],
+    "googlePlaceName": "Tegenungan Waterfall",
+    "googlePlaceId": "ChIJYQy97hsW0i0RXgxBuN15rsE",
+    "distanceMeters": 115,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Tegenungan Waterfall",
+    "poiName": "Bebek Tebasari Resto (Ubud Traditional Food)",
+    "currentCoords": [
+      115.275,
+      -8.571
+    ],
+    "googleCoords": [
+      115.25663600000001,
+      -8.5456567
+    ],
+    "googlePlaceName": "Bebek Tebasari Resto",
+    "googlePlaceId": "ChIJmTOl7WE90i0RxY1ZeQC94ko",
+    "distanceMeters": 3467,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Tirta Empul",
+    "poiName": "Warung Babi Guling Ibu Oka (Ubud Kuliner Legendaris)",
+    "currentCoords": [
+      115.313,
+      -8.418
+    ],
+    "googleCoords": [
+      115.2643161,
+      -8.5057663
+    ],
+    "googlePlaceName": "Warung Babi Guling Ibu Oka 3",
+    "googlePlaceId": "ChIJ86t1jWo90i0RJ9tw1nnFfvI",
+    "distanceMeters": 11132,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Tirta Empul",
+    "poiName": "Kopi Luwak Tampaksiring (Edukasi Kopi Bali)",
+    "currentCoords": [
+      115.319,
+      -8.412
+    ],
+    "googleCoords": [
+      115.31498509999999,
+      -8.4177043
+    ],
+    "googlePlaceName": "Sukabali Agro Coffee Roasting",
+    "googlePlaceId": "ChIJman4Z3gZ0i0RAV4F9pGTyiQ",
+    "distanceMeters": 773,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Coffee Plantation",
+    "poiName": "Satria Coffee Plantation (Agrowisata Organik)",
+    "currentCoords": [
+      115.304,
+      -8.431
+    ],
+    "googleCoords": [
+      115.260211,
+      -8.5486609
+    ],
+    "googlePlaceName": "Satria Agrowisata",
+    "googlePlaceId": "ChIJ6359VOw90i0RPV9P2Vy-euw",
+    "distanceMeters": 13941,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Coffee Plantation",
+    "poiName": "Cantik Agriculture (Sunset Coffee Testing)",
+    "currentCoords": [
+      115.307,
+      -8.428
+    ],
+    "googleCoords": [
+      115.3351787,
+      -8.383546299999999
+    ],
+    "googlePlaceName": "Cantik Agriculture Luwak Coffee",
+    "googlePlaceId": "ChIJU6uWG9ke0i0RTGomrchMe0Y",
+    "distanceMeters": 5835,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Kintamani",
+    "poiName": "Akasa Specialty Coffee (Ngopi Atas Awan & View Batur)",
+    "currentCoords": [
+      115.353,
+      -8.257
+    ],
+    "googleCoords": [
+      115.357559,
+      -8.279617
+    ],
+    "googlePlaceName": "AKASA",
+    "googlePlaceId": "ChIJa-9PmOH10S0RqEtr38wqvqU",
+    "distanceMeters": 2564,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Kintamani",
+    "poiName": "El Lago Bali (Japanese Culinary & Lake View)",
+    "currentCoords": [
+      115.35,
+      -8.254
+    ],
+    "googleCoords": [
+      115.34202499999999,
+      -8.2674591
+    ],
+    "googlePlaceName": "el lago",
+    "googlePlaceId": "ChIJL1wf3H310S0RfXPPcOd0INI",
+    "distanceMeters": 1735,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Kintamani",
+    "poiName": "Tegalalang - Kintamani Crater Ridge Path",
+    "currentCoords": [
+      115.355,
+      -8.252
+    ],
+    "googleCoords": [
+      115.39756650000001,
+      -8.249965999999999
+    ],
+    "googlePlaceName": "Mt Batur Volcano Sunrise",
+    "googlePlaceId": "ChIJa22Q6yH30S0RfUeRerw7FiM",
+    "distanceMeters": 4690,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Tegalalang Rice Terrace",
+    "poiName": "Cretya Ubud by Alas Harum (Resto & Pool Day Club)",
+    "currentCoords": [
+      115.277,
+      -8.434
+    ],
+    "googleCoords": [
+      115.280982,
+      -8.439962
+    ],
+    "googlePlaceName": "Cretya Ubud",
+    "googlePlaceId": "ChIJgxo5IH8i0i0Rpy_5pkJSx58",
+    "distanceMeters": 795,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Tegalalang Rice Terrace",
+    "poiName": "Alas Harum Giant Bali Swing",
+    "currentCoords": [
+      115.2785,
+      -8.4325
+    ],
+    "googleCoords": [
+      115.28072739999999,
+      -8.439799599999999
+    ],
+    "googlePlaceName": "Alas Harum Bali",
+    "googlePlaceId": "ChIJE4Bi4H4i0i0R83X6AGpQQ_Q",
+    "distanceMeters": 848,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Tegalalang Rice Terrace",
+    "poiName": "Tegalalang Terrace Photo Spot",
+    "currentCoords": [
+      115.28,
+      -8.4305
+    ],
+    "googleCoords": [
+      115.279303,
+      -8.431711199999999
+    ],
+    "googlePlaceName": "Tegallalang Rice Terrace",
+    "googlePlaceId": "ChIJ4wD5Iwsi0i0R7QRsOGmJGo0",
+    "distanceMeters": 155,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Tukad Cepung Waterfall",
+    "poiName": "Cepung Cave Sunlight Ray Spot",
+    "currentCoords": [
+      115.3595,
+      -8.4602
+    ],
+    "googleCoords": [
+      115.3868079,
+      -8.4410173
+    ],
+    "googlePlaceName": "Tukad Cepung Waterfall",
+    "googlePlaceId": "ChIJQ6ocSKAb0i0RP1CIrkak0ws",
+    "distanceMeters": 3684,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Tukad Cepung Waterfall",
+    "poiName": "Warung Cepung (Kuliner Lokal)",
+    "currentCoords": [
+      115.361,
+      -8.459
+    ],
+    "googleCoords": [
+      115.38689509999999,
+      -8.4411503
+    ],
+    "googlePlaceName": "Cepung Cafe",
+    "googlePlaceId": "ChIJv_TdP7ob0i0RBhV1gdP0JP8",
+    "distanceMeters": 3472,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Pandawa Beach",
+    "poiName": "Roosterfish Beach Club (Family Beach Club & Pool)",
+    "currentCoords": [
+      115.188,
+      -8.842
+    ],
+    "googleCoords": [
+      115.18817209999997,
+      -8.8438231
+    ],
+    "googlePlaceName": "Roosterfish Beach Club",
+    "googlePlaceId": "ChIJr8Q0ahlb0i0RRF1B_1fZIF4",
+    "distanceMeters": 204,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Pandawa Beach",
+    "poiName": "Pandawa Beach Canoeing (Sewa Kano Pantai)",
+    "currentCoords": [
+      115.1835,
+      -8.8445
+    ],
+    "googleCoords": [
+      115.18584209999997,
+      -8.8444517
+    ],
+    "googlePlaceName": "Pandawa Beach",
+    "googlePlaceId": "ChIJbZgU8gRb0i0RmWRatK3bd3I",
+    "distanceMeters": 257,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Pandawa Beach",
+    "poiName": "Tebing Kapur Pandawa (Instagramable Highway Cliffs)",
+    "currentCoords": [
+      115.182,
+      -8.8415
+    ],
+    "googleCoords": [
+      115.1744172,
+      -8.845825399999999
+    ],
+    "googlePlaceName": "TEBING PANJANG PANDAWA",
+    "googlePlaceId": "ChIJ25PPHQBb0i0RczfLqSSkGJk",
+    "distanceMeters": 962,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "GWK Cultural Park",
+    "poiName": "Jendela Bali Panoramic Restaurant (Resto Pemandangan Atas)",
+    "currentCoords": [
+      115.166,
+      -8.809
+    ],
+    "googleCoords": [
+      115.16803130000001,
+      -8.8086738
+    ],
+    "googlePlaceName": "Jendela Bali The Panoramic Resto",
+    "googlePlaceId": "ChIJr5WuWbZE0i0Rdk-Yq6O9QCU",
+    "distanceMeters": 226,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "GWK Cultural Park",
+    "poiName": "Lotus Pond Amphitheater Plaza",
+    "currentCoords": [
+      115.1685,
+      -8.8115
+    ],
+    "googleCoords": [
+      115.1673733,
+      -8.8101528
+    ],
+    "googlePlaceName": "GWK Lotus Pond",
+    "googlePlaceId": "ChIJz7YgugBF0i0RqS_ndlDJNTA",
+    "distanceMeters": 194,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Uluwatu Temple",
+    "poiName": "Uluwatu Kecak Dance Amphitheater (Sunset Performance)",
+    "currentCoords": [
+      115.084,
+      -8.8298
+    ],
+    "googleCoords": [
+      115.08538359999999,
+      -8.830719
+    ],
+    "googlePlaceName": "Kecak Dance Amphitheater Uluwatu Temple",
+    "googlePlaceId": "ChIJCxB3nhtR0i0RHBcyBJWrHWk",
+    "distanceMeters": 183,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Uluwatu Temple",
+    "poiName": "Single Fin Bali (Sunset Cliff Beach Club)",
+    "currentCoords": [
+      115.088,
+      -8.817
+    ],
+    "googleCoords": [
+      115.0888711,
+      -8.8148568
+    ],
+    "googlePlaceName": "Single Fin Bali",
+    "googlePlaceId": "ChIJ0aNPQ_lP0i0RtPlHW6trMHM",
+    "distanceMeters": 257,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Uluwatu Temple",
+    "poiName": "Suluban Beach Secret Cliff View",
+    "currentCoords": [
+      115.089,
+      -8.816
+    ],
+    "googleCoords": [
+      115.09378519999999,
+      -8.8145177
+    ],
+    "googlePlaceName": "Suluban Cliff Bali Villa",
+    "googlePlaceId": "ChIJD_9Lp_hP0i0RjKu5ZWslsyE",
+    "distanceMeters": 551,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Jimbaran Beach",
+    "poiName": "Menega Cafe (Seafood Bakar Legendaris Jimbaran)",
+    "currentCoords": [
+      115.162,
+      -8.7845
+    ],
+    "googleCoords": [
+      115.1644587,
+      -8.7807421
+    ],
+    "googlePlaceName": "Menega Cafe",
+    "googlePlaceId": "ChIJU5UcUPNE0i0RqXzzYHiETAc",
+    "distanceMeters": 498,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Jimbaran Beach",
+    "poiName": "Jimbaran Seafood Sunset Bay",
+    "currentCoords": [
+      115.161,
+      -8.783
+    ],
+    "googleCoords": [
+      115.1692432,
+      -8.759358599999999
+    ],
+    "googlePlaceName": "Jimbaran Bay Seafood (JBS)",
+    "googlePlaceId": "ChIJcQvJfSZF0i0RLDx29UMlfcg",
+    "distanceMeters": 2781,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Tanah Lot",
+    "poiName": "Tanah Lot Cliff Sunset Terrace",
+    "currentCoords": [
+      115.0855,
+      -8.622
+    ],
+    "googleCoords": [
+      115.0867662,
+      -8.618622
+    ],
+    "googlePlaceName": "Sunset View at Tanah Lot",
+    "googlePlaceId": "ChIJdVIo0II30i0RIyLJoFYGnfA",
+    "distanceMeters": 401,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Tanah Lot",
+    "poiName": "Deusa Coffee & Eatery Tanah Lot",
+    "currentCoords": [
+      115.091,
+      -8.618
+    ],
+    "googleCoords": [
+      115.13323829999999,
+      -8.6512692
+    ],
+    "googlePlaceName": "Deus Cafe Canggu",
+    "googlePlaceId": "ChIJ7Zd6MwA50i0Rzo2rEycLxD4",
+    "distanceMeters": 5937,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Jatiluwih Rice Terrace",
+    "poiName": "Jatiluwih UNESCO Rice Fields Trekking",
+    "currentCoords": [
+      115.131,
+      -8.371
+    ],
+    "googleCoords": [
+      115.1312269,
+      -8.3700942
+    ],
+    "googlePlaceName": "Jatiluwih Rice Terraces",
+    "googlePlaceId": "ChIJ-9cMAqsn0i0RmoPm81-HDy8",
+    "distanceMeters": 104,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Jatiluwih Rice Terrace",
+    "poiName": "Billy's Terrace Cafe Jatiluwih",
+    "currentCoords": [
+      115.1335,
+      -8.368
+    ],
+    "googleCoords": [
+      115.1308629,
+      -8.3701625
+    ],
+    "googlePlaceName": "Billy's Terrace Cafe",
+    "googlePlaceId": "ChIJq6qqqu4n0i0R0bWQkwOjg9A",
+    "distanceMeters": 377,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Ulun Danu Beratan",
+    "poiName": "Ulun Danu Beratan Iconic Pagoda Photo Spot",
+    "currentCoords": [
+      115.1665,
+      -8.2758
+    ],
+    "googleCoords": [
+      115.16682340000001,
+      -8.2751807
+    ],
+    "googlePlaceName": "Ulun Danu Beratan Temple",
+    "googlePlaceId": "ChIJVwisn2yJ0S0RUxvb5GhlJBg",
+    "distanceMeters": 78,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Ulun Danu Beratan",
+    "poiName": "Mentari Restaurant (Traditional Buffet Resto)",
+    "currentCoords": [
+      115.169,
+      -8.273
+    ],
+    "googleCoords": [
+      115.165307,
+      -8.2786349
+    ],
+    "googlePlaceName": "Mentari Restoran ᬫᭂᬦ᭄ᬢᬭᬶᬭᬾᬲ᭄ᬢᭀᬭᬦ᭄",
+    "googlePlaceId": "ChIJi40qzBKJ0S0Rp6CRQfc6WvA",
+    "distanceMeters": 747,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Handara Gate",
+    "poiName": "Handara Golf Resort Cliff Resto",
+    "currentCoords": [
+      115.195,
+      -8.2515
+    ],
+    "googleCoords": [
+      115.161155,
+      -8.2452074
+    ],
+    "googlePlaceName": "Breeze Terrace Restaurant",
+    "googlePlaceId": "ChIJH3ZsL3aJ0S0RKwU9BTbLQgc",
+    "distanceMeters": 3790,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Handara Gate",
+    "poiName": "Wanagiri Hidden Hills (Ayunan Danau & Spot Foto)",
+    "currentCoords": [
+      115.135,
+      -8.243
+    ],
+    "googleCoords": [
+      115.10750209999998,
+      -8.2402563
+    ],
+    "googlePlaceName": "Wanagiri Hidden Hill Bali",
+    "googlePlaceId": "ChIJJ5m6CESP0S0RJbkTRet1AtM",
+    "distanceMeters": 3041,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Taman Ayun",
+    "poiName": "Warung Rekreasi Bedugul (Taman Ayun Branch)",
+    "currentCoords": [
+      115.165,
+      -8.535
+    ],
+    "googleCoords": [
+      115.16311599999999,
+      -8.282153899999999
+    ],
+    "googlePlaceName": "Rekreasi Bedugul",
+    "googlePlaceId": "ChIJk9kbDg2J0S0RbtFBlfMp_Yc",
+    "distanceMeters": 28116,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Lempuyang Temple",
+    "poiName": "Lahangan Sweet (Pemandangan Gunung Agung Spektakuler)",
+    "currentCoords": [
+      115.625,
+      -8.375
+    ],
+    "googleCoords": [
+      115.63858259999999,
+      -8.371876799999999
+    ],
+    "googlePlaceName": "LAHANGAN SWEET",
+    "googlePlaceId": "ChIJrXC1BngB0i0RoqNsx43HBjs",
+    "distanceMeters": 1534,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Lempuyang Temple",
+    "poiName": "Lempuyang Resto & Bar",
+    "currentCoords": [
+      115.636,
+      -8.391
+    ],
+    "googleCoords": [
+      115.61947149999999,
+      -8.3991054
+    ],
+    "googlePlaceName": "Taman Lempuyang View (IIGA)",
+    "googlePlaceId": "ChIJ3x4ZumUH0i0RhgUSKTB3mXE",
+    "distanceMeters": 2029,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Bhanuswari Resort & Spa",
+    "poiName": "Taman Kupu-Kupu Kemenuh (Konservasi & Wisata)",
+    "currentCoords": [
+      115.278,
+      -8.552
+    ],
+    "googleCoords": [
+      115.28713470000001,
+      -8.5728188
+    ],
+    "googlePlaceName": "Kemenuh Butterfly Park, Bali",
+    "googlePlaceId": "ChIJ8yjEyTUX0i0RvzawGaLG6eU",
+    "distanceMeters": 2523,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Bhanuswari Resort & Spa",
+    "poiName": "Air Terjun Sumampan (Alami & Tersembunyi)",
+    "currentCoords": [
+      115.298,
+      -8.5535
+    ],
+    "googleCoords": [
+      115.29039759999998,
+      -8.5514923
+    ],
+    "googlePlaceName": "Sumampan Waterfall",
+    "googlePlaceId": "ChIJ93viDd0X0i0RokCC4Z_TgDo",
+    "distanceMeters": 865,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Bhanuswari Resort & Spa",
+    "poiName": "Tonyraka Art Gallery & Cafe",
+    "currentCoords": [
+      115.2785,
+      -8.5385
+    ],
+    "googleCoords": [
+      115.2722001,
+      -8.5474696
+    ],
+    "googlePlaceName": "TONYRAKA Art Lounge",
+    "googlePlaceId": "ChIJWe6UTJs90i0RQt1IYN_V31U",
+    "distanceMeters": 1214,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Bhanuswari Resort & Spa",
+    "poiName": "Bebek Tebasari Resto",
+    "currentCoords": [
+      115.275,
+      -8.571
+    ],
+    "googleCoords": [
+      115.25663600000001,
+      -8.5456567
+    ],
+    "googlePlaceName": "Bebek Tebasari Resto",
+    "googlePlaceId": "ChIJmTOl7WE90i0RxY1ZeQC94ko",
+    "distanceMeters": 3467,
+    "status": "🔴 FAR OFF"
+  },
+  {
+    "parentStop": "Jimbaran Bay Beach Resort",
+    "poiName": "Pantai Kedonganan Sunset",
+    "currentCoords": [
+      115.168,
+      -8.7555
+    ],
+    "googleCoords": [
+      115.16923140000002,
+      -8.7594336
+    ],
+    "googlePlaceName": "Sunset Dinner Beach",
+    "googlePlaceId": "ChIJ-_HZjGZE0i0RwgT66pUlolA",
+    "distanceMeters": 458,
+    "status": "✅ MATCH"
+  },
+  {
+    "parentStop": "Jimbaran Bay Beach Resort",
+    "poiName": "Cuca Restaurant Bali",
+    "currentCoords": [
+      115.1685,
+      -8.7635
+    ],
+    "googleCoords": [
+      115.16990139999999,
+      -8.7730974
+    ],
+    "googlePlaceName": "Cuca Restaurant",
+    "googlePlaceId": "ChIJp7V6o2FE0i0R0Vpk0XMjS4M",
+    "distanceMeters": 1078,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Jimbaran Bay Beach Resort",
+    "poiName": "Samasta Lifestyle Village",
+    "currentCoords": [
+      115.163,
+      -8.7735
+    ],
+    "googleCoords": [
+      115.1644987,
+      -8.7853653
+    ],
+    "googlePlaceName": "Samasta Lifestyle Village",
+    "googlePlaceId": "ChIJvbLamO1E0i0R51MpPQg8Ft8",
+    "distanceMeters": 1330,
+    "status": "⚠️ DRIFT"
+  },
+  {
+    "parentStop": "Jimbaran Bay Beach Resort",
+    "poiName": "Jenggala Keramik Bali",
+    "currentCoords": [
+      115.174,
+      -8.771
+    ],
+    "googleCoords": [
+      115.17049129999998,
+      -8.7848715
+    ],
+    "googlePlaceName": "Jenggala Flagship Store",
+    "googlePlaceId": "ChIJpVyu-I1E0i0R9aOgUdCaHUM",
+    "distanceMeters": 1590,
+    "status": "⚠️ DRIFT"
+  }
+]

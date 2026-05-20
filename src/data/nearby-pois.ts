@@ -17,7 +17,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '800m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Paluang+Cliff+Nusa+Penida',
-      coordinates: [115.4670, -8.7515]
+      coordinates: [115.4769, -8.7537]
     },
     {
       name: 'Secret Point Warung Kelingking (Kuliner Lokal & View)',
@@ -25,7 +25,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '120m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Secret+Point+Warung+Kelingking',
-      coordinates: [115.4715, -8.7495]
+      coordinates: [115.4772, -8.7466]
     },
     {
       name: 'Kelingking Sunset Point Bar',
@@ -33,7 +33,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '250m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kelingking+Sunset+Point+Bar',
-      coordinates: [115.4690, -8.7485]
+      coordinates: [115.4766, -8.7506]
     }
   ],
   'Broken Beach': [
@@ -43,7 +43,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Angels+Billabong+Nusa+Penida',
-      coordinates: [115.4510, -8.7290]
+      coordinates: [115.4490, -8.7335]
     },
     {
       name: 'Angel\'s Billabong Cafe',
@@ -51,7 +51,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.2,
       distance: '100m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Angels+Billabong+Cafe+Nusa+Penida',
-      coordinates: [115.4520, -8.7285]
+      coordinates: [115.4490, -8.7335]
     }
   ],
   'Angel Billabong': [
@@ -61,7 +61,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Broken+Beach+Nusa+Penida',
-      coordinates: [115.4526, -8.7297]
+      coordinates: [115.4508, -8.7328]
     },
     {
       name: 'Warung Angel Nusa Penida',
@@ -79,7 +79,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Crystal+Bay+Beach+Club',
-      coordinates: [115.4590, -8.7205]
+      coordinates: [115.4592, -8.7156]
     },
     {
       name: 'Snorkeling Point Crystal Bay (Sewa Perahu Lokal)',
@@ -87,7 +87,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Snorkeling+Crystal+Bay+Nusa+Penida',
-      coordinates: [115.4575, -8.7190]
+      coordinates: [115.4591, -8.7156]
     }
   ],
   'Tegenungan Waterfall': [
@@ -97,7 +97,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '100m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Omma+Dayclub+Bali',
-      coordinates: [115.2885, -8.5748]
+      coordinates: [115.2895, -8.5756]
     },
     {
       name: 'Tegenungan Swing & Photo Point',
@@ -105,7 +105,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tegenungan+Swing+and+Photo+Point',
-      coordinates: [115.2900, -8.5755]
+      coordinates: [115.2890, -8.5754]
     },
     {
       name: 'Bebek Tebasari Resto (Ubud Traditional Food)',
@@ -113,7 +113,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '3.2km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bebek+Tebasari+Resto',
-      coordinates: [115.2750, -8.5710]
+      coordinates: [115.2566, -8.5457]
     }
   ],
   'Tirta Empul': [
@@ -131,7 +131,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '1.2km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Coffee+Plantation+Tampaksiring',
-      coordinates: [115.3190, -8.4120]
+      coordinates: [115.3150, -8.4177]
     }
   ],
   'Coffee Plantation': [
@@ -141,7 +141,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Satria+Coffee+Plantation+Bali',
-      coordinates: [115.3040, -8.4310]
+      coordinates: [115.2602, -8.5487]
     },
     {
       name: 'Cantik Agriculture (Sunset Coffee Testing)',
@@ -149,7 +149,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '350m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Cantik+Agriculture+Bali',
-      coordinates: [115.3070, -8.4280]
+      coordinates: [115.3352, -8.3835]
     }
   ],
   'Kintamani': [
@@ -159,7 +159,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '300m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Akasa+Specialty+Coffee+Kintamani',
-      coordinates: [115.3530, -8.2570]
+      coordinates: [115.3576, -8.2796]
     },
     {
       name: 'El Lago Bali (Japanese Culinary & Lake View)',
@@ -167,7 +167,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '450m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=El+Lago+Kintamani',
-      coordinates: [115.3500, -8.2540]
+      coordinates: [115.3420, -8.2675]
     },
     {
       name: 'Tegalalang - Kintamani Crater Ridge Path',
@@ -185,7 +185,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '400m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Cretya+Ubud',
-      coordinates: [115.2770, -8.4340]
+      coordinates: [115.2810, -8.4400]
     },
     {
       name: 'Alas Harum Giant Bali Swing',
@@ -193,7 +193,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '200m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Alas+Harum+Ubud',
-      coordinates: [115.2785, -8.4325]
+      coordinates: [115.2807, -8.4398]
     },
     {
       name: 'Tegalalang Terrace Photo Spot',
@@ -201,7 +201,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tegalalang+Rice+Terrace+Ubud',
-      coordinates: [115.2800, -8.4305]
+      coordinates: [115.2793, -8.4317]
     }
   ],
   'Tukad Cepung Waterfall': [
@@ -211,7 +211,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tukad+Cepung+Waterfall+Bali',
-      coordinates: [115.3595, -8.4602]
+      coordinates: [115.3868, -8.4410]
     },
     {
       name: 'Warung Cepung (Kuliner Lokal)',
@@ -219,7 +219,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Warung+Tukad+Cepung',
-      coordinates: [115.3610, -8.4590]
+      coordinates: [115.3869, -8.4412]
     }
   ],
   'Pandawa Beach': [
@@ -229,7 +229,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '800m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Roosterfish+Beach+Club',
-      coordinates: [115.1880, -8.8420]
+      coordinates: [115.1882, -8.8438]
     },
     {
       name: 'Pandawa Beach Canoeing (Sewa Kano Pantai)',
@@ -237,7 +237,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '200m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pandawa+Beach+Canoe',
-      coordinates: [115.1835, -8.8445]
+      coordinates: [115.1858, -8.8445]
     },
     {
       name: 'Tebing Kapur Pandawa (Instagramable Highway Cliffs)',
@@ -245,7 +245,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '300m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pandawa+Beach+Cliff',
-      coordinates: [115.1820, -8.8415]
+      coordinates: [115.1744, -8.8458]
     }
   ],
   'GWK Cultural Park': [
@@ -255,7 +255,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '300m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Jendela+Bali+Panoramic+Restaurant',
-      coordinates: [115.1660, -8.8090]
+      coordinates: [115.1680, -8.8087]
     },
     {
       name: 'Lotus Pond Amphitheater Plaza',
@@ -263,7 +263,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Lotus+Pond+GWK',
-      coordinates: [115.1685, -8.8115]
+      coordinates: [115.1674, -8.8102]
     }
   ],
   'Uluwatu Temple': [
@@ -273,7 +273,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '100m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kecak+Dance+Uluwatu',
-      coordinates: [115.0840, -8.8298]
+      coordinates: [115.0854, -8.8307]
     },
     {
       name: 'Single Fin Bali (Sunset Cliff Beach Club)',
@@ -281,7 +281,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '1.5km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Single+Fin+Bali',
-      coordinates: [115.0880, -8.8170]
+      coordinates: [115.0889, -8.8149]
     },
     {
       name: 'Suluban Beach Secret Cliff View',
@@ -289,7 +289,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '1.8km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Suluban+Beach',
-      coordinates: [115.0890, -8.8160]
+      coordinates: [115.0938, -8.8145]
     }
   ],
   'Jimbaran Beach': [
@@ -299,7 +299,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Menega+Cafe+Jimbaran',
-      coordinates: [115.1620, -8.7845]
+      coordinates: [115.1645, -8.7807]
     },
     {
       name: 'Jimbaran Seafood Sunset Bay',
@@ -317,7 +317,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '100m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tanah+Lot+Sunset+Terrace',
-      coordinates: [115.0855, -8.6220]
+      coordinates: [115.0868, -8.6186]
     },
     {
       name: 'Deusa Coffee & Eatery Tanah Lot',
@@ -335,7 +335,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Jatiluwih+Rice+Terraces',
-      coordinates: [115.1310, -8.3710]
+      coordinates: [115.1312, -8.3701]
     },
     {
       name: 'Billy\'s Terrace Cafe Jatiluwih',
@@ -343,7 +343,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '350m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Billys+Terrace+Cafe+Jatiluwih',
-      coordinates: [115.1335, -8.3680]
+      coordinates: [115.1309, -8.3702]
     }
   ],
   'Ulun Danu Beratan': [
@@ -353,7 +353,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '50m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pura+Ulun+Danu+Beratan',
-      coordinates: [115.1665, -8.2758]
+      coordinates: [115.1668, -8.2752]
     },
     {
       name: 'Mentari Restaurant (Traditional Buffet Resto)',
@@ -361,7 +361,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.3,
       distance: '400m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Mentari+Restaurant+Bedugul',
-      coordinates: [115.1690, -8.2730]
+      coordinates: [115.1653, -8.2786]
     }
   ],
   'Handara Gate': [
@@ -371,7 +371,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.4,
       distance: '200m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Handara+Gate+Restaurant',
-      coordinates: [115.1950, -8.2515]
+      coordinates: [115.1612, -8.2452]
     },
     {
       name: 'Wanagiri Hidden Hills (Ayunan Danau & Spot Foto)',
@@ -379,7 +379,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '4.5km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Wanagiri+Hidden+Hills',
-      coordinates: [115.1350, -8.2430]
+      coordinates: [115.1075, -8.2403]
     }
   ],
   'Taman Ayun': [
@@ -399,7 +399,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '3.5km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Lahangan+Sweet',
-      coordinates: [115.6250, -8.3750]
+      coordinates: [115.6386, -8.3719]
     },
     {
       name: 'Lempuyang Resto & Bar',
@@ -419,7 +419,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.5,
       distance: '1.5km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kemenuh+Butterfly+Park',
-      coordinates: [115.2780, -8.5520]
+      coordinates: [115.2871, -8.5728]
     },
     {
       name: 'Air Terjun Sumampan (Alami & Tersembunyi)',
@@ -429,7 +429,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '2.2km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sumampan+Waterfall',
-      coordinates: [115.2980, -8.5535]
+      coordinates: [115.2904, -8.5515]
     },
     {
       name: 'Tonyraka Art Gallery & Cafe',
@@ -439,7 +439,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '1.8km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tonyraka+Art+Gallery',
-      coordinates: [115.2785, -8.5385]
+      coordinates: [115.2722, -8.5475]
     },
     {
       name: 'Bebek Tebasari Resto',
@@ -449,7 +449,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '3.2km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bebek+Tebasari+Resto',
-      coordinates: [115.2750, -8.5710]
+      coordinates: [115.2566, -8.5457]
     }
   ],
   'Jimbaran Bay Beach Resort': [
@@ -461,7 +461,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.7,
       distance: '150m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kedonganan+Beach',
-      coordinates: [115.1680, -8.7555]
+      coordinates: [115.1692, -8.7594]
     },
     {
       name: 'Cuca Restaurant Bali',
@@ -471,7 +471,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.8,
       distance: '900m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Cuca+Restaurant+Jimbaran',
-      coordinates: [115.1685, -8.7635]
+      coordinates: [115.1699, -8.7731]
     },
     {
       name: 'Samasta Lifestyle Village',
@@ -481,7 +481,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '1.2km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Samasta+Lifestyle+Village',
-      coordinates: [115.1630, -8.7735]
+      coordinates: [115.1645, -8.7854]
     },
     {
       name: 'Jenggala Keramik Bali',
@@ -491,7 +491,7 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       rating: 4.6,
       distance: '1.8km',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Jenggala+Keramik+Jimbaran',
-      coordinates: [115.1740, -8.7710]
+      coordinates: [115.1705, -8.7849]
     }
   ]
 };

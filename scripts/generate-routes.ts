@@ -6,35 +6,96 @@ dotenv.config({ path: path.join(__dirname, '../.env.local') });
 import { PACKAGE_GEO_DATA } from '../src/data/itinerary-geo';
 import type { DayRoute, PackageRoutes } from '../src/types/routes';
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 const OUT_DIR = path.join(__dirname, '../src/data/routes');
 
-if (!MAPBOX_TOKEN) {
-  console.error("ERROR: NEXT_PUBLIC_MAPBOX_TOKEN is missing in environment variables.");
+if (!GOOGLE_API_KEY) {
+  console.error("ERROR: NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is missing in environment variables.");
   process.exit(1);
 }
 
-async function fetchDrivingRoute(coordinates: [number, number][]) {
-  const coordsString = coordinates.map((c) => `${c[0]},${c[1]}`).join(';');
-  const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordsString}?geometries=geojson&overview=full&access_token=${MAPBOX_TOKEN}`;
+/**
+ * Decodes a Google encoded polyline string into [lng, lat] coordinates.
+ */
+function decodePolyline(encoded: string): [number, number][] {
+  const points: [number, number][] = [];
+  let index = 0, len = encoded.length;
+  let lat = 0, lng = 0;
 
-  const response = await fetch(url, {
-    headers: { 'Referer': 'http://localhost:3000/' }
-  });
+  while (index < len) {
+    let b, shift = 0, result = 0;
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+    const dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+    lat += dlat;
+
+    shift = 0;
+    result = 0;
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+    const dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+    lng += dlng;
+
+    points.push([lng / 100000.0, lat / 100000.0]);
+  }
+  return points;
+}
+
+async function fetchDrivingRoute(coordinates: [number, number][]) {
+  // Convert [lng, lat] to "lat,lng" for Google Maps API
+  const origin = `${coordinates[0][1]},${coordinates[0][0]}`;
+  const destination = `${coordinates[coordinates.length - 1][1]},${coordinates[coordinates.length - 1][0]}`;
+  
+  let waypointsParam = '';
+  if (coordinates.length > 2) {
+    const wps = coordinates.slice(1, -1).map(c => `${c[1]},${c[0]}`).join('|');
+    waypointsParam = `&waypoints=${wps}`;
+  }
+
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}${waypointsParam}&key=${GOOGLE_API_KEY}`;
+
+  const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Failed to fetch route: ${response.statusText}`);
+    throw new Error(`Failed to fetch route from Google: ${response.statusText}`);
   }
 
   const data = await response.json();
+  if (data.status !== 'OK') {
+    throw new Error(`Google Directions API error status: ${data.status}. Details: ${data.error_message || 'No additional details'}`);
+  }
+
   if (data.routes && data.routes.length > 0) {
     const route = data.routes[0];
+    
+    // Sum distance and duration from all legs
+    let totalDuration = 0;
+    let totalDistance = 0;
+    if (route.legs) {
+      for (const leg of route.legs) {
+        totalDuration += leg.duration?.value || 0;
+        totalDistance += leg.distance?.value || 0;
+      }
+    }
+
+    // Decode overview polyline points
+    const decodedCoords = decodePolyline(route.overview_polyline.points);
+
     return {
-      geometry: route.geometry,
-      duration: route.duration,
-      distance: route.distance,
+      geometry: {
+        type: 'LineString' as const,
+        coordinates: decodedCoords,
+      },
+      duration: totalDuration,
+      distance: totalDistance,
     };
   } else {
-    throw new Error("No route found in Mapbox response.");
+    throw new Error("No route found in Google response.");
   }
 }
 
@@ -84,14 +145,14 @@ async function generateRoutes() {
             dayRoute.segments.push({ transport: 'driving', geometry: null, duration: 0, distance: 0 });
             continue;
           }
-          console.log(`    Segment ${segIdx} (driving, ${seg.stops.length} stops) — fetching Mapbox...`);
+          console.log(`    Segment ${segIdx} (driving, ${seg.stops.length} stops) — fetching Google Directions...`);
           try {
             const routeData = await fetchDrivingRoute(coords);
             dayRoute.segments.push({
               transport: 'driving',
               ...routeData,
             });
-            await new Promise(resolve => setTimeout(resolve, 500)); // rate limit
+            await new Promise(resolve => setTimeout(resolve, 200)); // rate limit
           } catch (err: unknown) {
             const message = err instanceof Error ? err.message : String(err);
             console.error(`    Error: ${message}`);
@@ -108,7 +169,7 @@ async function generateRoutes() {
     console.log(`  Saved → ${outFile}`);
   }
 
-  console.log("\n✅ All routes generated successfully!");
+  console.log("\n✅ All routes generated successfully via Google Directions API!");
 }
 
 generateRoutes().catch(console.error);

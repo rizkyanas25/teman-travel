@@ -36,7 +36,9 @@ npm run dev
 - **Dark Tropical Theme** — Deep teal/jungle green palette, luxury gold accents, and unified glassmorphism
 - **Full Internationalization** — English & Indonesian with automatic locale detection and USD/IDR smart currency switching
 - **Locale-Neutral Sharing** — Smart shareable links (`/#pkg-{index}`) that adapt to the recipient's system language
-- **Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, adjustable speed control (1x/1.5x/2x), dynamic marker states, and synchronized stop progress
+- **Itinerary Map Visualizer** — Mapbox-powered animated route maps with per-day playback, dynamic marker states, interactive stop selection, POI details panel, and synchronized stop progress
+- **Automated Coordinate Auditing** — Google Places API (New) integration to automatically verify, detect, and geocode coordinates of all itinerary stops and nearby POIs
+- **Auto-Fix Coordinate Alignment** — Pure-JS script that parses geocoded outputs and safely updates hardcoded TypeScript files without breaking comments or formatting
 - **Adaptive Breakpoints** — Optimized layout switching (Stacked vs Side-by-side) specifically tuned for tablet and mobile usability
 - **Interactive Carousel** — Premium destination gallery with image-description split layout
 - **Package Comparison** — 3 tiered tour packages with collapsible itineraries and gold-themed feature badges
@@ -237,13 +239,47 @@ npm run dev
 
 ## 📜 Available Scripts
 
-| Command                   | Description                             |
-| ------------------------- | --------------------------------------- |
-| `npm run dev`             | Start development server with Turbopack |
-| `npm run build`           | Create production build                 |
-| `npm run start`           | Start production server                 |
-| `npm run lint`            | Run ESLint                              |
-| `npm run generate-routes` | Re-generate Mapbox route data           |
+| Command                   | Description                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| `npm run dev`             | Start development server with Turbopack                     |
+| `npm run build`           | Create production build                                    |
+| `npm run start`           | Start production server                                    |
+| `npm run lint`            | Run ESLint                                                 |
+| `npm run generate-routes` | Re-generate Mapbox route data                              |
+| `npm run audit-itinerary` | Audit itinerary stops coordinates via Google Places API    |
+| `npm run audit-pois`      | Audit nearby POIs coordinates via Google Places API        |
+| `npm run apply-fixes`     | Automatically apply geocoded precise coordinates to files  |
+
+---
+
+## 🗺️ Adding New Cities & Packages (Workflow)
+
+Follow this simple 3-step workflow to add a new city, stops, and package trips with 100% precise coordinates:
+
+### 1. Define the Draft Data
+1. Open `src/data/itinerary-geo.ts` and add your new stops to the `L` record. You can put rough approximate coordinates (e.g. city center) to start.
+2. Define your new package trip inside `PACKAGE_GEO_DATA` in `src/data/itinerary-geo.ts`.
+3. Open `src/data/nearby-pois.ts` and add the nearby POIs for your new stops with rough coordinates.
+
+### 2. Auto-Correct Coordinates
+1. Make sure `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is set in your `.env.local` and **Places API (New)** is enabled on Google Cloud.
+2. Run the audits to automatically query Google's highly accurate databases:
+   ```bash
+   npm run audit-itinerary
+   npm run audit-pois
+   ```
+3. Apply Google's precise coordinates to your source files automatically:
+   ```bash
+   npm run apply-fixes
+   ```
+   *Note: This will safely update `itinerary-geo.ts` and `nearby-pois.ts` with correct geocoded locations!*
+
+### 3. Generate Driving Routes
+1. Re-generate the road-network driving route lines for your maps:
+   ```bash
+   npm run generate-routes
+   ```
+2. Start the dev server (`npm run dev`) to see your new package live with perfect map pins and beautiful routing lines!
 
 ---
 
@@ -255,9 +291,10 @@ Deploy easily on [Vercel](https://vercel.com):
 
 ### Environment Variables
 
-| Variable                   | Required | Description               |
-| -------------------------- | -------- | ------------------------- |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Yes      | Mapbox GL JS access token |
+| Variable                         | Required | Description                                                         |
+| -------------------------------- | -------- | ------------------------------------------------------------------- |
+| `NEXT_PUBLIC_MAPBOX_TOKEN`       | Yes      | Mapbox GL JS access token                                           |
+| `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`| No       | Google Cloud API Key with Places API (New) enabled for geocoding    |
 
 ### Notes
 
