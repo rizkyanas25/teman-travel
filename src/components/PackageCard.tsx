@@ -5,17 +5,7 @@ import Image from "next/image";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { FiHome, FiCoffee, FiMapPin, FiTruck, FiVideo, FiChevronRight, FiChevronDown, FiMap, FiShare2, FiInfo } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
-interface PricingItem { pax: string; price: string; }
-interface ItineraryDay { day: string; title: string; items: string[]; tip?: string; }
-interface PackageItem {
-  title: string;
-  image: string;
-  pricing: PricingItem[];
-  includes: { title: string; description: string }[];
-  excludes: string[];
-  itinerary: ItineraryDay[];
-  tags?: string[];
-}
+
 
 const featureIcons = [
   { icon: FiHome, label: "hotel" },
@@ -60,12 +50,11 @@ export default function PackageCard({
 }) {
   const tc = useTranslations("common");
   const t = useTranslations("packages");
-  const messages = useMessages();
+  const messages = useMessages() as unknown as IntlMessages;
   const [openDay, setOpenDay] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const packagesMessages = messages.packages as { items: PackageItem[] };
-  const pkg = packagesMessages.items[parseInt(index)];
+  const pkg = messages.packages.items[parseInt(index)];
 
   if (!pkg) return null;
 
@@ -194,7 +183,10 @@ export default function PackageCard({
                   </span>
                   <FiChevronDown className={`w-4 h-4 text-white/40 transition-transform ${openDay === i ? "rotate-180" : ""}`} />
                 </button>
-                <div className={`itinerary-content ${openDay === i ? "open" : ""}`}>
+                <div 
+                  className={`itinerary-content ${openDay === i ? "open" : ""}`}
+                  aria-hidden={openDay !== i}
+                >
                   <div className="px-4 py-3 space-y-2">
                     {day.items.map((item, j) => (
                       <div key={j} className="flex items-center gap-2">

@@ -2,12 +2,7 @@
 import { useEffect } from 'react';
 import { useTranslations, useMessages } from 'next-intl';
 import { FiCheck, FiX, FiInfo } from 'react-icons/fi';
-interface TranslationPackageItem {
-  title: string;
-  includes: { title: string; description: string }[];
-  excludes: { title: string; description: string }[];
-  agentTip?: string;
-}
+
 
 interface Props {
   packageIndex: number | null;
@@ -17,7 +12,7 @@ interface Props {
 export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
   const t = useTranslations('packages');
   const tc = useTranslations('common');
-  const messages = useMessages();
+  const messages = useMessages() as unknown as IntlMessages;
 
   useEffect(() => {
     if (packageIndex === null) return;
@@ -55,10 +50,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
 
   if (packageIndex === null) return null;
 
-  const packagesMessages = messages.packages as unknown as {
-    items: TranslationPackageItem[];
-  };
-  const pkg = packagesMessages.items[packageIndex];
+  const pkg = messages.packages.items[packageIndex];
 
   if (!pkg) return null;
 
@@ -87,6 +79,7 @@ export default function PackageDetailsModal({ packageIndex, onClose }: Props) {
           <button
             onClick={onClose}
             className='w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition'
+            aria-label='Close modal'
           >
             <FiX className='w-5 h-5' />
           </button>

@@ -4,22 +4,13 @@ import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { FiMapPin, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-interface Destination {
-  title: string;
-  location: string;
-  image: string;
-  description: string;
-}
-
 export default function Gallery() {
   const t = useTranslations("gallery");
-  const messages = useMessages();
-  const destinations = (messages.gallery as { destinations: Destination[] }).destinations;
+  const messages = useMessages() as unknown as IntlMessages;
+  const destinations = messages.gallery.destinations;
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
 
-  const goTo = useCallback((idx: number, dir: "left" | "right") => {
-    setDirection(dir);
+  const goTo = useCallback((idx: number) => {
     setCurrent(idx);
   }, []);
 
@@ -27,19 +18,18 @@ export default function Gallery() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === destinations.length - 1 ? 0 : prev + 1));
-      setDirection("right");
     }, 5000);
     return () => clearInterval(timer);
   }, [destinations.length]);
 
   const prev = () => {
     const idx = current === 0 ? destinations.length - 1 : current - 1;
-    goTo(idx, "left");
+    goTo(idx);
   };
 
   const next = () => {
     const idx = current === destinations.length - 1 ? 0 : current + 1;
-    goTo(idx, "right");
+    goTo(idx);
   };
 
   const dest = destinations[current];
@@ -69,7 +59,6 @@ export default function Gallery() {
               fill
               className="object-cover carousel-img"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-dark-800/30" />
 
@@ -101,7 +90,7 @@ export default function Gallery() {
                 {destinations.map((_, i) => (
                   <button
                     key={i}
-                    onClick={() => goTo(i, i > current ? "right" : "left")}
+                    onClick={() => goTo(i)}
                     className={`transition-all duration-300 rounded-full ${
                       i === current
                         ? "w-8 h-2 bg-gold-400"

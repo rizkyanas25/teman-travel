@@ -5,16 +5,12 @@ import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { FiChevronDown } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+
 
 export default function FAQ() {
   const t = useTranslations("faq");
-  const messages = useMessages();
-  const faqData = messages.faq as { items: FAQItem[] };
-  const items = faqData.items;
+  const messages = useMessages() as unknown as IntlMessages;
+  const items = messages.faq.items;
 
   const [openIndex, setOpenIndex] = useState<number | null>(0); // First item open by default
 
@@ -26,8 +22,25 @@ export default function FAQ() {
   
   const whatsappUrl = getWhatsAppUrl(tc("whatsappGenericMessage"));
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer,
+      },
+    })),
+  };
+
   return (
     <section id="faq" className="py-24 bg-dark-900 relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
@@ -68,9 +81,10 @@ export default function FAQ() {
                 </button>
                 
                 <div 
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  className={`faq-content ${
+                    isOpen ? "open" : ""
                   }`}
+                  aria-hidden={!isOpen}
                 >
                   <div className="p-6 pt-0 text-white/60 leading-relaxed text-sm sm:text-base">
                     {item.answer}
@@ -85,7 +99,7 @@ export default function FAQ() {
         <div className="mt-12 text-center">
           <p className="text-white/40 text-sm mb-4">{t("stillHaveQuestions")}</p>
           <a 
-            href={getWhatsAppUrl("")} 
+            href={whatsappUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-[#25D366]/50 text-[#25D366] rounded-full font-semibold hover:bg-[#25D366]/10 hover:border-[#25D366] transition"

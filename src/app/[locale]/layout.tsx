@@ -3,6 +3,21 @@ import { setRequestLocale, getMessages, getTranslations } from "next-intl/server
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display-google",
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body-google",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 const SITE_URL = "https://temantravel.com";
 
@@ -18,7 +33,6 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "hero" });
-  const tAbout = await getTranslations({ locale, namespace: "about" });
 
   const isId = locale === "id";
   const title = isId
@@ -237,14 +251,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
+    <html lang={locale} className={`scroll-smooth ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#D4A843" />
         <JsonLd locale={locale} />

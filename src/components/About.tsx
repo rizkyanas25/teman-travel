@@ -73,18 +73,24 @@ export default function About() {
             </div>
           </div>
           <div className='relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl img-hover group'>
-            {carouselImages.map((src, idx) => (
-              <Image
-                key={src}
-                src={src}
-                alt={`Teman Travel Travelers in Bali - Photo ${idx + 1}`}
-                fill
-                sizes='(max-width: 1024px) 100vw, 50vw'
-                className={`object-cover transition-opacity duration-1000 ease-in-out ${
-                  idx === currentImageIdx ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
-            ))}
+            {carouselImages.map((src, idx) => {
+              const isCurrent = idx === currentImageIdx;
+              const isNext = idx === (currentImageIdx + 1) % carouselImages.length;
+              if (!isCurrent && !isNext) return null;
+              return (
+                <Image
+                  key={src}
+                  src={src}
+                  alt={t("imageAlt", { number: idx + 1 })}
+                  fill
+                  sizes='(max-width: 1024px) 100vw, 50vw'
+                  className={`object-cover transition-opacity duration-1000 ease-in-out ${
+                    isCurrent ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  aria-hidden={!isCurrent}
+                />
+              );
+            })}
             <div className='absolute bottom-4 right-4 bg-dark-900/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 z-10'>
               <p className='text-white/90 text-xs font-medium tracking-wide'>
                 ✦ Teman Travelers

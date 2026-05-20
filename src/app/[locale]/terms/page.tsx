@@ -3,12 +3,21 @@ import Footer from "@/components/Footer";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
+const SITE_URL = "https://temantravel.com";
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "legal.terms" });
   return {
     title: `${t("title")} | Teman Travel`,
     description: t("description"),
+    alternates: {
+      canonical: `${SITE_URL}/${locale}/terms`,
+      languages: {
+        en: `${SITE_URL}/en/terms`,
+        id: `${SITE_URL}/id/terms`,
+      },
+    },
   };
 }
 

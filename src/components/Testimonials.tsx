@@ -5,21 +5,12 @@ import { useRef, useState, useEffect } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 
-interface TestimonialItem {
-  name: string;
-  origin: string;
-  flag: string;
-  package: string;
-  rating: number;
-  quote: string;
-  avatar: string;
-}
+
 
 export default function Testimonials() {
   const t = useTranslations("testimonials");
-  const messages = useMessages();
-  const testimonialsData = messages.testimonials as { items: TestimonialItem[] };
-  const items = testimonialsData.items;
+  const messages = useMessages() as unknown as IntlMessages;
+  const items = messages.testimonials.items;
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);

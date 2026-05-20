@@ -115,6 +115,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
     const markerDataRef = useRef<
       Map<string, { el: HTMLElement; totalStops: number; visited: number }>
     >(new Map());
+    const activeTimeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
     const [speedMultiplierUI, setSpeedMultiplierUI] = useState(1);
     const animStateRef = useRef({
@@ -258,6 +259,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       pauseTimerRef.current = null;
       animStateRef.current.isPlaying = false;
       removeMovingMarker();
+      // Clean up active popup timeouts
+      activeTimeoutsRef.current.forEach(clearTimeout);
+      activeTimeoutsRef.current = [];
     };
 
     const clearMarkers = () => {
@@ -477,7 +481,12 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
       popup.getElement()?.style.setProperty('--popup-color', color);
 
-      setTimeout(() => popup.remove(), durationMs);
+      const timer = setTimeout(() => {
+        popup.remove();
+        // Remove this timer from the active list
+        activeTimeoutsRef.current = activeTimeoutsRef.current.filter((t) => t !== timer);
+      }, durationMs);
+      activeTimeoutsRef.current.push(timer);
     };
 
     useImperativeHandle(ref, () => ({

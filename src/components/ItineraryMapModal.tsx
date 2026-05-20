@@ -14,7 +14,7 @@ interface Props {
 
 export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   const t = useTranslations("packages");
-  const messages = useMessages();
+  const messages = useMessages() as unknown as IntlMessages;
   const [activeDayIndex, setActiveDayIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeStopIndex, setActiveStopIndex] = useState(-1);
@@ -68,16 +68,13 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
 
   if (packageIndex === null) return null;
 
-  interface ItineraryDay { title: string; day: string; activities: string[] }
-  interface PackageMessage { title: string; subtitle: string; itinerary: ItineraryDay[]; [key: string]: unknown }
-  const packagesMessages = messages.packages as { items: PackageMessage[] };
-  const pkgData = packagesMessages.items[packageIndex];
+  const pkgData = messages.packages.items[packageIndex];
   const geoData = PACKAGE_GEO_DATA.find(p => p.packageIndex === packageIndex);
 
   if (!pkgData || !geoData) return null;
 
-  const dayTitles = pkgData.itinerary.map((d: ItineraryDay) => d.title);
-  const dayLabels = pkgData.itinerary.map((d: ItineraryDay) => d.day);
+  const dayTitles = pkgData.itinerary.map((d) => d.title);
+  const dayLabels = pkgData.itinerary.map((d) => d.day);
   const currentDayGeo = geoData.days.find(d => d.dayIndex === activeDayIndex);
   const stopCount = currentDayGeo ? getDayStops(currentDayGeo).length : 0;
   const currentDayLabel = dayLabels[activeDayIndex] || `Day ${activeDayIndex + 1}`;
@@ -143,6 +140,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition"
+            aria-label="Close modal"
           >
             <FiX className="w-5 h-5" />
           </button>

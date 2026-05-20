@@ -15,8 +15,8 @@
   --color-dark-800: #13322d; /* Deep Forest/Teal for Cards */
   --color-dark-900: #0a1c19; /* Deep Jungle Green for Sections */
   --color-dark-950: #05100e; /* Almost Black Teal for Alternating Sections */
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: var(--font-display-google), 'Playfair Display', serif;
+  --font-body: var(--font-body-google), 'Inter', sans-serif;
 }
 
 body {
@@ -126,13 +126,17 @@ html {
   box-shadow: 0 25px 50px -12px rgba(212, 168, 67, 0.25);
 }
 
-.itinerary-content {
+.itinerary-content, .faq-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  visibility: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, visibility 0.4s ease, opacity 0.3s ease;
 }
-.itinerary-content.open {
+.itinerary-content.open, .faq-content.open {
   max-height: 2000px;
+  visibility: visible;
+  opacity: 1;
 }
 
 @keyframes fadeInUp {
