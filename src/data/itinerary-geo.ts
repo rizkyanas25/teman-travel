@@ -52,8 +52,9 @@ const L: Record<string, GeoStop> = {
   jimbaran:      { name: 'Jimbaran Beach',            coordinates: [115.1664, -8.7766], type: 'restaurant' },
   sanur:         { name: 'Sanur Port',                coordinates: [115.2608, -8.6696], type: 'port' },
   banjarNyuh:    { name: 'Banjar Nyuh Harbour',       coordinates: [115.4885, -8.6782], type: 'port' },
-  seaWP1:        { name: 'Sea Waypoint 1',            coordinates: [115.3500, -8.6500], type: 'waypoint' },
-  seaWP2:        { name: 'Sea Waypoint 2',            coordinates: [115.4200, -8.6400], type: 'waypoint' },
+  seaWP1:        { name: 'Sea Waypoint 1',            coordinates: [115.3500, -8.6600], type: 'waypoint' },
+  seaWP2:        { name: 'Sea Waypoint 2',            coordinates: [115.4450, -8.6540], type: 'waypoint' },
+  seaWP3:        { name: 'Sea Waypoint 3',            coordinates: [115.4720, -8.6600], type: 'waypoint' },
   kelingking:    { name: 'Kelingking Beach',          coordinates: [115.4732, -8.7514], type: 'destination' },
   brokenBeach:   { name: 'Broken Beach',              coordinates: [115.4508, -8.7328], type: 'destination' },
   angelBillabong:{ name: 'Angel Billabong',           coordinates: [115.4490, -8.7335], type: 'destination' },
@@ -78,9 +79,9 @@ const L: Record<string, GeoStop> = {
 // Nusa Penida segments (shared across all packages)
 const NUSA_PENIDA_SEGMENTS: GeoSegment[] = [
   { transport: 'driving', stops: [L.hotel, L.sanur] },                                      // Drive to port
-  { transport: 'sea',     stops: [L.sanur, L.seaWP1, L.seaWP2, L.banjarNyuh] },             // Boat crossing (curved)
+  { transport: 'sea',     stops: [L.sanur, L.seaWP1, L.seaWP2, L.seaWP3, L.banjarNyuh] },             // Boat crossing (curved around Lembongan)
   { transport: 'driving', stops: [L.banjarNyuh, L.kelingking, L.brokenBeach, L.angelBillabong, L.crystalBay, L.banjarNyuh] }, // Tour Nusa Penida by land
-  { transport: 'sea',     stops: [L.banjarNyuh, L.seaWP2, L.seaWP1, L.sanur] },             // Boat back (curved)
+  { transport: 'sea',     stops: [L.banjarNyuh, L.seaWP3, L.seaWP2, L.seaWP1, L.sanur] },             // Boat back (curved around Lembongan)
   { transport: 'driving', stops: [L.sanur, L.hotel] },                                      // Drive back to hotel
 ];
 

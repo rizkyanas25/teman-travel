@@ -83,8 +83,35 @@ async function fetchDrivingRoute(coordinates: [number, number][]) {
       }
     }
 
-    // Decode overview polyline points
-    const decodedCoords = decodePolyline(route.overview_polyline.points);
+    // Decode detailed steps polyline points to get maximum high-fidelity resolution
+    const decodedCoords: [number, number][] = [];
+    if (route.legs) {
+      for (const leg of route.legs) {
+        if (leg.steps) {
+          for (const step of leg.steps) {
+            if (step.polyline && step.polyline.points) {
+              const stepCoords = decodePolyline(step.polyline.points);
+              for (const coord of stepCoords) {
+                if (decodedCoords.length === 0) {
+                  decodedCoords.push(coord);
+                } else {
+                  const last = decodedCoords[decodedCoords.length - 1];
+                  // Skip duplicates at steps boundaries
+                  if (Math.abs(last[0] - coord[0]) > 1e-6 || Math.abs(last[1] - coord[1]) > 1e-6) {
+                    decodedCoords.push(coord);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Fallback if detailed steps coordinate parsing returned nothing
+    if (decodedCoords.length === 0 && route.overview_polyline && route.overview_polyline.points) {
+      decodedCoords.push(...decodePolyline(route.overview_polyline.points));
+    }
 
     return {
       geometry: {

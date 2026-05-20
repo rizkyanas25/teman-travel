@@ -622,7 +622,6 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
       pois.forEach((poi) => {
         const el = document.createElement('div');
-        el.style.position = 'relative';
         el.style.width = '32px';
         el.style.height = '32px';
         el.style.cursor = 'pointer';
@@ -972,11 +971,17 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           }
         }
 
-        // Cumulative time (sea=30ms/pt, driving=8ms/pt)
+        // Distance-based speed calculation (speed in degrees per millisecond)
+        // Smaller values make the animation slower
+        const DRIVING_SPEED = 0.00002;
+        const SEA_SPEED = 0.000025;
+
         const cumTime: number[] = [0];
         for (let i = 1; i < animPoints.length; i++) {
-          cumTime[i] =
-            cumTime[i - 1] + (animPoints[i].transport === 'sea' ? 30 : 8);
+          const dist = coordDist(animPoints[i - 1].coord, animPoints[i].coord);
+          const speed = animPoints[i].transport === 'sea' ? SEA_SPEED : DRIVING_SPEED;
+          const timeStep = speed > 0 ? (dist / speed) : 0;
+          cumTime[i] = cumTime[i - 1] + Math.max(timeStep, 1); // ensure minimum 1ms step
         }
         const TOTAL_DURATION = cumTime[cumTime.length - 1];
 
@@ -1211,7 +1216,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         <div
           className='absolute bottom-3 right-3 flex gap-0.5 rounded-md bg-white/90 p-0.5 backdrop-blur-sm'
           style={{
-            zIndex: 10,
+            zIndex: 50,
             fontFamily: 'Helvetica Neue, Arial, Helvetica, sans-serif',
           }}
         >
