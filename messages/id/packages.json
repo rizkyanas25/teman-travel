@@ -2,7 +2,7 @@
   "badge": "✦ Paket Kami",
   "heading": "Pilih Paket <highlight>Tour</highlight> Anda",
   "subtitle": "Itinerari Bali & Nusa Penida yang dirancang khusus untuk setiap budget dan gaya perjalanan Anda.",
-  "viewDetails": "Lihat detail lengkap",
+  "viewDetails": "Detail Fasilitas",
   "agentInsightTitle": "Kata Teman Lokal:",
   "featureLabels": {
     "hotel": "Hotel",
@@ -410,7 +410,7 @@
   "categoryPhoto": "Spot Foto",
   "categoryCafe": "Kafe & Bar",
   "categoryActivity": "Aktivitas",
-  "nearbyPoisEmpty": "Tidak ada rekomendasi lokal khusus.",
+  "nearbyPoisEmpty": "Tidak ada rekomendasi lokal khusus",
   "mapsLink": "Maps",
   "exploreNearbyHint": "Klik untuk jelajahi sekitar",
   "categoryPlace": "Tempat"
