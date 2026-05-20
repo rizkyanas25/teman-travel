@@ -8,7 +8,9 @@ import {
   useCallback,
 } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { useLocale } from 'next-intl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
+import { NEARBY_POIS } from '@/data/nearby-pois';
 
 import routesPackage0 from '@/data/routes/package-0-routes.json';
 import routesPackage1 from '@/data/routes/package-1-routes.json';
@@ -27,14 +29,17 @@ export interface MapViewHandle {
   flyToDay: (dayIndex: number) => void;
   playAnimation: (dayIndex: number) => void;
   pauseAnimation: () => void;
+  flyToStop: (stopIndex: number) => void;
 }
 
 interface MapViewProps {
   packageIndex: number;
   activeDayIndex: number;
+  selectedStopIndex?: number | null;
   onAnimationEnd: () => void;
   onStopReached?: (stopIndex: number) => void;
   onDepartStop?: (stopIndex: number) => void;
+  onStopSelect?: (stopIndex: number) => void;
 }
 
 /** Interpolate extra points along a straight line so sea segments animate smoothly */
@@ -104,11 +109,17 @@ function darkenColor(hex: string, amount: number): string {
 }
 
 const MapView = forwardRef<MapViewHandle, MapViewProps>(
-  ({ packageIndex, activeDayIndex, onAnimationEnd, onStopReached, onDepartStop }, ref) => {
+  ({ packageIndex, activeDayIndex, selectedStopIndex = null, onAnimationEnd, onStopReached, onDepartStop, onStopSelect }, ref) => {
+    const locale = useLocale();
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<mapboxgl.Map | null>(null);
     const markersRef = useRef<mapboxgl.Marker[]>([]);
     const popupsRef = useRef<mapboxgl.Popup[]>([]);
+    const poiMarkersRef = useRef<mapboxgl.Marker[]>([]);
+    const activePoiPopupRef = useRef<mapboxgl.Popup | null>(null);
+    const popupDataRef = useRef<Map<string, mapboxgl.Popup>>(new Map());
+    const flashedPopupsRef = useRef<mapboxgl.Popup[]>([]);
+    const abortControllerRef = useRef<AbortController | null>(null);
     const movingMarkerRef = useRef<mapboxgl.Marker | null>(null);
     const animationFrameRef = useRef<number | null>(null);
     const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -118,6 +129,46 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       Map<string, { el: HTMLElement; totalStops: number; visited: number }>
     >(new Map());
     const activeTimeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+    const getCategoryEmoji = (category: string) => {
+      switch (category) {
+        case 'food':
+          return '🍴';
+        case 'photo':
+          return '📷';
+        case 'cafe':
+          return '☕';
+        case 'activity':
+          return '🧭';
+        default:
+          return '📍';
+      }
+    };
+
+    const getCategoryLabel = (category: string, lang: string) => {
+      const isId = lang === 'id';
+      switch (category) {
+        case 'food':
+          return isId ? 'Kuliner' : 'Food';
+        case 'photo':
+          return isId ? 'Spot Foto' : 'Photo Spot';
+        case 'cafe':
+          return isId ? 'Kafe' : 'Cafe';
+        case 'activity':
+          return isId ? 'Aktivitas' : 'Activity';
+        default:
+          return isId ? 'Tempat' : 'Place';
+      }
+    };
+
+    const clearPoiMarkers = useCallback(() => {
+      if (activePoiPopupRef.current) {
+        activePoiPopupRef.current.remove();
+        activePoiPopupRef.current = null;
+      }
+      poiMarkersRef.current.forEach((m) => m.remove());
+      poiMarkersRef.current = [];
+    }, []);
 
     const [speedMultiplierUI, setSpeedMultiplierUI] = useState(1);
     const animStateRef = useRef({
@@ -155,17 +206,30 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       }
     }, []);
 
-    const cancelAllTimers = useCallback(() => {
+    const cancelAllTimers = useCallback((keepVehicle: boolean = false) => {
       if (animationFrameRef.current)
         cancelAnimationFrame(animationFrameRef.current);
       if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
       animationFrameRef.current = null;
       pauseTimerRef.current = null;
+      if (animStateRef.current.isPlaying) {
+        const now = performance.now();
+        const currentElapsed =
+          (now - animStateRef.current.animStartTime) *
+            animStateRef.current.speedMultiplier +
+          animStateRef.current.timeOffset;
+        animStateRef.current.timeOffset = currentElapsed;
+      }
       animStateRef.current.isPlaying = false;
-      removeMovingMarker();
+      if (!keepVehicle) {
+        removeMovingMarker();
+      }
       // Clean up active popup timeouts
       activeTimeoutsRef.current.forEach(clearTimeout);
       activeTimeoutsRef.current = [];
+      // Remove all flashed popups currently on the map
+      flashedPopupsRef.current.forEach((p) => p.remove());
+      flashedPopupsRef.current = [];
     }, [removeMovingMarker]);
 
     const clearMarkers = useCallback(() => {
@@ -241,6 +305,19 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         clearPopups();
         clearLayers();
         removeMovingMarker();
+        flashedPopupsRef.current.forEach((p) => p.remove());
+        flashedPopupsRef.current = [];
+
+        // Reset animation state for the day
+        animStateRef.current.timeOffset = 0;
+        animStateRef.current.isPlaying = false;
+
+        // Abort previous event listeners to prevent memory leaks
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort();
+        }
+        abortControllerRef.current = new AbortController();
+        const signal = abortControllerRef.current.signal;
 
         const dayData = pkgData.days.find((d) => d.dayIndex === dayIdx);
         const dayRouteGeo = routesData.days.find(
@@ -289,6 +366,8 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
         const placedCoords = new Set<string>();
         markerDataRef.current.clear();
+        popupDataRef.current.forEach((p) => p.remove());
+        popupDataRef.current.clear();
 
         allStops.forEach((stop) => {
           const key = stop.coordinates.join(',');
@@ -301,6 +380,8 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           // Outer container — Mapbox controls its transform for positioning, so keep it clean
           const el = document.createElement('div');
           el.style.cursor = 'pointer';
+          el.style.setProperty('z-index', '30', 'important'); // Render above POI markers
+          el.style.setProperty('transition', 'none', 'important'); // Keep Mapbox positioning crisp, avoid transition traps
 
           // Inner pill — we scale this on hover, not the outer element
           const inner = document.createElement('div');
@@ -336,39 +417,46 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             visited: 0,
           });
 
-          // Hover scale on inner div (not the Mapbox-controlled outer)
-          el.addEventListener('mouseenter', () => {
-            inner.style.transform = 'scale(1.3)';
-          });
-          el.addEventListener('mouseleave', () => {
-            inner.style.transform = 'scale(1)';
-          });
+          // Create XSS-Safe DOM Content for Popup
+          const popupInner = document.createElement('div');
+          popupInner.className = 'popup-inner';
+          const popupP = document.createElement('p');
+          popupP.textContent = `📍 ${stop.name}`;
+          popupInner.appendChild(popupP);
 
           const popup = new mapboxgl.Popup({
             offset: 15,
             closeButton: false,
             closeOnClick: false,
             className: 'custom-popup',
-          }).setHTML(`
-            <div class="popup-inner">
-              <p>📍 ${stop.name}</p>
-            </div>
-          `);
+          }).setDOMContent(popupInner);
+
+          popupDataRef.current.set(key, popup);
 
           const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
             .setLngLat(stop.coordinates as [number, number])
             .addTo(m);
 
-          // Show popup on hover
+          // Hover scale and popup show with abort signal
           el.addEventListener('mouseenter', () => {
+            inner.style.transform = 'scale(1.3)';
             popup.setLngLat(stop.coordinates as [number, number]).addTo(m);
-
             popup.getElement()?.style.setProperty('--popup-color', dayData.color);
-          });
+          }, { signal });
 
           el.addEventListener('mouseleave', () => {
+            inner.style.transform = 'scale(1)';
             popup.remove();
-          });
+          }, { signal });
+
+          // Click handler to trigger manual stop selection
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (onStopSelect) {
+              // numbers[0] is 1-indexed (e.g. Stop 1, Stop 2), so stop index is numbers[0] - 1
+              onStopSelect(numbers[0] - 1);
+            }
+          }, { signal });
 
           markersRef.current.push(marker);
           popupsRef.current.push(popup);
@@ -381,6 +469,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         clearPopups,
         clearLayers,
         removeMovingMarker,
+        onStopSelect,
       ],
     );
 
@@ -389,6 +478,16 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
     useEffect(() => {
       activeDayIndexRef.current = activeDayIndex;
     }, [activeDayIndex]);
+
+    const renderDayRef = useRef(renderDay);
+    const doFlyToDayRef = useRef(doFlyToDay);
+    const cancelAllTimersRef = useRef(cancelAllTimers);
+
+    useEffect(() => {
+      renderDayRef.current = renderDay;
+      doFlyToDayRef.current = doFlyToDay;
+      cancelAllTimersRef.current = cancelAllTimers;
+    }, [renderDay, doFlyToDay, cancelAllTimers]);
 
     // Initialize Map
     useEffect(() => {
@@ -424,8 +523,8 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
         m.on('load', () => {
           m.resize();
-          renderDay(activeDayIndexRef.current);
-          doFlyToDay(activeDayIndexRef.current, 800);
+          renderDayRef.current(activeDayIndexRef.current);
+          doFlyToDayRef.current(activeDayIndexRef.current, 800);
         });
         m.on('style.load', () => {
           m.resize();
@@ -434,7 +533,10 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
       return () => {
         clearTimeout(initTimer);
-        cancelAllTimers();
+        cancelAllTimersRef.current();
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort();
+        }
         if (map.current) {
           try {
             map.current.remove();
@@ -444,7 +546,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           map.current = null;
         }
       };
-    }, [pkgData, cancelAllTimers, doFlyToDay, renderDay]);
+    }, [pkgData]);
 
     useEffect(() => {
       if (
@@ -457,6 +559,131 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       renderDay(activeDayIndex);
     }, [activeDayIndex, routesData, pkgData, renderDay]);
 
+    // Dynamic POI Rendering based on selected stop
+    useEffect(() => {
+      if (!map.current || !pkgData) return;
+      
+      clearPoiMarkers();
+
+      if (selectedStopIndex === null || selectedStopIndex === undefined || selectedStopIndex === -1) {
+        return;
+      }
+
+      const dayData = pkgData.days.find((d) => d.dayIndex === activeDayIndex);
+      if (!dayData) return;
+
+      const stops = getDayStops(dayData);
+      const stop = stops[selectedStopIndex];
+      if (!stop) return;
+
+      const pois = NEARBY_POIS[stop.name] || [];
+      if (pois.length === 0) return;
+
+      pois.forEach((poi) => {
+        const el = document.createElement('div');
+        el.style.cursor = 'pointer';
+        el.style.setProperty('z-index', '20', 'important'); // Render below spot markers
+        el.style.setProperty('transition', 'none', 'important'); // Keep Mapbox positioning crisp, avoid transition traps
+
+        const inner = document.createElement('div');
+        inner.style.width = '32px';
+        inner.style.height = '32px';
+        inner.style.borderRadius = '50%';
+        inner.style.backgroundColor = 'rgba(10, 28, 25, 0.95)';
+        inner.style.border = `2px solid ${dayData.color}`;
+        inner.style.display = 'flex';
+        inner.style.alignItems = 'center';
+        inner.style.justifyContent = 'center';
+        inner.style.fontSize = '15px';
+        inner.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.6)';
+        inner.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease';
+        inner.innerText = getCategoryEmoji(poi.category);
+        el.appendChild(inner);
+
+        el.addEventListener('mouseenter', () => {
+          inner.style.transform = 'scale(1.25)';
+        });
+        el.addEventListener('mouseleave', () => {
+          inner.style.transform = 'scale(1)';
+        });
+
+        // Glassmorphic Custom DOM Popup
+        const popupEl = document.createElement('div');
+        popupEl.className = 'flex flex-col gap-2 p-1 text-white';
+
+        // Title
+        const titleEl = document.createElement('h5');
+        titleEl.className = 'font-bold text-sm text-white leading-tight pr-4';
+        titleEl.textContent = poi.name;
+        popupEl.appendChild(titleEl);
+
+        // Meta Row (Category, Rating & Distance)
+        const metaRow = document.createElement('div');
+        metaRow.className = 'flex items-center gap-2 text-xs text-white/70 mt-1';
+
+        const categoryEl = document.createElement('span');
+        categoryEl.className = 'flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/10 text-[9px] font-medium leading-none border border-white/5';
+        categoryEl.textContent = `${getCategoryEmoji(poi.category)} ${getCategoryLabel(poi.category, locale)}`;
+        metaRow.appendChild(categoryEl);
+
+        const ratingEl = document.createElement('span');
+        ratingEl.className = 'flex items-center gap-0.5 text-gold-400 font-bold font-mono text-[9px] leading-none';
+        ratingEl.textContent = `★ ${poi.rating.toFixed(1)}`;
+        metaRow.appendChild(ratingEl);
+
+        const distanceEl = document.createElement('span');
+        distanceEl.className = 'text-white/40 font-mono text-[9px] ml-auto';
+        distanceEl.textContent = poi.distance;
+        metaRow.appendChild(distanceEl);
+
+        popupEl.appendChild(metaRow);
+
+        // Divider
+        const hr = document.createElement('div');
+        hr.className = 'h-[1px] bg-white/10 my-1.5';
+        popupEl.appendChild(hr);
+
+        // Action Link
+        const link = document.createElement('a');
+        link.href = poi.googleMapsUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'flex items-center gap-1 text-[9px] font-bold text-gold-400 hover:text-gold-300 transition-colors uppercase tracking-wider mt-0.5';
+
+        const linkText = document.createElement('span');
+        linkText.textContent = 'Maps';
+        link.appendChild(linkText);
+
+        const linkIcon = document.createElement('span');
+        linkIcon.innerHTML = `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 text-gold-400/80" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`;
+        link.appendChild(linkIcon);
+
+        popupEl.appendChild(link);
+
+        const popup = new mapboxgl.Popup({
+          offset: 12,
+          closeButton: true,
+          closeOnClick: true,
+          className: 'poi-custom-popup anim-popup',
+        }).setDOMContent(popupEl);
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (activePoiPopupRef.current) {
+            activePoiPopupRef.current.remove();
+          }
+          popup.setLngLat(poi.coordinates as [number, number]).addTo(map.current!);
+          activePoiPopupRef.current = popup;
+        });
+
+        const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
+          .setLngLat(poi.coordinates as [number, number])
+          .addTo(map.current!);
+
+        poiMarkersRef.current.push(marker);
+      });
+    }, [selectedStopIndex, activeDayIndex, pkgData, clearPoiMarkers, locale]);
+
     /** Create the moving vehicle marker */
     const createMovingMarker = (
       coord: [number, number],
@@ -466,7 +693,8 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       el.style.fontSize = '24px';
       el.style.lineHeight = '1';
       el.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.7))';
-      el.style.zIndex = '50';
+      el.style.setProperty('z-index', '50', 'important'); // Render above all markers
+      el.style.setProperty('transition', 'none', 'important'); // Keep Mapbox positioning crisp, avoid transition traps
       el.innerText = isSea ? '⛴️' : '🚗';
 
       const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
@@ -502,8 +730,11 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
       popup.getElement()?.style.setProperty('--popup-color', color);
 
+      flashedPopupsRef.current.push(popup);
+
       const timer = setTimeout(() => {
         popup.remove();
+        flashedPopupsRef.current = flashedPopupsRef.current.filter((p) => p !== popup);
         // Remove this timer from the active list
         activeTimeoutsRef.current = activeTimeoutsRef.current.filter((t) => t !== timer);
       }, durationMs);
@@ -512,6 +743,39 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
     useImperativeHandle(ref, () => ({
       flyToDay: (dayIdx: number) => doFlyToDay(dayIdx),
+
+      flyToStop: (stopIndex: number) => {
+        if (!map.current || !pkgData) return;
+        const dayData = pkgData.days.find((d) => d.dayIndex === activeDayIndexRef.current);
+        if (!dayData) return;
+        const stops = getDayStops(dayData);
+        const stop = stops[stopIndex];
+        if (!stop) return;
+
+        // Dynamic zoom level: if spot has POIs, zoom deep to 15.5 so they are beautifully spaced and visible.
+        // Otherwise, zoom moderately to 13.5.
+        const pois = NEARBY_POIS[stop.name] || [];
+        const targetZoom = pois.length > 0 ? 15.5 : 13.5;
+
+        // Fly camera to stop coordinates
+        map.current.flyTo({
+          center: stop.coordinates as [number, number],
+          zoom: targetZoom,
+          duration: 1000,
+          essential: true,
+        });
+
+        // Close all other popups
+        popupDataRef.current.forEach((p) => p.remove());
+
+        // Open specific popup for this coordinate
+        const coordKey = stop.coordinates.join(',');
+        const popup = popupDataRef.current.get(coordKey);
+        if (popup) {
+          popup.setLngLat(stop.coordinates as [number, number]).addTo(map.current);
+          popup.getElement()?.style.setProperty('--popup-color', dayData.color);
+        }
+      },
 
       playAnimation: (dayIdx: number) => {
         if (!map.current || !routesData || !pkgData) return;
@@ -599,6 +863,17 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         }
         const TOTAL_DURATION = cumTime[cumTime.length - 1];
 
+        const timeToIndex = (elapsed: number): number => {
+          let lo = 0,
+            hi = cumTime.length - 1;
+          while (lo < hi) {
+            const mid = (lo + hi + 1) >> 1;
+            if (cumTime[mid] <= elapsed) lo = mid;
+            else hi = mid - 1;
+          }
+          return lo;
+        };
+
         const animSourceId = 'route-animated-source';
         const animLayerId = 'route-animated';
 
@@ -629,30 +904,57 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           layerIdsRef.current.push(animLayerId);
         }
 
+        const isResuming = animStateRef.current.timeOffset > 0;
+        const currentOffset = animStateRef.current.timeOffset;
+        const resumeIndex = isResuming ? timeToIndex(currentOffset) : 0;
+        const startPt = animPoints[resumeIndex] || animPoints[0];
+
         removeMovingMarker();
         movingMarkerRef.current = createMovingMarker(
-          animPoints[0].coord,
-          animPoints[0].transport === 'sea',
+          startPt.coord,
+          startPt.transport === 'sea',
         );
 
-        let lastTransport = animPoints[0].transport;
+        let lastTransport = startPt.transport;
         const hitCheckpoints = new Set<number>();
 
-        animStateRef.current.animStartTime = performance.now();
-        animStateRef.current.timeOffset = 0;
-        animStateRef.current.lastCameraTime = 0;
-        animStateRef.current.isPlaying = true;
-
-        const timeToIndex = (elapsed: number): number => {
-          let lo = 0,
-            hi = cumTime.length - 1;
-          while (lo < hi) {
-            const mid = (lo + hi + 1) >> 1;
-            if (cumTime[mid] <= elapsed) lo = mid;
-            else hi = mid - 1;
+        if (isResuming) {
+          checkpoints.forEach((cp) => {
+            if (resumeIndex >= cp.flatIdx) {
+              hitCheckpoints.add(cp.stopIdx);
+              const key = cp.coord.join(',');
+              const markerData = markerDataRef.current.get(key);
+              if (markerData) {
+                markerData.visited = markerData.totalStops;
+                markerData.el.style.backgroundColor = darkenColor(
+                  dayData.color,
+                  0.4,
+                );
+                markerData.el.style.color = '#ffffff';
+                markerData.el.style.opacity = '1';
+              }
+            }
+          });
+          // Update route rendering to show past path
+          const pastPath = animPoints.slice(0, resumeIndex + 1).map((p) => p.coord);
+          const source = m.getSource(animSourceId) as mapboxgl.GeoJSONSource;
+          if (source) {
+            source.setData({
+              type: 'Feature',
+              properties: {},
+              geometry: { type: 'LineString', coordinates: pastPath },
+            });
           }
-          return lo;
-        };
+        }
+
+        animStateRef.current.animStartTime = performance.now();
+        if (!isResuming) {
+          animStateRef.current.timeOffset = 0;
+          animStateRef.current.lastCameraTime = 0;
+        } else {
+          animStateRef.current.lastCameraTime = currentOffset;
+        }
+        animStateRef.current.isPlaying = true;
 
         const tick = (timestamp: number) => {
           const { animStartTime, timeOffset, speedMultiplier } =
@@ -665,6 +967,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           if (!pt || !pt.coord) {
             removeMovingMarker();
             animStateRef.current.isPlaying = false;
+            animStateRef.current.timeOffset = 0;
             if (onStopReached) onStopReached(allStops.length - 1);
             onAnimationEnd();
             return;
@@ -748,6 +1051,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           } else {
             removeMovingMarker();
             animStateRef.current.isPlaying = false;
+            animStateRef.current.timeOffset = 0;
             if (onStopReached) onStopReached(allStops.length - 1);
             onAnimationEnd();
           }
@@ -759,7 +1063,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       },
 
       pauseAnimation: () => {
-        cancelAllTimers();
+        cancelAllTimers(true);
       },
     }));
 

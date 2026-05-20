@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import DaySidebar from "./map/DaySidebar";
 import PlaybackControls from "./map/PlaybackControls";
@@ -22,6 +22,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   const [shouldPulse, setShouldPulse] = useState(true);
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
   const [prevPackage, setPrevPackage] = useState<number | null>(null);
+  const [selectedStopIndex, setSelectedStopIndex] = useState<number | null>(null);
   const mapRef = useRef<MapViewHandle>(null);
 
   useEffect(() => {
@@ -57,6 +58,86 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
     };
   }, [packageIndex]);
 
+  const handleSelectDay = useCallback((idx: number) => {
+    setActiveDayIndex(idx);
+    setIsPlaying(false);
+    setActiveStopIndex(-1);
+    setIsTransit(false);
+    setSelectedStopIndex(null);
+    // Pulse play button when switching to a non-completed day
+    setShouldPulse(!completedDays.has(idx));
+    if (mapRef.current) {
+      mapRef.current.pauseAnimation();
+      mapRef.current.flyToDay(idx);
+    }
+  }, [completedDays]);
+
+  const handlePlayToggle = useCallback(() => {
+    setIsPlaying((prevIsPlaying) => {
+      const nextIsPlaying = !prevIsPlaying;
+      if (nextIsPlaying) {
+        setShouldPulse(false);
+        const isFromStart = completedDays.has(activeDayIndex) || activeStopIndex === -1;
+        
+        if (isFromStart) {
+          setActiveStopIndex(-1);
+          setIsTransit(false);
+          setCompletedDays((prev) => {
+            const next = new Set(prev);
+            next.delete(activeDayIndex);
+            return next;
+          });
+        }
+        
+        setSelectedStopIndex(null);
+        if (mapRef.current) {
+          if (isFromStart) {
+            mapRef.current.flyToDay(activeDayIndex);
+            setTimeout(() => {
+               if (mapRef.current) mapRef.current.playAnimation(activeDayIndex);
+            }, 500);
+          } else {
+            mapRef.current.playAnimation(activeDayIndex);
+          }
+        }
+      } else {
+        if (mapRef.current) mapRef.current.pauseAnimation();
+      }
+      return nextIsPlaying;
+    });
+  }, [activeDayIndex, completedDays, activeStopIndex]);
+
+  const handleAnimationEnd = useCallback(() => {
+    setIsPlaying(false);
+    setIsTransit(false);
+
+    // Mark this day as completed — highlights persist
+    setCompletedDays(prev => new Set(prev).add(activeDayIndex));
+
+    // No auto-advance. Play pulse off, next day bullet will pulse in sidebar.
+    setShouldPulse(false);
+  }, [activeDayIndex]);
+
+  const handleStopReached = useCallback((stopIndex: number) => {
+    setActiveStopIndex(stopIndex);
+    setIsTransit(false);
+  }, []);
+
+  const handleDepartStop = useCallback(() => {
+    setIsTransit(true);
+  }, []);
+
+  const handleStopSelect = useCallback((stopIndex: number) => {
+    setIsPlaying(false);
+    setIsTransit(false);
+    setShouldPulse(false);
+    setSelectedStopIndex(stopIndex);
+    if (mapRef.current) {
+      mapRef.current.pauseAnimation();
+      mapRef.current.flyToStop(stopIndex);
+    }
+  }, []);
+
   // Synchronous reset when package changes — uses state (safe to read during render)
   if (packageIndex !== null && packageIndex !== prevPackage) {
     setPrevPackage(packageIndex);
@@ -66,6 +147,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
     if (isTransit) setIsTransit(false);
     if (!shouldPulse) setShouldPulse(true);
     if (completedDays.size > 0) setCompletedDays(new Set());
+    if (selectedStopIndex !== null) setSelectedStopIndex(null);
   }
 
   if (packageIndex === null) return null;
@@ -80,58 +162,6 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
   const currentDayGeo = geoData.days.find(d => d.dayIndex === activeDayIndex);
   const stopCount = currentDayGeo ? getDayStops(currentDayGeo).length : 0;
   const currentDayLabel = dayLabels[activeDayIndex] || `Day ${activeDayIndex + 1}`;
-
-  const handleSelectDay = (idx: number) => {
-    setActiveDayIndex(idx);
-    setIsPlaying(false);
-    setActiveStopIndex(-1);
-    setIsTransit(false);
-    // Pulse play button when switching to a non-completed day
-    setShouldPulse(!completedDays.has(idx));
-    if (mapRef.current) {
-      mapRef.current.pauseAnimation();
-      mapRef.current.flyToDay(idx);
-    }
-  };
-
-  const handlePlayToggle = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      setIsTransit(false);
-      if (mapRef.current) mapRef.current.pauseAnimation();
-    } else {
-      setIsPlaying(true);
-      setShouldPulse(false);
-      setActiveStopIndex(-1);
-      setIsTransit(false);
-      if (mapRef.current) {
-        mapRef.current.flyToDay(activeDayIndex);
-        setTimeout(() => {
-           if (mapRef.current) mapRef.current.playAnimation(activeDayIndex);
-        }, 500);
-      }
-    }
-  };
-
-  const handleAnimationEnd = () => {
-    setIsPlaying(false);
-    setIsTransit(false);
-
-    // Mark this day as completed — highlights persist
-    setCompletedDays(prev => new Set(prev).add(activeDayIndex));
-
-    // No auto-advance. Play pulse off, next day bullet will pulse in sidebar.
-    setShouldPulse(false);
-  };
-
-  const handleStopReached = (stopIndex: number) => {
-    setActiveStopIndex(stopIndex);
-    setIsTransit(false);
-  };
-
-  const handleDepartStop = () => {
-    setIsTransit(true);
-  };
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center lg:p-4" onClick={onClose}>
@@ -166,9 +196,11 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
                 ref={mapRef} 
                 packageIndex={packageIndex} 
                 activeDayIndex={activeDayIndex}
+                selectedStopIndex={selectedStopIndex}
                 onAnimationEnd={handleAnimationEnd}
                 onStopReached={handleStopReached}
                 onDepartStop={handleDepartStop}
+                onStopSelect={handleStopSelect}
              />
           </div>
 
@@ -182,10 +214,12 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
                 onSelectDay={handleSelectDay}
                 dayTitles={dayTitles}
                 dayLabels={dayLabels}
-                activeStopIndex={isPlaying ? activeStopIndex : (completedDays.has(activeDayIndex) ? 999 : -1)}
+                activeStopIndex={completedDays.has(activeDayIndex) ? 999 : activeStopIndex}
                 completedDays={completedDays}
                 isPlaying={isPlaying}
                 isTransit={isTransit}
+                selectedStopIndex={selectedStopIndex}
+                onStopSelect={handleStopSelect}
               />
             </div>
 
