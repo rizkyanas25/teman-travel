@@ -1,5 +1,8 @@
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
-import { FiCheck } from 'react-icons/fi';
+import { FiCheck, FiCompass } from 'react-icons/fi';
+import { useTranslations } from 'next-intl';
+import { NEARBY_POIS } from '@/data/nearby-pois';
+import PoiCard from './PoiCard';
 
 interface DaySidebarProps {
   packageIndex: number;
@@ -11,6 +14,8 @@ interface DaySidebarProps {
   completedDays?: Set<number>;
   isPlaying?: boolean;
   isTransit?: boolean;
+  selectedStopIndex?: number | null;
+  onStopSelect?: (stopIndex: number) => void;
 }
 
 export default function DaySidebar({
@@ -23,7 +28,10 @@ export default function DaySidebar({
   completedDays = new Set(),
   isPlaying = false,
   isTransit = false,
+  selectedStopIndex = null,
+  onStopSelect,
 }: DaySidebarProps) {
+  const t = useTranslations('packages');
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
 
   if (!pkgData) return null;
@@ -117,7 +125,7 @@ export default function DaySidebar({
 
               {/* Day Details (Stops) */}
               {isActive && (
-                <div className='pl-9 mt-3 space-y-2 animate-[fadeInUp_0.3s_ease]'>
+                <div className='pl-9 mt-3 space-y-3.5 animate-[fadeInUp_0.3s_ease]'>
                   {stops.map((stop, sIdx) => {
                     const isReached = activeStopIndex >= sIdx;
                     const isCurrent = isPlaying
@@ -126,54 +134,113 @@ export default function DaySidebar({
                         : activeStopIndex === sIdx
                       : activeStopIndex === sIdx;
                     const isEnRoute = isPlaying && isTransit && activeStopIndex + 1 === sIdx;
+                    const isSelected = selectedStopIndex === sIdx;
+                    const pois = NEARBY_POIS[stop.name] || [];
 
                     return (
-                      <div
-                        key={sIdx}
-                        className={`flex items-center gap-2.5 text-xs transition-all duration-300 ${
-                          isReached || isEnRoute ? 'opacity-100' : 'opacity-40'
-                        }`}
-                      >
+                      <div key={sIdx} className='space-y-2'>
+                        {/* Stop Header Clickable */}
                         <div
-                          className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
-                            isCurrent ? 'scale-125 ring-2 ring-white/30' : ''
-                          } ${
-                            isEnRoute
-                              ? 'animate-pulse ring-2 ring-white/40'
-                              : ''
+                          className={`flex items-start gap-2.5 text-xs transition-all duration-300 cursor-pointer ${
+                            isCurrent || isSelected
+                              ? 'opacity-100'
+                              : isReached || isEnRoute
+                                ? 'opacity-90 hover:opacity-100'
+                                : 'opacity-45 hover:opacity-75'
                           }`}
-                          style={{
-                            backgroundColor:
-                              isReached || isEnRoute
-                                ? day.color
-                                : 'rgba(255,255,255,0.15)',
-                            color:
-                              isReached || isEnRoute
-                                ? '#000'
-                                : 'rgba(255,255,255,0.4)',
-                          }}
+                          onClick={() => onStopSelect?.(sIdx)}
                         >
-                          {isReached ? (
-                            <span className='font-bold text-[9px]'>✓</span>
-                          ) : (
-                            <span className='font-bold text-[9px]'>
-                              {sIdx + 1}
+                          <div
+                            className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
+                              isCurrent || isSelected ? 'scale-110 ring-2 ring-white/30' : ''
+                            } ${
+                              isEnRoute
+                                ? 'animate-pulse ring-2 ring-white/40'
+                                : ''
+                            }`}
+                            style={{
+                              backgroundColor:
+                                isReached || isEnRoute || isSelected
+                                  ? day.color
+                                  : 'rgba(255,255,255,0.15)',
+                              color:
+                                isReached || isEnRoute || isSelected
+                                  ? '#000'
+                                  : 'rgba(255,255,255,0.4)',
+                            }}
+                          >
+                            {isReached ? (
+                              <span className='font-bold text-[9px]'>✓</span>
+                            ) : (
+                              <span className='font-bold text-[9px]'>
+                                {sIdx + 1}
+                              </span>
+                            )}
+                          </div>
+                          
+                          <div className='flex flex-col min-w-0 mt-0.5'>
+                            <span
+                              className={`leading-snug transition-colors duration-300 ${
+                                isCurrent || isSelected
+                                  ? 'text-white font-bold'
+                                  : isEnRoute
+                                    ? 'text-white font-medium animate-pulse'
+                                    : isReached
+                                      ? 'text-white/80'
+                                      : 'text-white/40'
+                              } ${isSelected ? 'font-extrabold scale-105 inline-block origin-left' : ''}`}
+                              style={{
+                                color: isSelected ? day.color : undefined
+                              }}
+                            >
+                              {stop.name}
                             </span>
-                          )}
+                            
+                            {/* Tap to explore hint (only when not selected) */}
+                            {!isSelected && (
+                              <span className='text-[9px] text-white/25 hover:text-white/45 transition-opacity duration-300 mt-0.5'>
+                                {t('exploreNearbyHint')}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <span
-                          className={`leading-snug mt-0.5 transition-colors duration-300 ${
-                            isCurrent
-                              ? 'text-white font-semibold'
-                              : isEnRoute
-                                ? 'text-white font-medium animate-pulse'
-                                : isReached
-                                  ? 'text-white/80'
-                                  : 'text-white/40'
-                          }`}
-                        >
-                          {stop.name}
-                        </span>
+
+                        {/* Glassmorphic Local POI Accordion */}
+                        {!isPlaying && isSelected && (
+                          <div className='pl-7 pr-1 w-full animate-[fadeInUp_0.25s_ease-out]'>
+                            <div className='backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-3 space-y-2.5 shadow-lg shadow-black/20'>
+                              <div className='flex items-center gap-1.5 text-[9px] font-bold text-white/50 uppercase tracking-widest border-b border-white/10 pb-1.5'>
+                                <FiCompass className='w-3.5 h-3.5 animate-spin-slow' style={{ color: day.color }} />
+                                {t('nearbyPoisTitle')}
+                              </div>
+                              
+                              {pois.length > 0 ? (
+                                <div className='space-y-2'>
+                                  {pois.map((poi, pIdx) => {
+                                    let catLabel = t('categoryActivity');
+                                    if (poi.category === 'food') catLabel = t('categoryFood');
+                                    if (poi.category === 'photo') catLabel = t('categoryPhoto');
+                                    if (poi.category === 'cafe') catLabel = t('categoryCafe');
+
+                                    return (
+                                      <PoiCard
+                                        key={pIdx}
+                                        poi={poi}
+                                        dayColor={day.color}
+                                        tCategory={catLabel}
+                                        tMapsLink={t('mapsLink')}
+                                      />
+                                    );
+                                  })}
+                                </div>
+                              ) : (
+                                <p className='text-[10px] text-white/35 italic pl-0.5 py-1'>
+                                  {t('nearbyPoisEmpty')}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })}

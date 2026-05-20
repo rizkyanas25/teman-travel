@@ -403,5 +403,16 @@
   "pauseJourney": "Jeda",
   "stops": "titik",
   "driveTime": "waktu tempuh",
-  "dayOf": "Hari {current} dari {total}"
+  "dayOf": "Hari {current} dari {total}",
+  "nearbyPoisTitle": "Rekomendasi Sekitar",
+  "googleMapsSearch": "Cari di Google Maps",
+  "categoryFood": "Kuliner",
+  "categoryPhoto": "Spot Foto",
+  "categoryCafe": "Kafe & Bar",
+  "categoryActivity": "Aktivitas",
+  "nearbyPoisEmpty": "Tidak ada rekomendasi lokal khusus.",
+  "mapsLink": "Maps",
+  "exploreNearbyHint": "Klik untuk jelajahi sekitar",
+  "noPoisNearby": "Tidak ada tempat menarik di sekitar",
+  "categoryPlace": "Tempat"
 }

@@ -165,36 +165,73 @@ html {
 }
 
 /* Mapbox Custom Styles */
+.mapboxgl-popup {
+  z-index: 100 !important;
+}
+
 .custom-popup .mapboxgl-popup-content {
-  background-color: var(--popup-color, white);
-  border-radius: 8px;
-  padding: 4px 8px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  background: rgba(10, 28, 25, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
   outline: none !important;
+  overflow: visible !important;
 }
 
 .custom-popup .popup-inner p {
   font-weight: 700;
-  color: #0f172a;
+  color: #ffffff;
   margin: 0;
   font-size: 13px;
 }
 
 .custom-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: var(--popup-color, white) !important;
+  border-top-color: rgba(10, 28, 25, 0.85) !important;
 }
 
 .custom-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: var(--popup-color, white) !important;
+  border-bottom-color: rgba(10, 28, 25, 0.85) !important;
 }
 
 .custom-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: var(--popup-color, white) !important;
+  border-right-color: rgba(10, 28, 25, 0.85) !important;
 }
 
 .custom-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: var(--popup-color, white) !important;
+  border-left-color: rgba(10, 28, 25, 0.85) !important;
+}
+
+/* POI Glassmorphic Popup Styles */
+.poi-custom-popup .mapboxgl-popup-content {
+  background: rgba(10, 28, 25, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  width: 230px !important;
+  overflow: visible !important;
+}
+
+.poi-custom-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: rgba(10, 28, 25, 0.85) !important;
+}
+
+.poi-custom-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  border-bottom-color: rgba(10, 28, 25, 0.85) !important;
+}
+
+.poi-custom-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: rgba(10, 28, 25, 0.85) !important;
+}
+
+.poi-custom-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: rgba(10, 28, 25, 0.85) !important;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -223,19 +260,53 @@ html {
   display: none !important;
 }
 
-/* Render a custom tip directly attached inside the content wrapper so they scale as one unified DOM element */
+/* Render a custom glassmorphic tip directly attached inside the content wrapper so they scale as one unified DOM element */
+.anim-popup .mapboxgl-popup-content::before {
+  display: none !important;
+}
+
 .anim-popup .mapboxgl-popup-content::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid var(--popup-color, white);
-  z-index: 1;
+  content: '' !important;
+  position: absolute !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(10, 28, 25, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+/* ================== BOTTOM ANCHOR ================== */
+.anim-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-content::after {
+  bottom: -6px !important;
+  left: 50% !important;
+  transform: translateX(-50%) rotate(45deg) !important;
+  border: none !important;
+}
+
+/* ================== TOP ANCHOR ================== */
+.anim-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-content::after {
+  top: -6px !important;
+  left: 50% !important;
+  transform: translateX(-50%) rotate(45deg) !important;
+  border: none !important;
+}
+
+/* ================== LEFT ANCHOR ================== */
+.anim-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-content::after {
+  left: -6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  border: none !important;
+}
+
+/* ================== RIGHT ANCHOR ================== */
+.anim-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-content::after {
+  right: -6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  border: none !important;
 }
 
 @keyframes popupFadeIn {

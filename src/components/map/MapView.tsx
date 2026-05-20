@@ -7,10 +7,12 @@ import {
   useState,
   useCallback,
 } from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import mapboxgl from 'mapbox-gl';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
 import { NEARBY_POIS } from '@/data/nearby-pois';
+import PoiCard from './PoiCard';
 
 import routesPackage0 from '@/data/routes/package-0-routes.json';
 import routesPackage1 from '@/data/routes/package-1-routes.json';
@@ -111,6 +113,7 @@ function darkenColor(hex: string, amount: number): string {
 const MapView = forwardRef<MapViewHandle, MapViewProps>(
   ({ packageIndex, activeDayIndex, selectedStopIndex = null, onAnimationEnd, onStopReached, onDepartStop, onStopSelect }, ref) => {
     const locale = useLocale();
+    const t = useTranslations('packages');
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<mapboxgl.Map | null>(null);
     const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -145,29 +148,36 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       }
     };
 
-    const getCategoryLabel = (category: string, lang: string) => {
-      const isId = lang === 'id';
-      switch (category) {
-        case 'food':
-          return isId ? 'Kuliner' : 'Food';
-        case 'photo':
-          return isId ? 'Spot Foto' : 'Photo Spot';
-        case 'cafe':
-          return isId ? 'Kafe' : 'Cafe';
-        case 'activity':
-          return isId ? 'Aktivitas' : 'Activity';
-        default:
-          return isId ? 'Tempat' : 'Place';
-      }
-    };
+    const poiRootsRef = useRef<Root[]>([]);
+    const poiCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const clearPoiMarkers = useCallback(() => {
+      if (poiCloseTimerRef.current) {
+        clearTimeout(poiCloseTimerRef.current);
+        poiCloseTimerRef.current = null;
+      }
       if (activePoiPopupRef.current) {
         activePoiPopupRef.current.remove();
         activePoiPopupRef.current = null;
       }
       poiMarkersRef.current.forEach((m) => m.remove());
       poiMarkersRef.current = [];
+
+      // Clean up React roots asynchronously in a macrotask to prevent React 19 unmount-during-render errors
+      const rootsToUnmount = [...poiRootsRef.current];
+      poiRootsRef.current = [];
+
+      if (rootsToUnmount.length > 0) {
+        setTimeout(() => {
+          rootsToUnmount.forEach((r) => {
+            try {
+              r.unmount();
+            } catch {
+              /* ignore */
+            }
+          });
+        }, 0);
+      }
     }, []);
 
     const [speedMultiplierUI, setSpeedMultiplierUI] = useState(1);
@@ -425,10 +435,10 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           popupInner.appendChild(popupP);
 
           const popup = new mapboxgl.Popup({
-            offset: 15,
+            offset: 20,
             closeButton: false,
             closeOnClick: false,
-            className: 'custom-popup',
+            className: 'custom-popup anim-popup',
           }).setDOMContent(popupInner);
 
           popupDataRef.current.set(key, popup);
@@ -579,101 +589,162 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       const pois = NEARBY_POIS[stop.name] || [];
       if (pois.length === 0) return;
 
+      const startCloseTimer = () => {
+        if (poiCloseTimerRef.current) clearTimeout(poiCloseTimerRef.current);
+        poiCloseTimerRef.current = setTimeout(() => {
+          if (activePoiPopupRef.current) {
+            activePoiPopupRef.current.remove();
+            activePoiPopupRef.current = null;
+          }
+        }, 150);
+      };
+
+      const bindPopupHoverListeners = (popupInstance: mapboxgl.Popup) => {
+        const popupElement = popupInstance.getElement();
+        if (popupElement && !popupElement.dataset.hoverBound) {
+          popupElement.dataset.hoverBound = 'true';
+          popupElement.addEventListener('mouseenter', () => {
+            if (poiCloseTimerRef.current) {
+              clearTimeout(poiCloseTimerRef.current);
+              poiCloseTimerRef.current = null;
+            }
+          });
+          popupElement.addEventListener('mouseleave', () => {
+            startCloseTimer();
+          });
+        }
+      };
+
       pois.forEach((poi) => {
         const el = document.createElement('div');
+        el.style.position = 'relative';
+        el.style.width = '32px';
+        el.style.height = '32px';
         el.style.cursor = 'pointer';
         el.style.setProperty('z-index', '20', 'important'); // Render below spot markers
         el.style.setProperty('transition', 'none', 'important'); // Keep Mapbox positioning crisp, avoid transition traps
 
         const inner = document.createElement('div');
-        inner.style.width = '32px';
-        inner.style.height = '32px';
+        inner.style.position = 'absolute';
+        inner.style.top = '0';
+        inner.style.left = '0';
+        inner.style.width = '100%';
+        inner.style.height = '100%';
         inner.style.borderRadius = '50%';
         inner.style.backgroundColor = 'rgba(10, 28, 25, 0.95)';
         inner.style.border = `2px solid ${dayData.color}`;
-        inner.style.display = 'flex';
-        inner.style.alignItems = 'center';
-        inner.style.justifyContent = 'center';
-        inner.style.fontSize = '15px';
         inner.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.6)';
+        inner.style.webkitBackfaceVisibility = 'hidden';
+        inner.style.backfaceVisibility = 'hidden';
+        inner.style.transformStyle = 'preserve-3d';
+        inner.style.willChange = 'transform';
+        inner.style.transform = 'translateZ(0)';
         inner.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease';
-        inner.innerText = getCategoryEmoji(poi.category);
+
+        const iconSpan = document.createElement('span');
+        iconSpan.style.position = 'absolute';
+        iconSpan.style.top = '50%';
+        iconSpan.style.left = '50%';
+        iconSpan.style.transform = 'translate(-50%, -50%) translateZ(0)';
+        iconSpan.style.display = 'flex';
+        iconSpan.style.alignItems = 'center';
+        iconSpan.style.justifyContent = 'center';
+        iconSpan.style.width = '100%';
+        iconSpan.style.height = '100%';
+        iconSpan.style.fontSize = '15px';
+        iconSpan.style.lineHeight = '1';
+        iconSpan.style.pointerEvents = 'none';
+        iconSpan.style.webkitBackfaceVisibility = 'hidden';
+        iconSpan.style.backfaceVisibility = 'hidden';
+        iconSpan.style.transformStyle = 'preserve-3d';
+        iconSpan.innerText = getCategoryEmoji(poi.category);
+
         el.appendChild(inner);
+        el.appendChild(iconSpan);
 
-        el.addEventListener('mouseenter', () => {
-          inner.style.transform = 'scale(1.25)';
-        });
-        el.addEventListener('mouseleave', () => {
-          inner.style.transform = 'scale(1)';
-        });
-
-        // Glassmorphic Custom DOM Popup
+        // Glassmorphic Custom DOM Popup (via React 19 createRoot)
         const popupEl = document.createElement('div');
-        popupEl.className = 'flex flex-col gap-2 p-1 text-white';
 
-        // Title
-        const titleEl = document.createElement('h5');
-        titleEl.className = 'font-bold text-sm text-white leading-tight pr-4';
-        titleEl.textContent = poi.name;
-        popupEl.appendChild(titleEl);
+        // Resolve translations in main React thread scope
+        let catLabel = t('categoryActivity');
+        if (poi.category === 'food') catLabel = t('categoryFood');
+        if (poi.category === 'photo') catLabel = t('categoryPhoto');
+        if (poi.category === 'cafe') catLabel = t('categoryCafe');
 
-        // Meta Row (Category, Rating & Distance)
-        const metaRow = document.createElement('div');
-        metaRow.className = 'flex items-center gap-2 text-xs text-white/70 mt-1';
-
-        const categoryEl = document.createElement('span');
-        categoryEl.className = 'flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/10 text-[9px] font-medium leading-none border border-white/5';
-        categoryEl.textContent = `${getCategoryEmoji(poi.category)} ${getCategoryLabel(poi.category, locale)}`;
-        metaRow.appendChild(categoryEl);
-
-        const ratingEl = document.createElement('span');
-        ratingEl.className = 'flex items-center gap-0.5 text-gold-400 font-bold font-mono text-[9px] leading-none';
-        ratingEl.textContent = `★ ${poi.rating.toFixed(1)}`;
-        metaRow.appendChild(ratingEl);
-
-        const distanceEl = document.createElement('span');
-        distanceEl.className = 'text-white/40 font-mono text-[9px] ml-auto';
-        distanceEl.textContent = poi.distance;
-        metaRow.appendChild(distanceEl);
-
-        popupEl.appendChild(metaRow);
-
-        // Divider
-        const hr = document.createElement('div');
-        hr.className = 'h-[1px] bg-white/10 my-1.5';
-        popupEl.appendChild(hr);
-
-        // Action Link
-        const link = document.createElement('a');
-        link.href = poi.googleMapsUrl;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.className = 'flex items-center gap-1 text-[9px] font-bold text-gold-400 hover:text-gold-300 transition-colors uppercase tracking-wider mt-0.5';
-
-        const linkText = document.createElement('span');
-        linkText.textContent = 'Maps';
-        link.appendChild(linkText);
-
-        const linkIcon = document.createElement('span');
-        linkIcon.innerHTML = `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 text-gold-400/80" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`;
-        link.appendChild(linkIcon);
-
-        popupEl.appendChild(link);
+        const root = createRoot(popupEl);
+        root.render(
+          <PoiCard
+            poi={poi}
+            dayColor={dayData.color}
+            tCategory={catLabel}
+            tMapsLink={t('mapsLink')}
+            className='border-0 bg-transparent hover:bg-transparent'
+          />
+        );
+        poiRootsRef.current.push(root);
 
         const popup = new mapboxgl.Popup({
-          offset: 12,
-          closeButton: true,
+          offset: 26,
+          closeButton: false,
           closeOnClick: true,
           className: 'poi-custom-popup anim-popup',
         }).setDOMContent(popupEl);
 
-        el.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (activePoiPopupRef.current) {
+        // Reset active ref when closed via map click
+        popup.on('close', () => {
+          if (activePoiPopupRef.current === popup) {
+            activePoiPopupRef.current = null;
+          }
+          if (poiCloseTimerRef.current) {
+            clearTimeout(poiCloseTimerRef.current);
+            poiCloseTimerRef.current = null;
+          }
+        });
+
+        el.addEventListener('mouseenter', () => {
+          inner.style.transform = 'scale(1.25) translateZ(0)';
+          
+          if (poiCloseTimerRef.current) {
+            clearTimeout(poiCloseTimerRef.current);
+            poiCloseTimerRef.current = null;
+          }
+
+          if (activePoiPopupRef.current && activePoiPopupRef.current !== popup) {
             activePoiPopupRef.current.remove();
           }
+
+          if (activePoiPopupRef.current !== popup) {
+            popup.setLngLat(poi.coordinates as [number, number]).addTo(map.current!);
+            popup.getElement()?.style.setProperty('--popup-color', dayData.color);
+            activePoiPopupRef.current = popup;
+          }
+
+          // Bind listeners to the popup's DOM content to bridge the hover gap
+          bindPopupHoverListeners(popup);
+        });
+
+        el.addEventListener('mouseleave', () => {
+          inner.style.transform = 'scale(1) translateZ(0)';
+          startCloseTimer();
+        });
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+
+          if (poiCloseTimerRef.current) {
+            clearTimeout(poiCloseTimerRef.current);
+            poiCloseTimerRef.current = null;
+          }
+
+          if (activePoiPopupRef.current && activePoiPopupRef.current !== popup) {
+            activePoiPopupRef.current.remove();
+          }
+
           popup.setLngLat(poi.coordinates as [number, number]).addTo(map.current!);
+          popup.getElement()?.style.setProperty('--popup-color', dayData.color);
           activePoiPopupRef.current = popup;
+
+          bindPopupHoverListeners(popup);
         });
 
         const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
@@ -682,7 +753,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
         poiMarkersRef.current.push(marker);
       });
-    }, [selectedStopIndex, activeDayIndex, pkgData, clearPoiMarkers, locale]);
+    }, [selectedStopIndex, activeDayIndex, pkgData, clearPoiMarkers, locale, t]);
 
     /** Create the moving vehicle marker */
     const createMovingMarker = (

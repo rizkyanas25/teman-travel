@@ -104,6 +104,7 @@ export default function PackageCard({
             src={pkg.image} 
             alt={pkg.title} 
             fill 
+            priority={index === "0"}
             className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 transform-gpu will-change-transform" 
             sizes="(max-width: 768px) 100vw, 33vw" 
           />

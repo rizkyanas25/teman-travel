@@ -403,5 +403,16 @@
   "pauseJourney": "Pause",
   "stops": "points",
   "driveTime": "drive time",
-  "dayOf": "Day {current} of {total}"
+  "dayOf": "Day {current} of {total}",
+  "nearbyPoisTitle": "Nearby Recommendations",
+  "googleMapsSearch": "Search on Google Maps",
+  "categoryFood": "Food",
+  "categoryPhoto": "Photo Spot",
+  "categoryCafe": "Cafe & Bar",
+  "categoryActivity": "Activity",
+  "nearbyPoisEmpty": "No specific local recommendations.",
+  "mapsLink": "Maps",
+  "exploreNearbyHint": "Click to explore nearby",
+  "noPoisNearby": "No nearby spots",
+  "categoryPlace": "Place"
 }
