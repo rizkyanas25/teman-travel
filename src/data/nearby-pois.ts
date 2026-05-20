@@ -1,5 +1,7 @@
 export interface NearbyPOI {
   name: string;
+  nameEn?: string;
+  nameId?: string;
   category: 'food' | 'photo' | 'cafe' | 'activity';
   rating: number;
   distance: string;
@@ -406,6 +408,90 @@ export const NEARBY_POIS: Record<string, NearbyPOI[]> = {
       distance: '500m',
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Lempuyang+Restaurant',
       coordinates: [115.6360, -8.3910]
+    }
+  ],
+  'Bhanuswari Resort & Spa': [
+    {
+      name: 'Taman Kupu-Kupu Kemenuh (Konservasi & Wisata)',
+      nameEn: 'Kemenuh Butterfly Park (Butterfly Conservation & Garden)',
+      nameId: 'Taman Kupu-Kupu Kemenuh (Konservasi & Edukasi Wisata)',
+      category: 'activity',
+      rating: 4.5,
+      distance: '1.5km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kemenuh+Butterfly+Park',
+      coordinates: [115.2780, -8.5520]
+    },
+    {
+      name: 'Air Terjun Sumampan (Alami & Tersembunyi)',
+      nameEn: 'Sumampan Waterfall (Scenic Hidden Gem Jungle Falls)',
+      nameId: 'Air Terjun Sumampan (Eksotis & Alami Tersembunyi)',
+      category: 'photo',
+      rating: 4.6,
+      distance: '2.2km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sumampan+Waterfall',
+      coordinates: [115.2980, -8.5535]
+    },
+    {
+      name: 'Tonyraka Art Gallery & Cafe',
+      nameEn: 'Tonyraka Art Gallery & Cafe (Contemporary Art & Specialty Coffee)',
+      nameId: 'Tonyraka Art Gallery & Cafe (Seni Kontemporer & Kopi Premium)',
+      category: 'cafe',
+      rating: 4.6,
+      distance: '1.8km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tonyraka+Art+Gallery',
+      coordinates: [115.2785, -8.5385]
+    },
+    {
+      name: 'Bebek Tebasari Resto',
+      nameEn: 'Bebek Tebasari Resto (Premium Balinese Heritage Dining)',
+      nameId: 'Bebek Tebasari Resto (Kuliner Bebek Tradisional Premium)',
+      category: 'food',
+      rating: 4.8,
+      distance: '3.2km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bebek+Tebasari+Resto',
+      coordinates: [115.2750, -8.5710]
+    }
+  ],
+  'Jimbaran Bay Beach Resort': [
+    {
+      name: 'Pantai Kedonganan Sunset',
+      nameEn: 'Kedonganan Beach Sunset (Golden Sands & Fishing Boats)',
+      nameId: 'Pantai Kedonganan (Sunset Keemasan & Nelayan Tradisional)',
+      category: 'photo',
+      rating: 4.7,
+      distance: '150m',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kedonganan+Beach',
+      coordinates: [115.1680, -8.7555]
+    },
+    {
+      name: 'Cuca Restaurant Bali',
+      nameEn: 'Cuca Restaurant Bali (Award-Winning Creative Tapas & Fine Dining)',
+      nameId: 'Cuca Restaurant Bali (Kuliner Kreatif Modern & Fine Dining Legendaris)',
+      category: 'food',
+      rating: 4.8,
+      distance: '900m',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Cuca+Restaurant+Jimbaran',
+      coordinates: [115.1685, -8.7635]
+    },
+    {
+      name: 'Samasta Lifestyle Village',
+      nameEn: 'Samasta Lifestyle Village (Premium Cafes, Eateries & Craft Shops)',
+      nameId: 'Samasta Lifestyle Village (Pusat Kuliner, Kafe & Belanja Premium)',
+      category: 'cafe',
+      rating: 4.6,
+      distance: '1.2km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Samasta+Lifestyle+Village',
+      coordinates: [115.1630, -8.7735]
+    },
+    {
+      name: 'Jenggala Keramik Bali',
+      nameEn: 'Jenggala Ceramics (Paint-a-Pot Ceramic Workshop & Showroom)',
+      nameId: 'Jenggala Keramik (Edukasi Mewarnai & Galeri Keramik Mewah)',
+      category: 'activity',
+      rating: 4.6,
+      distance: '1.8km',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Jenggala+Keramik+Jimbaran',
+      coordinates: [115.1740, -8.7710]
     }
   ]
 };

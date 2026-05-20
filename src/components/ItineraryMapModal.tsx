@@ -5,6 +5,7 @@ import DaySidebar from "./map/DaySidebar";
 import PlaybackControls from "./map/PlaybackControls";
 import MapView, { MapViewHandle } from "./map/MapView";
 import { PACKAGE_GEO_DATA, getDayStops } from "@/data/itinerary-geo";
+import { NearbyPOI } from "@/data/nearby-pois";
 import { FiX } from "react-icons/fi";
 
 interface Props {
@@ -138,6 +139,16 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
     }
   }, []);
 
+  const handlePoiSelect = useCallback((poi: NearbyPOI) => {
+    setIsPlaying(false);
+    setIsTransit(false);
+    setShouldPulse(false);
+    if (mapRef.current) {
+      mapRef.current.pauseAnimation();
+      mapRef.current.flyToPoi?.(poi);
+    }
+  }, []);
+
   // Synchronous reset when package changes — uses state (safe to read during render)
   if (packageIndex !== null && packageIndex !== prevPackage) {
     setPrevPackage(packageIndex);
@@ -220,6 +231,7 @@ export default function ItineraryMapModal({ packageIndex, onClose }: Props) {
                 isTransit={isTransit}
                 selectedStopIndex={selectedStopIndex}
                 onStopSelect={handleStopSelect}
+                onPoiSelect={handlePoiSelect}
               />
             </div>
 

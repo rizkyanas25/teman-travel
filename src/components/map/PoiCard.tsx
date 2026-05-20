@@ -2,6 +2,8 @@ import { FiCoffee, FiCamera, FiActivity, FiExternalLink, FiStar } from 'react-ic
 
 interface PoiProps {
   name: string;
+  nameEn?: string;
+  nameId?: string;
   category: string;
   rating: number;
   distance: string;
@@ -14,6 +16,8 @@ interface PoiCardProps {
   tCategory: string;
   tMapsLink: string;
   className?: string;
+  onClick?: () => void;
+  locale?: string;
 }
 
 export default function PoiCard({
@@ -22,7 +26,11 @@ export default function PoiCard({
   tCategory,
   tMapsLink,
   className = '',
+  onClick,
+  locale = 'en',
 }: PoiCardProps) {
+  const displayName = locale === 'id' ? (poi.nameId || poi.name) : (poi.nameEn || poi.name);
+
   const getCategoryIcon = (category: string, color: string) => {
     switch (category) {
       case 'food':
@@ -37,12 +45,13 @@ export default function PoiCard({
 
   return (
     <div
+      onClick={onClick}
       className={`bg-black/30 border border-white/5 rounded-lg p-2.5 space-y-2 transition-all hover:bg-black/45 select-none ${className}`}
     >
       {/* Title & Distance Row */}
       <div className='flex items-start justify-between gap-2'>
         <span className='font-bold text-xs text-white leading-tight line-clamp-2'>
-          {poi.name}
+          {displayName}
         </span>
         <span className='shrink-0 text-[10px] text-white/40 font-mono mt-0.5'>
           {poi.distance}
@@ -70,6 +79,7 @@ export default function PoiCard({
           href={poi.googleMapsUrl}
           target='_blank'
           rel='noopener noreferrer'
+          onClick={(e) => e.stopPropagation()}
           className='inline-flex items-center gap-1 text-[9px] font-bold transition-colors uppercase tracking-wider hover:brightness-110 shrink-0 h-[18px] leading-none'
           style={{ color: dayColor }}
         >

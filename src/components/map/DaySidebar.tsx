@@ -1,7 +1,7 @@
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
 import { FiCheck, FiCompass } from 'react-icons/fi';
-import { useTranslations } from 'next-intl';
-import { NEARBY_POIS } from '@/data/nearby-pois';
+import { useTranslations, useLocale } from 'next-intl';
+import { NEARBY_POIS, NearbyPOI } from '@/data/nearby-pois';
 import PoiCard from './PoiCard';
 
 interface DaySidebarProps {
@@ -16,6 +16,7 @@ interface DaySidebarProps {
   isTransit?: boolean;
   selectedStopIndex?: number | null;
   onStopSelect?: (stopIndex: number) => void;
+  onPoiSelect?: (poi: NearbyPOI) => void;
 }
 
 export default function DaySidebar({
@@ -30,8 +31,10 @@ export default function DaySidebar({
   isTransit = false,
   selectedStopIndex = null,
   onStopSelect,
+  onPoiSelect,
 }: DaySidebarProps) {
   const t = useTranslations('packages');
+  const locale = useLocale();
   const pkgData = PACKAGE_GEO_DATA.find((p) => p.packageIndex === packageIndex);
 
   if (!pkgData) return null;
@@ -196,17 +199,17 @@ export default function DaySidebar({
                               {stop.name}
                             </span>
                             
-                            {/* Tap to explore hint (only when not selected) */}
-                            {!isSelected && (
+                            {/* Contextual hint: explore if POIs exist, otherwise inform no recommendations */}
+                            {(!isSelected || pois.length === 0) && (
                               <span className='text-[9px] text-white/25 hover:text-white/45 transition-opacity duration-300 mt-0.5'>
-                                {t('exploreNearbyHint')}
+                                {pois.length > 0 ? t('exploreNearbyHint') : t('nearbyPoisEmpty')}
                               </span>
                             )}
                           </div>
                         </div>
 
-                        {/* Glassmorphic Local POI Accordion */}
-                        {!isPlaying && isSelected && (
+                        {/* Glassmorphic Local POI Accordion (only for stops with POIs) */}
+                        {!isPlaying && isSelected && pois.length > 0 && (
                           <div className='pl-7 pr-1 w-full animate-[fadeInUp_0.25s_ease-out]'>
                             <div className='backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-3 space-y-2.5 shadow-lg shadow-black/20'>
                               <div className='flex items-center gap-1.5 text-[9px] font-bold text-white/50 uppercase tracking-widest border-b border-white/10 pb-1.5'>
@@ -214,30 +217,27 @@ export default function DaySidebar({
                                 {t('nearbyPoisTitle')}
                               </div>
                               
-                              {pois.length > 0 ? (
-                                <div className='space-y-2'>
-                                  {pois.map((poi, pIdx) => {
-                                    let catLabel = t('categoryActivity');
-                                    if (poi.category === 'food') catLabel = t('categoryFood');
-                                    if (poi.category === 'photo') catLabel = t('categoryPhoto');
-                                    if (poi.category === 'cafe') catLabel = t('categoryCafe');
+                              <div className='space-y-2'>
+                                {pois.map((poi, pIdx) => {
+                                  let catLabel = t('categoryActivity');
+                                  if (poi.category === 'food') catLabel = t('categoryFood');
+                                  if (poi.category === 'photo') catLabel = t('categoryPhoto');
+                                  if (poi.category === 'cafe') catLabel = t('categoryCafe');
 
-                                    return (
-                                      <PoiCard
-                                        key={pIdx}
-                                        poi={poi}
-                                        dayColor={day.color}
-                                        tCategory={catLabel}
-                                        tMapsLink={t('mapsLink')}
-                                      />
-                                    );
-                                  })}
-                                </div>
-                              ) : (
-                                <p className='text-[10px] text-white/35 italic pl-0.5 py-1'>
-                                  {t('nearbyPoisEmpty')}
-                                </p>
-                              )}
+                                  return (
+                                    <PoiCard
+                                      key={pIdx}
+                                      poi={poi}
+                                      dayColor={day.color}
+                                      tCategory={catLabel}
+                                      tMapsLink={t('mapsLink')}
+                                      locale={locale}
+                                      onClick={() => onPoiSelect?.(poi)}
+                                      className="cursor-pointer hover:border-white/20 hover:bg-black/40 active:scale-[0.98] transition-all duration-200"
+                                    />
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
                         )}

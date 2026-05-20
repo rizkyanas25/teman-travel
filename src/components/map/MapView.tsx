@@ -11,7 +11,7 @@ import { createRoot, Root } from 'react-dom/client';
 import mapboxgl from 'mapbox-gl';
 import { useLocale, useTranslations } from 'next-intl';
 import { PACKAGE_GEO_DATA, getDayStops } from '@/data/itinerary-geo';
-import { NEARBY_POIS } from '@/data/nearby-pois';
+import { NEARBY_POIS, NearbyPOI } from '@/data/nearby-pois';
 import PoiCard from './PoiCard';
 
 import routesPackage0 from '@/data/routes/package-0-routes.json';
@@ -32,6 +32,7 @@ export interface MapViewHandle {
   playAnimation: (dayIndex: number) => void;
   pauseAnimation: () => void;
   flyToStop: (stopIndex: number) => void;
+  flyToPoi?: (poi: NearbyPOI) => void;
 }
 
 interface MapViewProps {
@@ -150,6 +151,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
     const poiRootsRef = useRef<Root[]>([]);
     const poiCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const poiPopupsMapRef = useRef<
+      Map<string, { marker: mapboxgl.Marker; popup: mapboxgl.Popup; dayColor: string }>
+    >(new Map());
 
     const clearPoiMarkers = useCallback(() => {
       if (poiCloseTimerRef.current) {
@@ -162,6 +166,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
       }
       poiMarkersRef.current.forEach((m) => m.remove());
       poiMarkersRef.current = [];
+      poiPopupsMapRef.current.clear();
 
       // Clean up React roots asynchronously in a macrotask to prevent React 19 unmount-during-render errors
       const rootsToUnmount = [...poiRootsRef.current];
@@ -679,6 +684,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             tCategory={catLabel}
             tMapsLink={t('mapsLink')}
             className='border-0 bg-transparent hover:bg-transparent'
+            locale={locale}
           />
         );
         poiRootsRef.current.push(root);
@@ -752,6 +758,9 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
           .addTo(map.current!);
 
         poiMarkersRef.current.push(marker);
+
+        const coordKey = poi.coordinates.join(',');
+        poiPopupsMapRef.current.set(coordKey, { marker, popup, dayColor: dayData.color });
       });
     }, [selectedStopIndex, activeDayIndex, pkgData, clearPoiMarkers, locale, t]);
 
@@ -845,6 +854,43 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
         if (popup) {
           popup.setLngLat(stop.coordinates as [number, number]).addTo(map.current);
           popup.getElement()?.style.setProperty('--popup-color', dayData.color);
+        }
+      },
+
+      flyToPoi: (poi: NearbyPOI) => {
+        if (!map.current) return;
+
+        // Fly camera to POI coordinates
+        map.current.flyTo({
+          center: poi.coordinates as [number, number],
+          zoom: 16.5,
+          duration: 1000,
+          essential: true,
+        });
+
+        // Close all stop popups
+        popupDataRef.current.forEach((p) => p.remove());
+
+        // Close any other active POI popups
+        if (activePoiPopupRef.current) {
+          activePoiPopupRef.current.remove();
+          activePoiPopupRef.current = null;
+        }
+
+        // Cancel any pending close timers for POI popup
+        if (poiCloseTimerRef.current) {
+          clearTimeout(poiCloseTimerRef.current);
+          poiCloseTimerRef.current = null;
+        }
+
+        // Open dynamic glassmorphic popup for this POI
+        const coordKey = poi.coordinates.join(',');
+        const entry = poiPopupsMapRef.current.get(coordKey);
+        if (entry) {
+          const { popup, dayColor } = entry;
+          popup.setLngLat(poi.coordinates as [number, number]).addTo(map.current);
+          popup.getElement()?.style.setProperty('--popup-color', dayColor);
+          activePoiPopupRef.current = popup;
         }
       },
 
