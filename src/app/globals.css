@@ -19,6 +19,10 @@
   --font-body: var(--font-body-google), 'Inter', sans-serif;
 }
 
+:root {
+  --spacing: 0.25rem;
+}
+
 body {
   font-family: var(--font-body);
   background: var(--color-dark-950);
@@ -167,6 +171,34 @@ html {
 /* Mapbox Custom Styles */
 .mapboxgl-popup {
   z-index: 100 !important;
+}
+
+/* Default buat Mobile (Mengikuti padding p-4 / 1rem) */
+.mapboxgl-map .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin-top: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+/* Buat Desktop (md: 768px ke atas -> Mengikuti padding p-6 / 1.5rem) */
+@media (min-width: 1024px) {
+  .mapboxgl-map .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+    margin-top: 1.5rem !important;
+    margin-right: 1.5rem !important;
+  }
+}
+
+/* Default buat Mobile (Mengikuti padding p-4 / 1rem) */
+.mapboxgl-map .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+  margin-bottom: 1.3rem !important;
+  margin-left: 1.3rem !important;
+}
+
+/* Buat Desktop (md: 768px ke atas -> Mengikuti padding p-6 / 1.5rem) */
+@media (min-width: 1024px) {
+  .mapboxgl-map .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+    margin-bottom: 1.7rem !important;
+    margin-left: 1.7rem !important;
+  }
 }
 
 .custom-popup .mapboxgl-popup-content {

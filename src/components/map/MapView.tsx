@@ -1214,7 +1214,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
 
         {/* Speed Controls (Segmented control style) */}
         <div
-          className='absolute bottom-3 right-3 flex gap-0.5 rounded-md bg-white/90 p-0.5 backdrop-blur-sm'
+          className='absolute bottom-4 right-4 md:bottom-6 md:right-6 flex gap-0.5 rounded-md bg-white/90 p-0.5 backdrop-blur-sm transition-all duration-200'
           style={{
             zIndex: 50,
             fontFamily: 'Helvetica Neue, Arial, Helvetica, sans-serif',

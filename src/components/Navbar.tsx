@@ -71,7 +71,7 @@ export default function Navbar() {
 
           <button 
             onClick={() => setMenuOpen(!menuOpen)} 
-            className="lg:hidden text-white focus:outline-none flex items-center justify-center h-10 w-10" 
+            className="lg:hidden -mr-2 text-white focus:outline-none flex items-center justify-center h-10 w-10" 
             aria-label="Toggle menu"
           >
             {menuOpen ? <FiX className="w-7 h-7" /> : <FiMenu className="w-7 h-7" />}
@@ -82,7 +82,7 @@ export default function Navbar() {
       {/* Premium Mobile Menu Dropdown */}
       <div 
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-150 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-2 border-t border-white/5">
