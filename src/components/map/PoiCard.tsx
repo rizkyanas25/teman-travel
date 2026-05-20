@@ -4,6 +4,8 @@ interface PoiProps {
   name: string;
   nameEn?: string;
   nameId?: string;
+  subtitleEn?: string;
+  subtitleId?: string;
   category: string;
   rating: number;
   distance: string;
@@ -30,6 +32,7 @@ export default function PoiCard({
   locale = 'en',
 }: PoiCardProps) {
   const displayName = locale === 'id' ? (poi.nameId || poi.name) : (poi.nameEn || poi.name);
+  const displaySubtitle = locale === 'id' ? (poi.subtitleId || poi.subtitleEn) : (poi.subtitleEn || poi.subtitleId);
 
   const getCategoryIcon = (category: string, color: string) => {
     switch (category) {
@@ -50,9 +53,16 @@ export default function PoiCard({
     >
       {/* Title & Distance Row */}
       <div className='flex items-start justify-between gap-2'>
-        <span className='font-bold text-xs text-white leading-tight line-clamp-2'>
-          {displayName}
-        </span>
+        <div className='min-w-0'>
+          <span className='font-bold text-xs text-white leading-tight line-clamp-1 block'>
+            {displayName}
+          </span>
+          {displaySubtitle && (
+            <span className='block text-[10px] text-white/50 leading-tight mt-0.5 line-clamp-1'>
+              {displaySubtitle}
+            </span>
+          )}
+        </div>
         <span className='shrink-0 text-[10px] text-white/40 font-mono mt-0.5'>
           {poi.distance}
         </span>
