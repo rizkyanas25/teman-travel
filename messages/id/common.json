@@ -10,5 +10,10 @@
   "toddlerNote": "Anak di bawah 2 tahun: Gratis",
   "whatsappBookMessage": "Halo Teman Travel! 👋 Saya tertarik dengan paket *{title}*. Bisa info lebih lanjut?",
   "whatsappGenericMessage": "Halo Teman Travel! 👋 Saya ingin bertanya tentang paket wisata Bali.",
-  "linkCopied": "Link disalin!"
+  "linkCopied": "Link disalin!",
+  "notFound": {
+    "title": "404 - Halaman Tidak Ditemukan",
+    "description": "Halaman yang Anda cari mungkin telah dihapus, mengalami perubahan nama, atau sedang tidak tersedia untuk sementara waktu.",
+    "backHome": "Kembali ke Beranda"
+  }
 }
