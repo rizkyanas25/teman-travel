@@ -684,6 +684,7 @@ const MapView = forwardRef<MapViewHandle, MapViewProps>(
             tMapsLink={t('mapsLink')}
             className='border-0 bg-transparent hover:bg-transparent'
             locale={locale}
+            isInMap={true}
           />
         );
         poiRootsRef.current.push(root);

@@ -20,6 +20,7 @@ interface PoiCardProps {
   className?: string;
   onClick?: () => void;
   locale?: string;
+  isInMap?: boolean;
 }
 
 export default function PoiCard({
@@ -30,6 +31,7 @@ export default function PoiCard({
   className = '',
   onClick,
   locale = 'en',
+  isInMap = false,
 }: PoiCardProps) {
   const displayName = locale === 'id' ? (poi.nameId || poi.name) : (poi.nameEn || poi.name);
   const displaySubtitle = locale === 'id' ? (poi.subtitleId || poi.subtitleEn) : (poi.subtitleEn || poi.subtitleId);
@@ -49,16 +51,28 @@ export default function PoiCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-black/30 border border-white/5 rounded-lg p-2.5 space-y-2 transition-all hover:bg-black/45 select-none ${className}`}
+      className={`${
+        isInMap ? '' : 'group/poi'
+      } bg-black/30 border border-white/5 rounded-lg p-2.5 space-y-2 transition-all hover:bg-black/45 select-none ${className}`}
     >
       {/* Title & Distance Row */}
       <div className='flex items-start justify-between gap-2'>
         <div className='min-w-0'>
-          <span className='font-bold text-xs text-white leading-tight line-clamp-1 block'>
+          <span
+            className={`font-bold text-xs text-white leading-tight ${
+              isInMap ? 'block' : 'line-clamp-1'
+            }`}
+          >
             {displayName}
           </span>
           {displaySubtitle && (
-            <span className='block text-[10px] text-white/50 leading-tight mt-0.5 line-clamp-1'>
+            <span
+              className={`text-[10px] text-white/50 leading-tight mt-0.5 ${
+                isInMap
+                  ? 'block'
+                  : 'line-clamp-1 group-hover/poi:line-clamp-none transition-all duration-200'
+              }`}
+            >
               {displaySubtitle}
             </span>
           )}
