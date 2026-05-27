@@ -1,20 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+export default async function NotFound() {
+  // Extract the locale from headers set by next-intl middleware
+  const locale = (await headers()).get("x-next-intl-locale") || "en";
+  
+  // Fetch translations on the server side using the resolved locale
   const t = await getTranslations({ locale, namespace: "common.notFound" });
-  return {
-    title: `${t("title")} | Teman Travel`,
-    description: t("description"),
-  };
-}
-
-export default function NotFound() {
-  const t = useTranslations("common.notFound");
 
   return (
     <>
