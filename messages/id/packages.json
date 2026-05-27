@@ -34,11 +34,11 @@
         },
         {
           "title": "Tiket & Tur",
-          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk ditanggung."
+          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk objek wisata sudah termasuk."
         },
         {
           "title": "Transport & Pemandu",
-          "description": "Jemput & antar bandara. Sopir berbahasa Indonesia sebagai pemandu."
+          "description": "Jemput & antar bandara. Sopir sekaligus pemandu wisata berbahasa Indonesia."
         },
         {
           "title": "Video & Ekstra",
@@ -139,11 +139,11 @@
         },
         {
           "title": "Tiket & Tur",
-          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk ditanggung."
+          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk objek wisata sudah termasuk."
         },
         {
           "title": "Transport & Pemandu",
-          "description": "Jemput & antar bandara. Sopir berbahasa Indonesia sebagai pemandu."
+          "description": "Jemput & antar bandara. Sopir sekaligus pemandu wisata berbahasa Indonesia."
         },
         {
           "title": "Video & Ekstra",
@@ -259,11 +259,11 @@
         },
         {
           "title": "Tiket & Tur",
-          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk ditanggung."
+          "description": "Tur privat sepenuhnya untuk wisata Bali & Nusa Penida. Semua tiket masuk objek wisata sudah termasuk."
         },
         {
           "title": "Transport & Pemandu",
-          "description": "Jemput & antar bandara. Sopir berbahasa Indonesia sebagai pemandu."
+          "description": "Jemput & antar bandara. Sopir sekaligus pemandu wisata berbahasa Indonesia."
         },
         {
           "title": "Video & Ekstra",
@@ -385,9 +385,9 @@
     "sunsetDinner": "Makan malam seafood sunset di Jimbaran",
     "privateTour": "Tur privat sepenuhnya",
     "baliNusaPenida": "Wisata Bali & Nusa Penida",
-    "entranceFee": "Semua tiket masuk ditanggung",
+    "entranceFee": "Semua tiket masuk objek wisata sudah termasuk",
     "pickup": "Jemput & antar bandara",
-    "driverGuide": "Sopir berbahasa Indonesia sebagai pemandu",
+    "driverGuide": "Sopir sekaligus pemandu wisata berbahasa Indonesia",
     "cinematicVideo": "Gratis editing video cinematic perjalanan",
     "water": "Air mineral sepanjang perjalanan"
   },

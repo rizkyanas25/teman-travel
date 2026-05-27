@@ -38,7 +38,7 @@
         },
         {
           "title": "Transport & Guide",
-          "description": "Airport pickup & drop-off. English-speaking driver guide."
+          "description": "Airport pickup & drop-off. English-speaking driver-guide."
         },
         {
           "title": "Video & Extras",
@@ -89,7 +89,7 @@
             "Return to harbour & cross back to Bali",
             "Return to hotel"
           ],
-          "tip": "Fast boat boarding at Sanur port requires stepping directly into shallow seawater. Wear sandals and shorts/comfortable clothes!"
+          "tip": "Fast boat boarding at Sanur Port requires stepping directly into shallow seawater. Wear sandals and shorts/comfortable clothes!"
         },
         {
           "day": "Day 3",
@@ -143,7 +143,7 @@
         },
         {
           "title": "Transport & Guide",
-          "description": "Airport pickup & drop-off. English-speaking driver guide."
+          "description": "Airport pickup & drop-off. English-speaking driver-guide."
         },
         {
           "title": "Video & Extras",
@@ -263,7 +263,7 @@
         },
         {
           "title": "Transport & Guide",
-          "description": "Airport pickup & drop-off. English-speaking driver guide."
+          "description": "Airport pickup & drop-off. English-speaking driver-guide."
         },
         {
           "title": "Video & Extras",
@@ -387,7 +387,7 @@
     "baliNusaPenida": "Bali & Nusa Penida island excursion",
     "entranceFee": "All entrance fees covered",
     "pickup": "Airport pickup & drop-off transfers",
-    "driverGuide": "English-speaking driver guide",
+    "driverGuide": "English-speaking driver-guide",
     "cinematicVideo": "Complimentary cinematic travel video",
     "water": "Bottled water throughout the trip"
   },
